@@ -1,0 +1,942 @@
+<ion-content>
+  <div class="contentWrap">
+    <ion-grid class="noMargin" no-padding *ngIf="!isLoading">
+      <!-- <ng-template #scoring> -->
+      <div>
+        <div class="header side-padding">
+          <span class="backArrowWrap" (click)="onCancel()">
+            <img src="assets/icon/back.png" class="arrow" />
+            <ion-label class="filterLabel">
+              {{ backArrowLabel }}
+            </ion-label>
+          </span>
+
+          <ion-label
+            *ngIf="showLiveScore"
+            class="toggle-livescore"
+            (click)="toggleLiveScore()"
+          >
+            <img
+              style="width: 12px"
+              *ngIf="params.liveScoring == '1'"
+              src="../../../assets/live-blinking.gif"
+            />
+            {{ startStopLiveScore }}
+          </ion-label>
+        </div>
+
+        <!-- setting views -->
+        <ng-container *ngIf="view == 1; then scoring; else thenBlock">
+        </ng-container>
+
+        <ng-template #thenBlock>
+          <ng-container *ngIf="view == 2; then survey; else injury">
+          </ng-container>
+        </ng-template>
+
+        <!-- scoring view -->
+        <ng-template #scoring>
+          <div class="caption-wrap" *ngIf="!assesmentCompleted">
+            <ion-item lines="none" (click)="changeView(2)">
+              <div class="caption-txt-wrap">
+                <p>Complete Risk <br />Assessment first</p>
+                <ion-icon mode="ios" name="arrow-forward"></ion-icon>
+              </div>
+            </ion-item>
+          </div>
+          <div
+            class="contentTop side-padding"
+            [ngClass]="params.liveScoring == '1' ? 'live-score-bg' : ''"
+          >
+            <div class="overlay" *ngIf="!assesmentCompleted"></div>
+            <ion-row>
+              <ion-col size="12" text-center>
+                <h1 class="heading">
+                  {{ screenName }}
+                </h1>
+              </ion-col>
+            </ion-row>
+
+            <!-- table headers -->
+            <div>
+              <ng-container
+                *ngIf="
+                  params.isRowingSport == 1 || params.isTileEvent == 1;
+                  then rowingScore;
+                  else scoreSort
+                "
+              >
+              </ng-container>
+
+              <ng-template #scoreSort>
+                <ng-container  
+                  *ngIf="gameDetails.display_reverse_tiers == 1;
+                  then reverseScore;
+                  else defaultScore;
+                ">
+
+                </ng-container>
+              </ng-template>
+
+              <ng-template #rowingScore>
+                <ion-row>
+                  <ion-col size="12" class="noPadding">
+                    <div class="scoreTableWrap">
+                      <div class="scoreTableHead eachRow borderBottom">
+                        <div class="labelSecRowing">
+                          <div class="tableHeadEachColRowing"></div>
+                        </div>
+                        <div class="scoreSecRowing">
+                          <!-- <div class="tableHeadEachCol" *ngFor="let score of homeScores; let index = index"> -->
+                          <div class="tableHeadEachColRowing">
+                            <!-- <div *ngIf="true; then firstBlock else successive"></div> -->
+                            <div>
+                              <!-- <ng-template #firstBlock> -->
+                              <span
+                                *ngIf="
+                                  labels[0].toString().length;
+                                  else ptHardCoded
+                                "
+                              >
+                                <span class="opacity">
+                                  {{ labels[0] }}
+                                </span>
+                              </span>
+                              <!-- </ng-template> -->
+                              <ng-template #ptHardCoded>
+                                <span class="opacity"> PT </span>
+                              </ng-template>
+                            </div>
+                            <!-- <ng-template #successive>
+                              <span *ngIf="labels[index].toString().trim().length; else haedCodedLabel">
+                                <span class="opacity">
+                                  {{labels[index]}}
+                                </span>
+                              </span>
+                            </ng-template>
+
+                            <ng-template #haedCodedLabel>
+                              <span class="opacity">
+                                SET {{ index  }}
+                              </span>
+                            </ng-template> -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        *ngFor="
+                          let homeTeam of rowingHomeTeams;
+                          let index = index
+                        "
+                      >
+                        <div class="scoreTableHead eachRow borderBottom">
+                          <div class="labelSecRowing">
+                            <div class="tableHeadEachColRowing">
+                              {{ homeTeam }}
+                            </div>
+                          </div>
+                          <div class="scoreSecRowing">
+                            <div
+                              class="tableHeadEachColRowing"
+                              (click)="updateHome(index)"
+                            >
+                              <span>{{ rowingHomeScores[index] }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ng-template>
+
+              <ng-template #defaultScore>
+                <ion-row>
+                  <ion-col size="12" class="noPadding">
+                    <div class="scoreTableWrap">
+                      <div class="scoreTableHead eachRow borderBottom">
+                        <div class="labelSec">
+                          <div class="tableHeadEachCol"></div>
+                        </div>
+                        <div class="scoreSec">
+                          <div
+                            class="tableHeadEachCol"
+                            *ngFor="let score of homeScores; let index = index"
+                          >
+                            <div
+                              *ngIf="
+                                index == 0;
+                                then firstBlock;
+                                else successive
+                              "
+                            ></div>
+                            <ng-template #firstBlock>
+                              <span
+                                *ngIf="
+                                  labels[0].toString().length;
+                                  else ptHardCoded
+                                "
+                              >
+                                <span class="opacity">
+                                  {{ labels[0] }}
+                                </span>
+                              </span>
+                            </ng-template>
+                            <ng-template #ptHardCoded>
+                              <span class="opacity"> PT </span>
+                            </ng-template>
+                            <ng-template #successive>
+                              <span
+                                *ngIf="
+                                  labels[index].toString().trim().length;
+                                  else haedCodedLabel
+                                "
+                              >
+                                <span class="opacity">
+                                  {{ labels[index] }}
+                                </span>
+                              </span>
+                            </ng-template>
+
+                            <ng-template #haedCodedLabel>
+                              <span class="opacity"> SET {{ index }} </span>
+                            </ng-template>
+
+                            <!-- <span class="opacity">
+                                SET {{ index + 1 }}
+                              </span> -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scoreTableHead eachRow borderBottom">
+                        <div class="labelSec">
+                          <div class="tableHeadEachCol">
+                            {{ params.homeTeam }}
+                          </div>
+                        </div>
+                        <div class="scoreSec">
+                          <div
+                            class="tableHeadEachCol"
+                            *ngFor="let score of homeScores; let index = index"
+                            (click)="updateHome(index)"
+                          >
+                            <span
+                              [ngClass]="
+                                score == 0 ||
+                                awayScores[index] > homeScores[index]
+                                  ? 'opacity'
+                                  : ''
+                              "
+                            >
+                              {{ score }}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scoreTableHead eachRow borderBottom">
+                        <div class="labelSec">
+                          <div class="tableHeadEachCol">
+                            {{ params.awayTeam }}
+                          </div>
+                        </div>
+                        <div class="scoreSec">
+                          <div
+                            class="tableHeadEachCol"
+                            *ngFor="let score of awayScores; let index = index"
+                            (click)="updateAway(index)"
+                          >
+                            <span
+                              [ngClass]="
+                                score == 0 ||
+                                awayScores[index] < homeScores[index]
+                                  ? 'opacity'
+                                  : ''
+                              "
+                            >
+                              {{ score }}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ng-template>
+
+              <ng-template #reverseScore>
+                <ion-row>
+                  <ion-col size="12" class="noPadding">
+                    <div class="scoreTableWrap">
+                      <div class="scoreTableHead eachRow borderBottom">
+                        <div class="labelSec">
+                          <div class="tableHeadEachCol"></div>
+                        </div>
+                        <div class="scoreSec">
+                          <div
+                            class="tableHeadEachCol"
+                            *ngFor="let score of homeScores; let index = index"
+                          >
+                            <div
+                              *ngIf="
+                                index == 0;
+                                then firstBlock;
+                                else successive
+                              "
+                            ></div>
+                            <ng-template #firstBlock>
+                              <span
+                                *ngIf="
+                                  labels[homeScores.length-1].toString().length;
+                                  else ptHardCoded
+                                "
+                              >
+                                <span class="opacity">
+                                  {{ labels[homeScores.length-1] }}
+                                </span>
+                              </span>
+                            </ng-template>
+                            <ng-template #ptHardCoded>
+                              <span class="opacity" *ngIf="index == homeScores.length-1; else setValue">PT</span>
+                              <ng-template #setValue>
+                                <span class="opacity">SET {{ homeScores.length-1 }} </span>
+                              </ng-template>
+                            </ng-template>
+                            <ng-template #successive>
+                              <span
+                                *ngIf="labels[homeScores.length-index-1].toString().trim().length;
+                                  else haedCodedLabel"
+                              >
+                                <span class="opacity">
+                                  {{ labels[homeScores.length-index-1] }}
+                                </span>
+                              </span>
+                            </ng-template>
+
+                            <ng-template #haedCodedLabel>
+                              <div
+                              *ngIf="
+                                index == homeScores.length-1;
+                                then lastBlock;
+                                else intermediate
+                              "
+                            ></div>
+                              <ng-template #lastBlock>
+                                <span class="opacity">PT</span>
+                              </ng-template>
+                              <ng-template #intermediate>
+                                <span class="opacity"> SET {{ homeScores.length-index-1 }} </span>
+                              </ng-template>
+                            </ng-template>
+
+                            <!-- <span class="opacity">
+                                SET {{ index + 1 }}
+                              </span> -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scoreTableHead eachRow borderBottom">
+                        <div class="labelSec">
+                          <div class="tableHeadEachCol">
+                            {{ params.homeTeam }}
+                          </div>
+                        </div>
+                        <div class="scoreSec">
+                          <div
+                            class="tableHeadEachCol"
+                            *ngFor="let score of homeScores; let index = index"
+                            (click)="updateHome(index)"
+                          >
+                            <span
+                              [ngClass]="
+                                score == 0 ||
+                                awayScores[index] > homeScores[index]
+                                  ? 'opacity'
+                                  : ''
+                              "
+                            >
+                              {{ score }}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scoreTableHead eachRow borderBottom">
+                        <div class="labelSec">
+                          <div class="tableHeadEachCol">
+                            {{ params.awayTeam }}
+                          </div>
+                        </div>
+                        <div class="scoreSec">
+                          <div
+                            class="tableHeadEachCol"
+                            *ngFor="let score of awayScores; let index = index"
+                            (click)="updateAway(index)"
+                          >
+                            <span
+                              [ngClass]="
+                                score == 0 ||
+                                awayScores[index] < homeScores[index]
+                                  ? 'opacity'
+                                  : ''
+                              "
+                            >
+                              {{ score }}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ng-template>
+              <!-- Volleyball and tennis ends-->
+
+              <!-- Radio btn section start-->
+              <ion-row>
+                <ion-col size="12" class="resultRadioWrap">
+                  <div class="radioWrapDiv">
+                    <ion-list class="">
+                      <ion-radio-group
+                        allow-empty-selection
+                        value="anchovies"
+                        class="eachWrap"
+                      >
+                        <div
+                          (click)="toggleResultRadioBtn(1)"
+                          class="radio-block"
+                          *ngIf="
+                            params.isRowingSport != 1 && params.isTileEvent != 1
+                          "
+                        >
+                          <ion-radio
+                            slot="start"
+                            mode="md"
+                            color="danger"
+                            value="forfeithome"
+                          ></ion-radio>
+                          <ion-label>FORFEIT HOME</ion-label>
+                        </div>
+
+                        <div
+                          (click)="toggleResultRadioBtn(2)"
+                          class="radio-block"
+                        >
+                          <ion-radio
+                            slot="start"
+                            mode="md"
+                            color="danger"
+                            value="washout"
+                          ></ion-radio>
+                          <ion-label>WASHOUT</ion-label>
+                        </div>
+
+                        <div
+                          (click)="toggleResultRadioBtn(3)"
+                          class="radio-block"
+                          *ngIf="
+                            params.isRowingSport != 1 && params.isTileEvent != 1
+                          "
+                        >
+                          <ion-radio
+                            slot="start"
+                            mode="md"
+                            color="danger"
+                            value="forfeitaway"
+                          ></ion-radio>
+                          <ion-label>FORFEIT AWAY</ion-label>
+                        </div>
+                      </ion-radio-group>
+                    </ion-list>
+                    <!-- <div class="eachWrap" (click)="toggleResultRadioBtn(1)">
+                      <div
+                        *ngIf="
+                          params.isRowingSport != 1 && params.isTileEvent != 1
+                        "
+                      >
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          checked
+                          color="danger"
+                          *ngIf="forfiet === 1 && isLiveScoring == 0"
+                        >
+                        </ion-radio>
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          color="danger"
+                          *ngIf="forfiet === 0"
+                        ></ion-radio>
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          checked
+                          color="light"
+                          *ngIf="forfiet === 1 && isLiveScoring == 1"
+                        >
+                        </ion-radio>
+                      </div>
+                      <div
+                        class="btnText"
+                        *ngIf="
+                          params.isRowingSport != 1 && params.isTileEvent != 1
+                        "
+                      >
+                        <ion-text class="resultLabel">FORFEIT HOME</ion-text>
+                      </div>
+                    </div>
+                    <div class="eachWrap" (click)="toggleResultRadioBtn(2)">
+                      <div>
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          checked
+                          color="danger"
+                          *ngIf="washout === 1 && isLiveScoring == 0"
+                        >
+                        </ion-radio>
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          color="danger"
+                          *ngIf="washout === 0"
+                        >
+                        </ion-radio>
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          checked
+                          color="light"
+                          *ngIf="washout === 1 && isLiveScoring == 1"
+                        >
+                        </ion-radio>
+                      </div>
+                      <div class="btnText">
+                        <ion-text class="resultLabel">WASHOUT</ion-text>
+                      </div>
+                    </div>
+                    <div class="eachWrap" (click)="toggleResultRadioBtn(3)">
+                      <div
+                        *ngIf="
+                          params.isRowingSport != 1 && params.isTileEvent != 1
+                        "
+                      >
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          checked
+                          color="danger"
+                          *ngIf="forfietAway === 1 && isLiveScoring == 0"
+                        >
+                        </ion-radio>
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          color="danger"
+                          *ngIf="forfietAway === 0"
+                        ></ion-radio>
+                        <ion-radio
+                          mode="md"
+                          value="cord"
+                          checked
+                          color="light"
+                          *ngIf="forfietAway === 1 && isLiveScoring == 1"
+                        >
+                        </ion-radio>
+                      </div>
+                      <div
+                        class="btnText"
+                        *ngIf="
+                          params.isRowingSport != 1 && params.isTileEvent != 1
+                        "
+                      >
+                        <ion-text class="resultLabel">FORFEIT AWAY</ion-text>
+                      </div>
+                    </div> -->
+                  </div>
+                </ion-col>
+              </ion-row>
+              <!-- Radio btn section end-->
+
+              <!-- Best scorer section start-->
+              <ion-row
+                *ngIf="
+                  showBestScorerForm &&
+                  params.isRowingSport != 1 &&
+                  params.isTileEvent != 1
+                "
+                class="borderTop borderBottom"
+              >
+                <ion-col>
+                  <form [formGroup]="bestScorerForm">
+                    <div class="bestScorerWrap">
+                      <div class="teamWrap">
+                        <ion-label
+                          >Team {{ params.homeTeam }} Best Scorer</ion-label
+                        >
+                        <div class="nameWraper">
+                          <ion-input
+                            type="text"
+                            formControlName="teamHomeScorer"
+                            placeholder="Enter player's names"
+                          >
+                          </ion-input>
+                        </div>
+                      </div>
+                      <div class="teamWrap">
+                        <ion-label
+                          >Team {{ params.awayTeam }} Best Scorer</ion-label
+                        >
+                        <div class="nameWraper">
+                          <ion-input
+                            type="text"
+                            formControlName="teamAwayScorer"
+                            placeholder="Enter player's names"
+                          >
+                          </ion-input>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </ion-col>
+              </ion-row>
+              <!-- Best scorer section end-->
+
+              <!-- Text area section -->
+              <ion-row *ngIf="showReportTextScoring" class="reportTextWrap">
+                <ion-col size="12" class="noPadding">
+                  <ion-card class="cardLayout">
+                    <ion-card-header style="padding: 10px">
+                      <ion-card-subtitle text-center>Report</ion-card-subtitle>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                      <ion-textarea
+                        class="notes"
+                        [(ngModel)]="reportHome"
+                      ></ion-textarea>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+              <!-- Text area section ends here-->
+
+              <!-- Accept / Protest buttons  -->
+              <ion-row class="borderBottom" *ngIf="params.isScoring === '0'">
+                <ion-col size="6" class="addGameWrap">
+                  <ion-button
+                    mode="ios"
+                    type="button"
+                    color="medium"
+                    fill="outline"
+                    class="appThemeSolidBtn colorDark"
+                  >
+                    ACCEPT
+                  </ion-button>
+                </ion-col>
+                <ion-col size="6" class="addGameWrap">
+                  <ion-button mode="ios" type="button" color="danger">
+                    PROTEST
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+              <!-- Accept / Protest buttons end here -->
+
+              <!-- Image section with Camera -->
+              <div *ngIf="showImageUploadedScoring" class="cameraDiv">
+                <ion-icon
+                  *ngIf="imageChoosenURL == ''; else showPreview"
+                  src="../../assets/svg/add-photo.svg"
+                  (click)="takePicture()"
+                ></ion-icon>
+
+                <ng-template #showPreview>
+                  <div style="position: relative">
+                    <!-- <div class="closeIcon">
+                      </div> -->
+                    <ion-img
+                      style="
+                        position: absolute;
+                        height: 25px;
+                        width: 25px;
+                        z-index: 999;
+                        right: -10px;
+                        top: -10px;
+                      "
+                      src="../../assets/svg/close-icon.svg"
+                      (click)="onCloseClicked()"
+                    ></ion-img>
+                    <ion-img [src]="imageChoosenURL"></ion-img>
+                  </div>
+                </ng-template>
+              </div>
+              <!-- Image section ends here.. -->
+
+              <!-- Finish, Save & Update Score Buttons -->
+              <div
+                class="contentBottom"
+                [ngClass]="params.liveScoring == '1' ? 'live-score-bg' : ''"
+              >
+                <ion-row>
+                  <ion-col>
+                    <div class="scoreBtnWrap">
+                      <ion-label
+                        *ngIf="isLiveScoring == 1"
+                        color="light"
+                        slot="primary"
+                        (click)="showConfirmModal(1)"
+                        fill="outline"
+                      >
+                        FINISH GAME</ion-label
+                      >
+
+                      <ion-button
+                        *ngIf="isLiveScoring == 0"
+                        mode="ios"
+                        slot="primary"
+                        type="button"
+                        color="light"
+                        fill="outline"
+                        (click)="showConfirmModal(1)"
+                      >
+                        SAVE
+                      </ion-button>
+                      <ion-button
+                        *ngIf="isLiveScoring == 1"
+                        mode="ios"
+                        slot="primary"
+                        type="button"
+                        color="light"
+                        fill="outline"
+                        (click)="showConfirmModal(0)"
+                      >
+                        UPDATE SCORE
+                      </ion-button>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <!-- scoring view end here -->
+
+        <!-- survey form start here -->
+        <ng-template #survey>
+          <div class="contentTop side-padding">
+            <ion-row>
+              <ion-col size="12" text-center>
+                <h1 class="heading">
+                  {{ screenName }}
+                </h1>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngFor="let survey of questionAnswers">
+              <ion-col size="12">
+                <div class="answer-cont-wrap">
+                  <p>
+                    {{ survey?.question }}
+                  </p>
+                  <div class="answer-wrap">
+                    <span
+                      *ngFor="let option of survey.option"
+                      (click)="addAnswer(survey, option.option_value)"
+                    >
+                      <ion-radio-group [value]="survey.answer">
+                        <ion-radio
+                          color="danger"
+                          [value]="option.option_value"
+                          mode="md"
+                        ></ion-radio>
+                      </ion-radio-group>
+
+                      <ion-label>{{ option.option_label }}</ion-label>
+                    </span>
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <div class="btn-wrap">
+                  <ion-button
+                    mode="ios"
+                    [disabled]="!enableQnSaveBtn"
+                    size="medium"
+                    type="button"
+                    color="light"
+                    fill="outline"
+                    (click)="saveAnswers()"
+                    >Save</ion-button
+                  >
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ng-template>
+        <!-- survey form end here -->
+
+        <!-- Injury Report Form -->
+        <ng-template #injury>
+          <div class="contentTop side-padding">
+            <ion-row>
+              <ion-col size="12" text-center>
+                <h1 class="heading">
+                  {{ screenName }}
+                </h1>
+              </ion-col>
+            </ion-row>
+
+            <div class="injuryReportWrap" *ngFor="let survey of injuryQA">
+              <div
+                *ngIf="survey.question_type === 0"
+                class="eachRow borderBottom"
+              >
+                <div class="tableHeadEach">{{ survey.question }}</div>
+                <div class="ansWrap">
+                  <ion-row>
+                    <ion-col size="12">
+                      <ion-range
+                        #range
+                        step="1"
+                        mode="md"
+                        [min]="survey.scale_from"
+                        [max]="survey.scale_to"
+                        (ionChange)="rangeFn(survey)"
+                      ></ion-range>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngIf="survey.label.length">
+                    <ion-col size="12">
+                      <ion-label>{{ survey.label }}</ion-label>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+
+              <div
+                *ngIf="survey.question_type === 1"
+                class="eachRow borderBottom"
+              >
+                <div class="tableHeadEach">{{ survey.question }}</div>
+                <div class="ansWrap">
+                  <ion-row>
+                    <ion-col size="2" class="ion-no-padding">
+                      <ion-input
+                        type="number"
+                        (ionChange)="onChange($event, survey)"
+                      ></ion-input>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+
+              <div
+                *ngIf="survey.question_type === 2"
+                class="eachRow borderBottom"
+              >
+                <div class="tableHeadEach">{{ survey.question }}</div>
+                <div class="ansWrap">
+                  <ion-textarea
+                    rows="5"
+                    (ionChange)="onChange($event, survey)"
+                  ></ion-textarea>
+                </div>
+              </div>
+
+              <div
+                *ngIf="survey.question_type === 3"
+                class="eachRow borderBottom"
+              >
+                <div class="tableHeadEach">{{ survey.question }}</div>
+                <div class="ansWrap">
+                  <ion-select
+                    placeholder="Select Body Part"
+                    (ionChange)="onChange($event, survey)"
+                  >
+                    <ion-select-option
+                      *ngFor="let option of survey.option"
+                      [value]="option.survey_option_id"
+                    >
+                      {{ option.option_label }}
+                    </ion-select-option>
+                  </ion-select>
+                </div>
+              </div>
+
+              <div
+                *ngIf="survey.question_type === 4"
+                class="eachRow borderBottom"
+              >
+                <div class="tableHeadEach">{{ survey.question }}</div>
+                <div class="ansWrap">
+                  <ion-row>
+                    <ion-col size="12" class="resultRadioWrap">
+                      <div class="radioGroupWrap">
+                        <ion-radio-group
+                          class="eachWrap"
+                          *ngFor="let option of survey.option"
+                          (click)="
+                            addInjuryAnswer(survey, option.survey_option_id)
+                          "
+                          [value]="survey.answer"
+                        >
+                          <div>
+                            <ion-radio
+                              mode="md"
+                              [value]="option.option_value"
+                              color="danger"
+                            ></ion-radio>
+                          </div>
+                          <div class="btnText">
+                            <ion-text class="resultLabel">{{
+                              option.option_label
+                            }}</ion-text>
+                          </div>
+                        </ion-radio-group>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </div>
+                <div *ngIf="survey.isAnswered">
+                  <div class="tableHeadEach">Please Describe:</div>
+                  <div class="ansWrap textArea">
+                    <ion-textarea
+                      rows="2"
+                      (ionChange)="onChangeComment($event, survey)"
+                    ></ion-textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ion-row>
+              <ion-col>
+                <div class="btn-wrap">
+                  <ion-button
+                    mode="ios"
+                    size="medium"
+                    type="submit"
+                    color="light"
+                    fill="outline"
+                    [disabled]="!enableInjurySaveBtn"
+                    (click)="saveInjuryReport()"
+                    >Save</ion-button
+                  >
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ng-template>
+        <!-- Injury Report Form End Here -->
+      </div>
+      <!-- </ng-template> -->
+    </ion-grid>
+  </div>
+</ion-content>

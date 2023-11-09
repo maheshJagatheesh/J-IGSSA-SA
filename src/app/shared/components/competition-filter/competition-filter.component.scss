@@ -1,0 +1,48 @@
+.filter-header{
+    --background : #15233C;
+    --color : #fff;
+    --height : 74px;
+    --border-width : 0px !important;
+}
+.filter-body{
+    --background : #15233cf7;
+    --color : #fff;
+    --height : 74px;
+}
+.text_center{
+    text-align: center;
+}
+
+.name-tile{
+    height: 140px;
+    color: #ffffff47;
+    font-weight: 700;;
+}
+
+.filter-outer{
+    margin-top: 80px;;
+}
+
+.filter-active{
+    color: #fff !important;
+}
+
+.top-line{
+    BORDER: SOLID 1px #ffffff7d;
+    width: 0;
+    height: 13px;
+    position: absolute;
+    left: 50%;
+    right: 0px;
+    bottom: 0;
+}
+
+.bottom-line{
+    BORDER: SOLID 1px #ffffff7d;
+    width: 0;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    right: 0px;
+    top: 0;
+}

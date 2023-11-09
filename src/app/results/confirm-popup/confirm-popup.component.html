@@ -1,0 +1,29 @@
+<div class="modalWrapper">
+  <div class="modalHead">
+    <ion-label *ngIf="acceptProtest === 1; else accept">
+
+      CHALLENGE SCORE
+    </ion-label>
+    <ng-template #accept>
+      <ion-label>
+        ACCEPT SCORE
+      </ion-label>
+    </ng-template>
+  </div>
+  <div class="modalContent">
+    <p *ngIf="acceptProtest === 1">
+      Are you sure you want to challenge the score previously saved?
+    </p>
+    <p *ngIf="acceptProtest === 0">
+      Are you sure you want to accept the score previously saved?
+    </p>
+  </div>
+  <div class="modalBtns">
+    <div>
+      <ion-label (click)="onConfirm()">YES</ion-label>
+    </div>
+    <div>
+      <ion-label (click)="onCancel()">NO</ion-label>
+    </div>
+  </div>
+</div>

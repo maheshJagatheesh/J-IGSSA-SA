@@ -1,0 +1,173 @@
+// ion-list-header{
+//     --color: var(--ion-toolbar-text-color) !important;
+//     font-size: 18px;
+//     font-weight: 600;
+//     border-bottom: 1px solid;
+//     padding: 0;
+//     margin-top: 15px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: baseline;
+
+//     .listItemHead{
+//         font-size: 22px;
+//     }
+//     ion-label{
+//         margin-bottom: 5px;
+//     }
+//     .listSubHeadWrap{
+//         width: 100%;
+//         display: flex;
+//         margin-bottom: 5px;
+
+//         div{
+//             flex: 1;
+//         }
+
+//         div:nth-child(2){
+//             text-align: right;
+//         }
+//     }
+//     .listSubHead{
+//         font-size: 14px;
+//     }
+// }
+// ion-item {
+//     --background: var(--ion-page-background);
+//     --inner-padding-end: 0px;
+//     --padding-start: 5px;
+//     --padding-end: 5px;
+//     --padding-top: 15px;
+//     --inner-padding-bottom: 15px;
+
+//     .contentWrap{
+//         display: flex;
+//         flex-direction: row;
+//         width: 100%;
+
+//         .logoWrap{
+//             flex: 1;
+//             display: flex;
+//             justify-content: center;
+//             ion-img{
+//                 width: 50px;
+//                 height: 50px;
+//             }
+//         }
+
+//         .resultDetailWrap{
+//             flex: 3;
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             text-align: center;
+
+//             .label{
+//                 flex: 1
+//             }
+//             .midSection{
+//                 flex: 1;
+//                 display: flex;
+//                 flex-direction: column;
+//                 align-items: center;
+//                 justify-content: center;
+
+//                 .bordered{
+//                     border: 1px solid var(--ion-color-danger, #f04141) !important;
+//                     color: var(--ion-color-danger, #f04141) !important;
+//                     background: transparent;
+//                     border-radius: 15px;
+//                 }
+
+//                 ion-badge{
+//                     --padding-start: 15px;
+//                     --padding-end: 15px;
+//                     --padding-top: 5px;
+//                     --padding-bottom: 5px;
+//                 }
+//             }
+
+//             .point{
+//                 font-size: 25px;
+//                 font-weight: 500;
+//             }
+//         }
+//     }
+// }
+
+.listHearder{
+    margin: 20px 0px 0px;
+    font-size: 18px;
+
+    ion-label{
+        font-weight: 600;
+    }
+}
+
+ion-item {
+    --background: var(--ion-page-background);
+    --inner-padding-end: 0px;
+    --padding-start: 5px;
+    --padding-end: 5px;
+    --padding-top: 15px;
+    --inner-padding-bottom: 15px;
+
+    .contentWrap{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .logoWrap{
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            ion-img{
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        .resultDetailWrap{
+            flex: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            .label{
+                flex: 1
+            }
+            .midSection{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+
+                .bordered{
+                    border: 1px solid var(--ion-color-danger, #f04141) !important;
+                    color: var(--ion-color-danger, #f04141) !important;
+                    background: transparent;
+                }
+
+                ion-badge{
+                    --padding-start: 15px;
+                    --padding-end: 15px;
+                    --padding-top: 5px;
+                    --padding-bottom: 5px;
+                }
+                
+                .seeAll{
+                    font-size: 14px;
+                    padding: 0px 10px;
+                }
+            }
+
+            .point{
+                font-size: 25px;
+                font-weight: 500;
+            }
+        }
+    }
+}

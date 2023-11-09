@@ -1,0 +1,95 @@
+.background{
+    background-color: #f3f3f3;
+}
+.modalWrapper{
+    // display: flex;
+    // flex-direction: row;
+    justify-content: center;
+    // margin: 15px 0px;
+    padding: 15px 0px;
+    height: 100%;
+
+    .modalHead{
+        text-align: center;
+        color: #9A9A9A;
+        font-size: 14px;
+        // margin-bottom: 11px;
+        ion-label{
+            letter-spacing: 1px;
+            font-weight: bold;    
+        }
+    }
+
+    .modalContent{
+        // flex: 0 0 60%;
+        text-align: center;
+        --ion-grid-padding : 5px;
+        ion-label{
+            font-size: 13px;
+        }
+        margin-bottom: 11px;
+    }
+
+    .modalBtns{
+        // flex: 0 0 10%;
+        display: flex;
+        flex-direction: row;
+
+        div{
+            flex: 1;
+            text-align: center;
+
+            ion-label{
+                padding: 15px 30px;
+            }
+        }
+        ion-label{
+            font-size: 13px;
+            font-weight: 600;
+        }
+    }
+}
+
+// ion-modal.custom-popup ion-backdrop {
+//     visibility: visible !important;
+//     z-index:0;
+// }
+// ion-modal.custom-popup .modal-wrapper{
+//     top: 20%;
+//     width:60%;
+//     height:300px;
+//     position:absolute;
+// }
+
+// ion-page.modal {
+//     padding: 30px;
+//     background: rgba(0,0,0,0.5);
+// }
+
+// .sc-ion-modal-md-h {
+//     --width: 80%;
+//     --min-width: auto;
+//     --max-width: auto;
+//     --height: 52%;
+//     --min-height: auto;
+//     --max-height: auto;
+//     --overflow: hidden;
+//     --border-radius: 0;
+//     --border-width: 0;
+//     --border-style: none;
+//     --border-color: transparent;
+//     --background: var(--ion-background-color,#fff);
+//     --box-shadow: none;
+//     left: 0;
+//     right: 0;
+//     top: 0;
+//     bottom: 0;
+//     display: -ms-flexbox;
+//     display: flex;
+//     position: absolute;
+//     -ms-flex-align: center;
+//     align-items: center;
+//     -ms-flex-pack: center;
+//     justify-content: center;
+//     contain: strict;
+// }

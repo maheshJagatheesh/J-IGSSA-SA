@@ -1,0 +1,1163 @@
+<ion-list-header slot="primary" *ngIf="showSportLabel" mode="md">
+  <div class="listSubHeadWrap">
+    <div *ngIf="resulList.clientName != 'Rowing'">
+      <ion-label class="listSubHead" slot="start">{{ resulList.sportName }}</ion-label>
+    </div>
+    <div *ngIf="resulList.clientName == 'Rowing'">
+      <ion-label class="listSubHead" slot="start">{{ resulList.sportName }}  - {{resulList.eventName}}</ion-label>
+    </div>
+    <!-- <div>
+    </div> -->
+  </div>
+</ion-list-header>
+
+<ng-container *ngFor="let eventsData of resulList.eventGroup">
+  <ng-container *ngIf="eventsData?.eventDisplayType == 'Tile'; then Tile else thenBlock">
+  </ng-container>
+
+  <ng-template #thenBlock> 
+    <ng-container *ngIf="eventsData?.eventDisplayType == 'Normal'; then Normal else Old">
+    </ng-container>
+  </ng-template> 
+
+  <ng-template #Tile >
+    <ng-container *ngFor="let events of eventsData.eventDivisionData">
+      <div *ngIf="events && events.eventByCatData && events.eventByCatData.length">
+        <ion-item [ngClass]="eventsData.isLiveScoring == 1 ? 'liveScore' : '' ">
+          <ng-container>
+            <div class="competionItemWrap" >
+              <div class="listHeadWrap">
+                <div class="listHead1">{{events.categoryName}}</div>
+                <div class="listHead2">{{eventsData.clientName + " " + eventsData.divisionName}}</div>
+              </div>
+              <div class="listImgWrap">
+                <div class="eachImg" *ngFor="let item of events.eventByCatData">
+                  <ion-img [src]="imgBaseUrl + item.homeClubLogo"></ion-img>
+                  <ion-text>{{item.homeScore}}</ion-text>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ion-item>
+      </div>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #Normal >
+    <div *ngIf="resulList.clientName != 'Rowing'">
+      <ion-item [ngClass]="eventsData.eventData.isLiveScoring == 1 ? 'liveScore' : '' ">
+      
+        <div class="mainContentWrap">
+      
+          <div>
+      
+            <img *ngIf="eventsData.eventData.isLiveScoring == 1" src="../../../assets/live-blinking.gif">
+          </div>
+      
+          <div>
+            <!-- Head sec -->
+            <div *ngIf="eventsData.eventData.gameRound" class="gameRoundWrap">
+              <ion-label class="gameRound">{{eventsData.eventData.gameRound}}</ion-label>
+            </div>
+      
+            <div class="headWrap">
+              <div class="resultHeadSec">
+      
+                <div class="divisionNameWrap">
+                  <ion-text>
+                    <span class="divisionHighlighted">
+                      {{ eventsData.eventData.homeDivisionName }}
+                    </span> <span *ngIf="showTimeStarted">- {{eventsData.eventData.timeStarted}}</span>
+                  </ion-text>
+                </div>
+              </div>
+              <!-- Default order - label -->
+              <div class="scoreSecHead" *ngIf="eventsData.display_reverse_tiers == 0 || eventsData.display_reverse_tiers == ''">
+                
+                <ion-text
+                  *ngIf="eventsData.eventData.homeScore.toString().trim().length || eventsData.eventData.awayScore.toString().trim().length">
+                  <!-- {{ eventsData.eventData.homeAwayScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.eventData.homeAwayScoreLabel.toString().length; else pts">
+                    {{ eventsData.eventData.homeAwayScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #pts>
+                    Pt
+                  </ng-template>
+                </ion-text>
+
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length || eventsData.eventData.tier2AwayScore.toString().trim().length">
+                  <!-- set1 -->
+                  <ng-container *ngIf="eventsData.eventData.homeAwayT2ScoreLabel.toString().length; else set1">
+                    {{ eventsData.eventData.homeAwayT2ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set1>
+                    Set1
+                  </ng-template>
+                </ion-text>
+      
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.eventData.tier3HomeScore.toString().trim().length || eventsData.eventData.tier3AwayScore.toString().trim().length">
+                  <!-- set2 -->
+                  <!-- {{ eventsData.eventData.homeAwayT3ScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.eventData.homeAwayT3ScoreLabel.toString().length; else set2">
+                    {{ eventsData.eventData.homeAwayT3ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set2>
+                    Set2
+                  </ng-template>
+                </ion-text>
+      
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.eventData.tier4HomeScore.toString().trim().length || eventsData.eventData.tier4AwayScore.toString().trim().length">
+                  <!-- {{ eventsData.eventData.homeAwayT4ScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.eventData.homeAwayT4ScoreLabel.toString().length; else set3">
+                    {{ eventsData.eventData.homeAwayT4ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set3>
+                    Set3
+                  </ng-template>
+                </ion-text>
+      
+               
+      
+                <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+      
+                </div>
+              </div>
+
+              <!-- Reverse order - label -->
+              <div class="scoreSecHead" *ngIf="eventsData.display_reverse_tiers == 1">    
+                
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.eventData.tier4HomeScore.toString().trim().length || eventsData.eventData.tier4AwayScore.toString().trim().length">
+                  <!-- {{ eventsData.eventData.homeAwayT4ScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.eventData.homeAwayT4ScoreLabel.toString().length; else set3">
+                    {{ eventsData.eventData.homeAwayT4ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set3>
+                    Set3
+                  </ng-template>
+                </ion-text> 
+      
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.eventData.tier3HomeScore.toString().trim().length || eventsData.eventData.tier3AwayScore.toString().trim().length">
+                  <!-- set2 -->
+                  <!-- {{ eventsData.eventData.homeAwayT3ScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.eventData.homeAwayT3ScoreLabel.toString().length; else set2">
+                    {{ eventsData.eventData.homeAwayT3ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set2>
+                    Set2
+                  </ng-template>
+                </ion-text>    
+                     
+                
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length || eventsData.eventData.tier2AwayScore.toString().trim().length">
+                  <!-- set1 -->
+                  <ng-container *ngIf="eventsData.eventData.homeAwayT2ScoreLabel.toString().length; else set1">
+                    {{ eventsData.eventData.homeAwayT2ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set1>
+                    Set1
+                  </ng-template>
+                </ion-text>
+
+                <ion-text
+                  *ngIf="eventsData.eventData.homeScore.toString().trim().length || eventsData.eventData.awayScore.toString().trim().length">
+                  <!-- {{ eventsData.eventData.homeAwayScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.eventData.homeAwayScoreLabel.toString().length; else pts">
+                    {{ eventsData.eventData.homeAwayScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #pts>
+                    Pt
+                  </ng-template>
+                </ion-text>
+      
+                <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+      
+                </div>
+              </div>
+      
+            </div>
+
+            
+      
+            <!--Home team-->
+            <div>
+              <div class="wrap">
+                <div class="logoSec">
+                  <div class="logoWrap">
+                    <ion-img [src]="imgBaseUrl + eventsData.eventData.homeClubLogo"></ion-img>
+                  </div>
+                  <div class="nameWrap">
+                    <ion-row>
+                      <ion-text>{{eventsData.eventData.homeTeamName}}</ion-text>
+                      <ion-text style="color: red;font-style: italic;padding-left: 5px; padding-right: 5px;"
+                        *ngIf="eventsData.eventData.isforfeitHome == 1">Forfeit</ion-text>
+                      <ion-text style="color: red;font-style: italic;padding-left: 5px; padding-right: 5px;"
+                        *ngIf="eventsData.eventData.isWashOut == 1">Washout</ion-text>
+                    </ion-row>
+                  </div>
+                </div>
+
+                <!-- Default order - home score -->
+                <div class="scoreSec" *ngIf="eventsData.display_reverse_tiers == 0 || eventsData.display_reverse_tiers == ''">
+        
+                  <!-- <ng-container *ngIf="eventsData.eventData.sportFlag == 20 else tireScore">
+                    <ion-text *ngIf="eventsData.eventData.homeScore.toString().trim().length"
+                      [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      {{eventsData.eventData.homeScore}}
+                    </ion-text>
+        
+                    <ion-text *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length"
+                      [ngClass]="eventsData.eventData.tier2HomeScore < eventsData.eventData.tier2AwayScore ? 'loss': ''">
+                      {{eventsData.eventData.tier2HomeScore}}
+                    </ion-text>
+        
+                  </ng-container> -->
+        
+                  <!-- <ng-template #tireScore> -->
+
+                  <ion-text
+                    *ngIf="eventsData.eventData.homeScore.toString().trim().length || eventsData.eventData.awayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else ptsHome">
+                        -
+                      </ng-container>
+                      <ng-template #ptsHome>
+                        {{eventsData.eventData.homeScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length || eventsData.eventData.tier2AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set1Home">
+                        -
+                      </ng-container>
+                      <ng-template #set1Home>
+                        {{eventsData.eventData.tier2HomeScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier3HomeScore.toString().trim().length || eventsData.eventData.tier3AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set2Home">
+                        -
+                      </ng-container>
+                      <ng-template #set2Home>
+                        {{eventsData.eventData.tier3HomeScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier4HomeScore.toString().trim().length || eventsData.eventData.tier4AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set3Home">
+                        -
+                      </ng-container>
+                      <ng-template #set3Home>
+                        {{eventsData.eventData.tier4HomeScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <!-- <div *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length" class="resultBorder resultBorderTop"></div> -->
+        
+                 
+                  <!-- </ng-template> -->
+        
+                  <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                    <ion-img *ngIf="eventsData.eventData.acceptProtestStatus === 0 && isLogedIn" src="/assets/svg/tick_icon.svg"></ion-img>
+        
+                    <ion-img *ngIf=" eventsData.eventData.acceptProtestStatus === 1 && isLogedIn" src="/assets/svg/danger.svg">
+                    </ion-img>
+                  </div>
+                </div>
+
+                 <!-- Reverse order - home score -->
+                 <div class="scoreSec" *ngIf="eventsData.display_reverse_tiers == 1">
+        
+                  <!-- <ng-container *ngIf="eventsData.eventData.sportFlag == 20 else tireScore">
+                    <ion-text *ngIf="eventsData.eventData.homeScore.toString().trim().length"
+                      [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      {{eventsData.eventData.homeScore}}
+                    </ion-text>
+        
+                    <ion-text *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length"
+                      [ngClass]="eventsData.eventData.tier2HomeScore < eventsData.eventData.tier2AwayScore ? 'loss': ''">
+                      {{eventsData.eventData.tier2HomeScore}}
+                    </ion-text>
+        
+                  </ng-container> -->
+        
+                  <!-- <ng-template #tireScore> -->                  
+                  
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier4HomeScore.toString().trim().length || eventsData.eventData.tier4AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set3Home">
+                        -
+                      </ng-container>
+                      <ng-template #set3Home>
+                        {{eventsData.eventData.tier4HomeScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier3HomeScore.toString().trim().length || eventsData.eventData.tier3AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set2Home">
+                        -
+                      </ng-container>
+                      <ng-template #set2Home>
+                        {{eventsData.eventData.tier3HomeScore}}
+                      </ng-template>
+                  </ion-text>       
+                
+        
+                  <!-- <div *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length" class="resultBorder resultBorderTop"></div> -->      
+                  
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length || eventsData.eventData.tier2AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set1Home">
+                        -
+                      </ng-container>
+                      <ng-template #set1Home>
+                        {{eventsData.eventData.tier2HomeScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text
+                    *ngIf="eventsData.eventData.homeScore.toString().trim().length || eventsData.eventData.awayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore < eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else ptsHome">
+                        -
+                      </ng-container>
+                      <ng-template #ptsHome>
+                        {{eventsData.eventData.homeScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <!-- </ng-template> -->
+        
+                  <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                    <ion-img *ngIf="eventsData.eventData.acceptProtestStatus === 0 && isLogedIn" src="/assets/svg/tick_icon.svg"></ion-img>
+        
+                    <ion-img *ngIf=" eventsData.eventData.acceptProtestStatus === 1 && isLogedIn" src="/assets/svg/danger.svg">
+                    </ion-img>
+                  </div>
+                </div>
+        
+                <!-- <div class="labelSec" *ngIf="showLabel"> -->
+                <!-- <ion-badge *ngIf="eventsData.eventData.seeAllFlag" mode="ios" color="warning">
+                    {{ eventsData.eventData.homeDivisionName }}
+                  </ion-badge> -->
+                <!-- 
+                  <span *ngIf="eventsData.eventData.seeAllFlag" style="background: #cd051c;padding: 3px;border-radius: 51px;font-size: 8px;color: #fff;font-weight: bold;">{{ eventsData.eventData.homeDivisionName }}</span>
+        
+                  <ion-text *ngIf="eventsData.eventData.seeAllFlag == 0" class="seeAllLabel">
+                    {{ eventsData.eventData.homeDivisionName }} </ion-text>
+                </div> -->
+              </div>
+      
+              <div *ngIf="eventsData.eventData.home_best_player" class="bestScorer">
+                <ion-label>Best Scorer: {{eventsData.eventData.home_best_player}}</ion-label>
+              </div>
+            </div>
+      
+            <!--Away team name-->
+            <div>
+              <div class="wrap">
+                <div class="logoSec">
+                  <div class="logoWrap">
+                    <ion-img [src]="imgBaseUrl + eventsData.eventData.awayClubLogo"></ion-img>
+                  </div>
+                  <div class="nameWrap">
+                    <ion-row>
+                      <ion-text>{{eventsData.eventData.awayTeamName}}</ion-text>
+                      <ion-text style="color: red;font-style: italic;padding-left: 5px; padding-right: 5px;"
+                        *ngIf="eventsData.eventData.isforfeitAway == 1">Forfeit</ion-text>
+                    </ion-row>
+                  </div>
+                </div>
+                <!-- Default order - Away score -->
+                <div class="scoreSec" *ngIf="eventsData.display_reverse_tiers == 0 || eventsData.display_reverse_tiers == ''">
+        
+                  <!-- <ng-container *ngIf="eventsData.eventData.sportFlag == 20 else tireScoreAway">
+                    <ion-text [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      {{eventsData.eventData.awayScore }}
+                    </ion-text>
+        
+                    <ion-text *ngIf="eventsData.eventData.tier2AwayScore.toString().trim().length"
+                      [ngClass]="eventsData.eventData.tier2HomeScore > eventsData.eventData.tier2AwayScore ? 'loss': ''">
+                      {{eventsData.eventData.tier2AwayScore}}
+                    </ion-text>
+        
+                  </ng-container> -->
+        
+                  <!-- <ng-template #tireScoreAway> -->
+                  <ion-text
+                    *ngIf="eventsData.eventData.homeScore.toString().trim().length || eventsData.eventData.awayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else ptsAway">
+                        -
+                      </ng-container>
+                      <ng-template #ptsAway>
+                        {{eventsData.eventData.awayScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length || eventsData.eventData.tier2AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set1Away">
+                        -
+                      </ng-container>
+                      <ng-template #set1Away>
+                        {{eventsData.eventData.tier2AwayScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier3HomeScore.toString().trim().length || eventsData.eventData.tier3AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set2Away">
+                        -
+                      </ng-container>
+                      <ng-template #set2Away>
+                        {{eventsData.eventData.tier3AwayScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier4HomeScore.toString().trim().length || eventsData.eventData.tier4AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set3Away">
+                        -
+                      </ng-container>
+                      <ng-template #set3Away>
+                        {{eventsData.eventData.tier4AwayScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <!-- <div *ngIf="eventsData.eventData.tier2AwayScore.toString().trim().length > 0" class="resultBorder resultBorderBottom">
+                    </div> -->
+        
+                  
+                  <!-- </ng-template> -->
+        
+                  <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                  </div>
+                </div>
+
+                <!-- Reverse order - Away score -->
+                <div class="scoreSec" *ngIf="eventsData.display_reverse_tiers == 1"> 
+        
+                  <!-- <ng-container *ngIf="eventsData.eventData.sportFlag == 20 else tireScoreAway">
+                    <ion-text [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      {{eventsData.eventData.awayScore }}
+                    </ion-text>
+        
+                    <ion-text *ngIf="eventsData.eventData.tier2AwayScore.toString().trim().length"
+                      [ngClass]="eventsData.eventData.tier2HomeScore > eventsData.eventData.tier2AwayScore ? 'loss': ''">
+                      {{eventsData.eventData.tier2AwayScore}}
+                    </ion-text>
+        
+                  </ng-container> -->
+        
+                  <!-- <ng-template #tireScoreAway> -->     
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier4HomeScore.toString().trim().length || eventsData.eventData.tier4AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set3Away">
+                        -
+                      </ng-container>
+                      <ng-template #set3Away>
+                        {{eventsData.eventData.tier4AwayScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier3HomeScore.toString().trim().length || eventsData.eventData.tier3AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set2Away">
+                        -
+                      </ng-container>
+                      <ng-template #set2Away>
+                        {{eventsData.eventData.tier3AwayScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <!-- <div *ngIf="eventsData.eventData.tier2AwayScore.toString().trim().length > 0" class="resultBorder resultBorderBottom">
+                    </div> -->        
+                  
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.eventData.tier2HomeScore.toString().trim().length || eventsData.eventData.tier2AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else set1Away">
+                        -
+                      </ng-container>
+                      <ng-template #set1Away>
+                        {{eventsData.eventData.tier2AwayScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text
+                    *ngIf="eventsData.eventData.homeScore.toString().trim().length || eventsData.eventData.awayScore.toString().trim().length"
+                    [ngClass]="eventsData.eventData.homeScore > eventsData.eventData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.eventData.isWashOut == 1; else ptsAway">
+                        -
+                      </ng-container>
+                      <ng-template #ptsAway>
+                        {{eventsData.eventData.awayScore}}
+                      </ng-template>
+                  </ion-text>  
+                  <!-- </ng-template> -->
+        
+                  <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                  </div>
+                </div>
+                <!-- <div class="labelSec" *ngIf="showLabel">
+        
+                  <ion-text *ngIf="eventsData.eventData.seeAllFlag" class="seeAllLabel" style="padding: 1px 0px;"
+                    [routerLink]="['/', 'home', 'tabs', 'results', eventsData.eventData.awayDivisionID ]">
+                    See All</ion-text>
+                  <ion-text *ngIf="eventsData.eventData.seeAllFlag == 0" class="seeAllLabel">
+                    {{ eventsData.eventData.awayDivisionName | slice:0:6 }} </ion-text>
+                </div> -->
+              </div>
+      
+              <div *ngIf="eventsData.eventData.away_best_player" class="bestScorer">
+                <ion-label>Best Scorer: {{eventsData.eventData.away_best_player}}</ion-label>
+              </div>
+            </div>
+      
+            <div class="live-stream-wrap" *ngIf="eventsData.eventData.isLiveScoring"
+              (click)="openLiveStreamURL(eventsData.eventData.liveStreaming_url)">
+              <ion-img src='assets/svg/live.svg'></ion-img>
+              <ion-text>LIVESTREAM</ion-text>
+            </div>
+      
+            <div class="bottomBtnWrap" *ngIf=" eventsData.eventData.showAcceptRejectButton === 1">
+              <div class="btnProtest">
+                <ion-button slot="primary" type="button" class="appThemeBtn" fill="outline"
+                  (click)="protest(eventsData.eventData.eventId)" mode="ios">
+                  PROTEST
+                </ion-button>
+              </div>
+              <div class="btnAccept">
+                <ion-button slot="primary" type="button" class="appThemeBtn appThemeSolidBtn" fill="solid"
+                  (click)="accept(eventsData.eventData.eventId)" mode="ios">
+                  ACCEPT
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+  </ng-template>
+
+  <ng-template #Old >
+    <div *ngIf="resulList.clientName == 'Rowing'">
+      <ion-item *ngFor="let divList of resulList.divisions">
+        <div class="mainContentWrap">
+          <div>
+            <div class="headWrap">
+              <div class="resultHeadSec">
+                <div class="divisionNameWrap">
+                  <ion-text>
+                    <span class="divisionHighlighted">
+                      {{ divList.homeDivisionName }}
+                    </span>
+                    <!-- </span> <span *ngIf="showTimeStarted">- {{resultList.timeStarted}}</span> -->
+                  </ion-text>
+                </div>
+              </div>
+              <div class="scoreSecHead">
+                <ion-text class="flexDiv">
+                  {{ divList.homeAwayScoreLabel }}
+                </ion-text>
+              </div>
+            </div>
+          </div>
+          <div *ngFor="let resultList of resulList.eventGroup">
+            <div *ngIf="divList.homeDivisionName == resultList.homeDivisionName">
+              <div>
+                <div class="wrap">
+                  <div class="logoSec">
+                    <div class="logoWrap">
+                      <ion-img [src]="imgBaseUrl + resultList.homeClubLogo"></ion-img>
+                    </div>
+                    <div class="nameWrap">
+                      <ion-row>
+                        <ion-text>{{resultList.homeTeamName}}</ion-text>
+                      </ion-row>
+                    </div>
+                  </div>
+                  <div class="scoreSec">
+                    <ion-text class="flexDiv">
+                      {{resultList.homeScore}}
+                    </ion-text>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+    
+    <div *ngIf="resulList.clientName != 'Rowing'">
+      <ion-item [ngClass]="eventsData.isLiveScoring == 1 ? 'liveScore' : '' ">
+    
+        <div class="mainContentWrap">
+      
+          <div>
+      
+            <img *ngIf="eventsData.isLiveScoring == 1" src="../../../assets/live-blinking.gif">
+          </div>
+      
+          <div>
+            <!-- Head sec -->
+            <div *ngIf="eventsData.gameRound" class="gameRoundWrap">
+              <ion-label class="gameRound">{{eventsData.gameRound}}</ion-label>
+            </div>
+      
+            <div class="headWrap">
+              <div class="resultHeadSec">
+      
+                <div class="divisionNameWrap">
+                  <ion-text>
+                    <span class="divisionHighlighted">
+                      {{ eventsData.homeDivisionName }}
+                    </span> <span *ngIf="showTimeStarted">- {{eventsData.timeStarted}}</span>
+                  </ion-text>
+                </div>
+              </div>
+              <!-- Default order label-->
+              <div class="scoreSecHead" *ngIf="eventsData.display_reverse_tiers == 0 || eventsData.display_reverse_tiers == ''">
+
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.homeScore.toString().trim().length || eventsData.awayScore.toString().trim().length">
+                  <!-- {{ eventsData.homeAwayScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.homeAwayScoreLabel.toString().length; else pts">
+                    {{ eventsData.homeAwayScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #pts>
+                    Pt
+                  </ng-template>
+                </ion-text>
+      
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.tier2HomeScore.toString().trim().length || eventsData.tier2AwayScore.toString().trim().length">
+                  <!-- set1 -->
+                  <ng-container *ngIf="eventsData.homeAwayT2ScoreLabel.toString().length; else set1">
+                    {{ eventsData.homeAwayT2ScoreLabel }}
+       
+                  </ng-container>
+                  <ng-template #set1>
+                    Set1
+                  </ng-template>
+                </ion-text>
+      
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.tier3HomeScore.toString().trim().length || eventsData.tier3AwayScore.toString().trim().length">
+                  <!-- set2 -->
+                  <!-- {{ eventsData.homeAwayT3ScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.homeAwayT3ScoreLabel.toString().length; else set2">
+                    {{ eventsData.homeAwayT3ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set2>
+                    Set2
+                  </ng-template>
+                </ion-text>
+      
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.tier4HomeScore.toString().trim().length || eventsData.tier4AwayScore.toString().trim().length">
+                  <!-- {{ eventsData.homeAwayT4ScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.homeAwayT4ScoreLabel.toString().length; else set3">
+                    {{ eventsData.homeAwayT4ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set3>
+                    Set3
+                  </ng-template>
+                </ion-text>     
+                
+      
+                <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+      
+                </div>
+              </div>
+              <!-- reverse order label --> 
+              <div class="scoreSecHead" *ngIf="eventsData.display_reverse_tiers == 1">                
+
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.tier4HomeScore.toString().trim().length || eventsData.tier4AwayScore.toString().trim().length">
+                  <!-- {{ eventsData.homeAwayT4ScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.homeAwayT4ScoreLabel.toString().length; else set3">
+                    {{ eventsData.homeAwayT4ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set3>
+                    Set3
+                  </ng-template>
+                </ion-text>
+
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.tier3HomeScore.toString().trim().length || eventsData.tier3AwayScore.toString().trim().length">
+                  <!-- set2 -->
+                  <!-- {{ eventsData.homeAwayT3ScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.homeAwayT3ScoreLabel.toString().length; else set2">
+                    {{ eventsData.homeAwayT3ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set2>
+                    Set2
+                  </ng-template>
+                </ion-text>
+      
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.tier2HomeScore.toString().trim().length || eventsData.tier2AwayScore.toString().trim().length">
+                  <!-- set1 -->
+                  <ng-container *ngIf="eventsData.homeAwayT2ScoreLabel.toString().length; else set1">
+                    {{ eventsData.homeAwayT2ScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #set1>
+                    Set1
+                  </ng-template>
+                </ion-text>  
+
+                <ion-text class="flexDiv"
+                  *ngIf="eventsData.homeScore.toString().trim().length || eventsData.awayScore.toString().trim().length">
+                  <!-- {{ eventsData.homeAwayScoreLabel }} -->
+                  <ng-container *ngIf="eventsData.homeAwayScoreLabel.toString().length; else pts">
+                    {{ eventsData.homeAwayScoreLabel }}
+      
+                  </ng-container>
+                  <ng-template #pts>
+                    Pt
+                  </ng-template>
+                </ion-text>
+
+                <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+      
+                </div>
+              </div>
+      
+            </div>
+      
+            <!--Home team-->
+            <div>
+              <div class="wrap">
+                <div class="logoSec">
+                  <div class="logoWrap">
+                    <ion-img [src]="imgBaseUrl + eventsData.homeClubLogo"></ion-img>
+                  </div>
+                  <div class="nameWrap">
+                    <ion-row>
+                      <ion-text>{{eventsData.homeTeamName}}</ion-text>
+                      <ion-text style="color: red;font-style: italic;padding-left: 5px; padding-right: 5px;"
+                        *ngIf="eventsData.isforfeitHome == 1">Forfeit</ion-text>
+                      <ion-text style="color: red;font-style: italic;padding-left: 5px; padding-right: 5px;"
+                        *ngIf="eventsData.isWashOut == 1">Washout</ion-text>
+                    </ion-row>
+                  </div>
+                </div>
+                <!-- Default order home team -->
+                <div class="scoreSec"  *ngIf="eventsData.display_reverse_tiers == 0 || eventsData.display_reverse_tiers == ''">
+        
+                  <!-- <ng-container *ngIf="eventsData.sportFlag == 20 else tireScore">
+                    <ion-text *ngIf="eventsData.homeScore.toString().trim().length"
+                      [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      {{eventsData.homeScore}}
+                    </ion-text>
+        
+                    <ion-text *ngIf="eventsData.tier2HomeScore.toString().trim().length"
+                      [ngClass]="eventsData.tier2HomeScore < eventsData.tier2AwayScore ? 'loss': ''">
+                      {{eventsData.tier2HomeScore}}
+                    </ion-text>
+        
+                  </ng-container> -->
+        
+                  <!-- <ng-template #tireScore> -->
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.homeScore.toString().trim().length || eventsData.awayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else ptsHome">
+                        -
+                      </ng-container>
+                      <ng-template #ptsHome>
+                        {{eventsData.homeScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier2HomeScore.toString().trim().length || eventsData.tier2AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set1Home">
+                        -
+                      </ng-container>
+                      <ng-template #set1Home>
+                        {{eventsData.tier2HomeScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier3HomeScore.toString().trim().length || eventsData.tier3AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set2Home">
+                        -
+                      </ng-container>
+                      <ng-template #set2Home>
+                        {{eventsData.tier3HomeScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier4HomeScore.toString().trim().length || eventsData.tier4AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set3Home">
+                        -
+                      </ng-container>
+                      <ng-template #set3Home>
+                        {{eventsData.tier4HomeScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <!-- <div *ngIf="eventsData.tier2HomeScore.toString().trim().length" class="resultBorder resultBorderTop"></div> -->
+        
+              
+                  <!-- </ng-template> -->
+        
+                  <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                    <ion-img *ngIf="eventsData.acceptProtestStatus === 0 && isLogedIn" src="/assets/svg/tick_icon.svg"></ion-img>
+        
+                    <ion-img *ngIf=" eventsData.acceptProtestStatus === 1 && isLogedIn" src="/assets/svg/danger.svg">
+                    </ion-img>
+                  </div>
+                </div>
+
+                <!-- Reverse order home team -->
+                <div class="scoreSec" *ngIf="eventsData.display_reverse_tiers == 1">
+        
+                  <!-- <ng-container *ngIf="eventsData.sportFlag == 20 else tireScore">
+                    <ion-text *ngIf="eventsData.homeScore.toString().trim().length"
+                      [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      {{eventsData.homeScore}}
+                    </ion-text>
+        
+                    <ion-text *ngIf="eventsData.tier2HomeScore.toString().trim().length"
+                      [ngClass]="eventsData.tier2HomeScore < eventsData.tier2AwayScore ? 'loss': ''">
+                      {{eventsData.tier2HomeScore}}
+                    </ion-text>
+        
+                  </ng-container> -->
+        
+                  <!-- <ng-template #tireScore> -->                    
+                    
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier4HomeScore.toString().trim().length || eventsData.tier4AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set3Home">
+                        -
+                      </ng-container>
+                      <ng-template #set3Home>
+                        {{eventsData.tier4HomeScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <!-- <div *ngIf="eventsData.tier2HomeScore.toString().trim().length" class="resultBorder resultBorderTop"></div> -->      
+                  
+
+                  <ion-text class="flexDiv"
+                  *ngIf="eventsData.tier3HomeScore.toString().trim().length || eventsData.tier3AwayScore.toString().trim().length"
+                  [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                    <ng-container *ngIf="eventsData.isWashOut == 1; else set2Home">
+                      -
+                    </ng-container>
+                    <ng-template #set2Home>
+                      {{eventsData.tier3HomeScore}}
+                    </ng-template>
+                </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier2HomeScore.toString().trim().length || eventsData.tier2AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set1Home">
+                        -
+                      </ng-container>
+                      <ng-template #set1Home>
+                        {{eventsData.tier2HomeScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.homeScore.toString().trim().length || eventsData.awayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore < eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else ptsHome">
+                        -
+                      </ng-container>
+                      <ng-template #ptsHome>
+                        {{eventsData.homeScore}}
+                      </ng-template>
+                  </ion-text>     
+                  <!-- </ng-template> -->
+        
+                  <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                    <ion-img *ngIf="eventsData.acceptProtestStatus === 0 && isLogedIn" src="/assets/svg/tick_icon.svg"></ion-img>
+        
+                    <ion-img *ngIf=" eventsData.acceptProtestStatus === 1 && isLogedIn" src="/assets/svg/danger.svg">
+                    </ion-img>
+                  </div>
+                </div>
+        
+                <!-- <div class="labelSec" *ngIf="showLabel"> -->
+                <!-- <ion-badge *ngIf="eventsData.seeAllFlag" mode="ios" color="warning">
+                    {{ eventsData.homeDivisionName }}
+                  </ion-badge> -->
+                <!-- 
+                  <span *ngIf="eventsData.seeAllFlag" style="background: #cd051c;padding: 3px;border-radius: 51px;font-size: 8px;color: #fff;font-weight: bold;">{{ eventsData.homeDivisionName }}</span>
+        
+                  <ion-text *ngIf="eventsData.seeAllFlag == 0" class="seeAllLabel">
+                    {{ eventsData.homeDivisionName }} </ion-text>
+                </div> -->
+              </div>
+      
+              <div *ngIf="eventsData.home_best_player" class="bestScorer">
+                <ion-label>Best Scorer: {{eventsData.home_best_player}}</ion-label>
+              </div>
+            </div>
+      
+            <!--Away team name-->
+            <div>
+              <div class="wrap">
+                <div class="logoSec">
+                  <div class="logoWrap">
+                    <ion-img [src]="imgBaseUrl + eventsData.awayClubLogo"></ion-img>
+                  </div>
+                  <div class="nameWrap">
+                    <ion-row>
+                      <ion-text>{{eventsData.awayTeamName}}</ion-text>
+                      <ion-text style="color: red;font-style: italic;padding-left: 5px; padding-right: 5px;"
+                        *ngIf="eventsData.isforfeitAway == 1">Forfeit</ion-text>
+                    </ion-row>
+                  </div>
+                </div>
+                <!-- Default order away team -->
+                <div class="scoreSec"  *ngIf="eventsData.display_reverse_tiers == 0 || eventsData.display_reverse_tiers == ''">
+        
+                  <!-- <ng-container *ngIf="eventsData.sportFlag == 20 else tireScoreAway">
+                    <ion-text [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      {{eventsData.awayScore }}
+                    </ion-text>
+        
+                    <ion-text *ngIf="eventsData.tier2AwayScore.toString().trim().length"
+                      [ngClass]="eventsData.tier2HomeScore > eventsData.tier2AwayScore ? 'loss': ''">
+                      {{eventsData.tier2AwayScore}}
+                    </ion-text>
+        
+                  </ng-container> -->
+        
+                  <!-- <ng-template #tireScoreAway> -->
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.homeScore.toString().trim().length || eventsData.awayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else ptsAway">
+                        -
+                      </ng-container>
+                      <ng-template #ptsAway>
+                        {{eventsData.awayScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier2HomeScore.toString().trim().length || eventsData.tier2AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set1Away">
+                        -
+                      </ng-container>
+                      <ng-template #set1Away>
+                        {{eventsData.tier2AwayScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier3HomeScore.toString().trim().length || eventsData.tier3AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set2Away">
+                        -
+                      </ng-container>
+                      <ng-template #set2Away>
+                        {{eventsData.tier3AwayScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier4HomeScore.toString().trim().length || eventsData.tier4AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set3Away">
+                        -
+                      </ng-container>
+                      <ng-template #set3Away>
+                        {{eventsData.tier4AwayScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <!-- <div *ngIf="eventsData.tier2AwayScore.toString().trim().length > 0" class="resultBorder resultBorderBottom">
+                    </div> -->       
+                
+                  <!-- </ng-template> -->
+        
+                  <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                  </div>
+                </div>
+
+                <!-- Reverse order away team -->
+                <div class="scoreSec" *ngIf="eventsData.display_reverse_tiers == 1">
+        
+                  <!-- <ng-container *ngIf="eventsData.sportFlag == 20 else tireScoreAway">
+                    <ion-text [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      {{eventsData.awayScore }}
+                    </ion-text>
+        
+                    <ion-text *ngIf="eventsData.tier2AwayScore.toString().trim().length"
+                      [ngClass]="eventsData.tier2HomeScore > eventsData.tier2AwayScore ? 'loss': ''">
+                      {{eventsData.tier2AwayScore}}
+                    </ion-text>
+        
+                  </ng-container> -->
+        
+                  <!-- <ng-template #tireScoreAway> -->                  
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier4HomeScore.toString().trim().length || eventsData.tier4AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set3Away">
+                        -
+                      </ng-container>
+                      <ng-template #set3Away>
+                        {{eventsData.tier4AwayScore}}
+                      </ng-template>
+                  </ion-text>
+        
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier3HomeScore.toString().trim().length || eventsData.tier3AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set2Away">
+                        -
+                      </ng-container>
+                      <ng-template #set2Away>
+                        {{eventsData.tier3AwayScore}}
+                      </ng-template>
+                  </ion-text>  
+        
+                  <!-- <div *ngIf="eventsData.tier2AwayScore.toString().trim().length > 0" class="resultBorder resultBorderBottom">
+                    </div> -->      
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.tier2HomeScore.toString().trim().length || eventsData.tier2AwayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else set1Away">
+                        -
+                      </ng-container>
+                      <ng-template #set1Away>
+                        {{eventsData.tier2AwayScore}}
+                      </ng-template>
+                  </ion-text>
+
+                  <ion-text class="flexDiv"
+                    *ngIf="eventsData.homeScore.toString().trim().length || eventsData.awayScore.toString().trim().length"
+                    [ngClass]="eventsData.homeScore > eventsData.awayScore ? 'loss': ''">
+                      <ng-container *ngIf="eventsData.isWashOut == 1; else ptsAway">
+                        -
+                      </ng-container>
+                      <ng-template #ptsAway>
+                        {{eventsData.awayScore}}
+                      </ng-template>
+                  </ion-text>
+                  <!-- </ng-template> -->
+        
+                  <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                  </div>
+                </div>
+                <!-- <div class="labelSec" *ngIf="showLabel">
+        
+                  <ion-text *ngIf="eventsData.seeAllFlag" class="seeAllLabel" style="padding: 1px 0px;"
+                    [routerLink]="['/', 'home', 'tabs', 'results', eventsData.awayDivisionID ]">
+                    See All</ion-text>
+                  <ion-text *ngIf="eventsData.seeAllFlag == 0" class="seeAllLabel">
+                    {{ eventsData.awayDivisionName | slice:0:6 }} </ion-text>
+                </div> -->
+              </div>
+      
+              <div *ngIf="eventsData.away_best_player" class="bestScorer">
+                <ion-label>Best Scorer: {{eventsData.away_best_player}}</ion-label>
+              </div>
+            </div>
+      
+            <div class="live-stream-wrap" *ngIf="eventsData.isLiveScoring"
+              (click)="openLiveStreamURL(eventsData.liveStreaming_url)">
+              <ion-img src='assets/svg/live.svg'></ion-img>
+              <ion-text>LIVESTREAM</ion-text>
+            </div>
+      
+            <div class="bottomBtnWrap" *ngIf=" eventsData.showAcceptRejectButton === 1">
+              <div class="btnProtest">
+                <ion-button slot="primary" type="button" class="appThemeBtn" fill="outline"
+                  (click)="protest(eventsData.eventId)" mode="ios">
+                  PROTEST
+                </ion-button>
+              </div>
+              <div class="btnAccept">
+                <ion-button slot="primary" type="button" class="appThemeBtn appThemeSolidBtn" fill="solid"
+                  (click)="accept(eventsData.eventId)" mode="ios">
+                  ACCEPT
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+  </ng-template>
+</ng-container>
+
+
+<!-- <div *ngIf="resulList?.eventDisplayType == 'Tile'">
+  <ion-item *ngFor="let eventsData of resulList.eventGroup" [ngClass]="eventsData.isLiveScoring == 1 ? 'liveScore' : '' ">
+    <ng-container *ngFor="let events of eventsData.eventDivisionData">
+      <div class="competionItemWrap" >
+        <div class="listHeadWrap">
+          <div class="listHead1">{{events.categoryName}}</div>
+          <div class="listHead2">{{eventsData.clientName + " " + eventsData.divisionName}}</div>
+        </div>
+        <div class="listImgWrap">
+          <div class="eachImg" *ngFor="let item of events.eventByCatData">
+            <ion-img [src]="imgBaseUrl + item.homeClubLogo"></ion-img>
+            <ion-text>{{item.homeScore}}</ion-text>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ion-item>
+</div> -->

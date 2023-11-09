@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar mode="md">
+
+    <ion-buttons slot="end">
+      <app-common-injury></app-common-injury>
+      <app-common-scoring></app-common-scoring>
+      <app-competition-filter-icon></app-competition-filter-icon>
+      <app-common-notification></app-common-notification>
+      <app-common-filter></app-common-filter>
+      <!-- <ion-button (click)="toggleFilter()">
+        <ion-img class="filterIcon" src="../../assets/icon/filter/filter.svg"></ion-img>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title mode="md" class="pageTitle">{{!isLogedIn && showDraw? 'Draw' : 'Fixtures'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="isLoading">
+    <ion-list *ngFor="let i of [1,2,3,5,6,7]">
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ng-container *ngIf="showDraw && !isLogedIn; then draw else fixture">
+
+  </ng-container>
+
+  <ng-template #draw> 
+    <ion-list mode="ios" *ngIf="! isLoading && drawModel.length > 0">
+      <app-match-round *ngFor="let drawData of drawModel" [drawData]="drawData" [isLogedIn]="isLogedIn">
+      </app-match-round>
+    </ion-list>
+    <ion-infinite-scroll *ngIf="! isLoading && drawModel.length > 0" threshold="100px"
+      (ionInfinite)="loadDrawData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-template> 
+
+  <ng-template #fixture> 
+    <ion-list mode="ios" *ngIf="! isLoading && fixtureModel.length > 0">
+      <app-match-details *ngFor="let machData of fixtureModel" [fixture]="machData" [isLogedIn]="isLogedIn">
+      </app-match-details>
+    </ion-list>
+
+    <ion-infinite-scroll *ngIf="! isLoading && fixtureModel.length > 0" threshold="100px"
+      (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-template> 
+
+
+  <ion-row style="height: 100%" *ngIf="! isLoading && (fixtureModel.length == 0 && drawModel.length == 0)">
+    <ion-col size="12" class="noContentWrap">
+      <div class="noDataFound">
+        <p>
+          No upcoming fixtures to show
+        </p>
+      </div>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

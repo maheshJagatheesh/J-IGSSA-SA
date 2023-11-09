@@ -1,0 +1,177 @@
+<ion-list-header slot="primary" *ngIf="showSportLabel" mode="md">
+  <div class="listSubHeadWrap labelSec">
+    <div>
+      <ion-label class="listSubHead" slot="start">{{ resulList.sportName }}</ion-label>
+    </div>
+    <div>
+      <ion-badge mode="ios" class="bordered" slot="range-left">
+        {{ resulList.homeDivisionName | slice:0:6}}
+      </ion-badge>
+    </div>
+  </div>
+</ion-list-header>
+
+
+
+<ion-item *ngFor="let resultList of resulList.eventGroup" [ngClass]="resultList.isLiveScoring == 1 ? 'liveScore' : '' ">
+  <!-- <ion-item *ngFor="let resultList of data"> -->
+
+  <div class="mainContentWrap">
+    <div>
+
+      <img *ngIf="resultList.isLiveScoring == 1" src="../../../assets/live-blinking.gif">
+    </div>
+
+    <div>
+
+      <!--Home team-->
+      <div class="wrap">
+        <div class="logoSec">
+          <div class="logoWrap">
+            <ion-img [src]="imgBaseUrl + resultList.homeClubLogo"></ion-img>
+          </div>
+          <div class="nameWrap">
+            <ion-text>{{resultList.homeTeamName}}</ion-text>
+          </div>
+        </div>
+        <!-- <div class="scoreSec">
+          <ion-text [ngClass]="resultList.homeScore < resultList.awayScore ? 'loss': ''">{{resultList.homeScore}}
+          </ion-text>
+        </div> -->
+
+        <div class="scoreSec">
+
+          <ng-container *ngIf="resultList.sportFlag == 20 else tireScore">
+            <ion-text *ngIf="resultList.homeScore.toString().trim().length"
+              [ngClass]="resultList.homeScore < resultList.awayScore ? 'loss': ''">
+              {{resultList.homeScore}}
+            </ion-text>
+
+            <ion-text *ngIf="resultList.tier2HomeScore.toString().trim().length"
+              [ngClass]="resultList.tier2HomeScore < resultList.tier2AwayScore ? 'loss': ''">
+              {{resultList.tier2HomeScore}}
+            </ion-text>
+
+          </ng-container>
+
+          <ng-template #tireScore>
+
+            <ion-text *ngIf="resultList.tier2HomeScore.toString().trim().length"
+              [ngClass]="resultList.tier2HomeScore < resultList.tier2AwayScore ? 'loss': ''">
+              {{resultList.tier2HomeScore}}
+            </ion-text>
+
+            <ion-text *ngIf="resultList.tier3HomeScore.toString().trim().length"
+              [ngClass]="resultList.tier3HomeScore < resultList.tier3AwayScore ? 'loss': ''">
+              {{resultList.tier3HomeScore}}
+            </ion-text>
+
+            <ion-text *ngIf="resultList.tier4HomeScore.toString().trim().length"
+              [ngClass]="resultList.tier4HomeScore < resultList.tier4AwayScore ? 'loss': ''">
+              {{resultList.tier4HomeScore}}
+            </ion-text>
+
+            <div *ngIf="resultList.tier2HomeScore.toString().trim().length" class="resultBorder resultBorderTop"></div>
+
+            <ion-text *ngIf="resultList.homeScore.toString().trim().length"
+              [ngClass]="resultList.homeScore < resultList.awayScore ? 'loss': ''">
+              {{resultList.homeScore}}
+            </ion-text>
+
+          </ng-template>
+
+          <div class="iconWrap" *ngIf="showLabel">
+            <ion-img *ngIf="resultList.acceptProtestStatus === 0 " src="/assets/svg/tick_icon.svg"></ion-img>
+
+            <ion-img *ngIf=" resultList.acceptProtestStatus === 1 " src="/assets/svg/danger.svg">
+            </ion-img>
+          </div>
+
+        </div>
+      </div>
+
+      <!--Away team name-->
+      <div class="wrap">
+        <div class="logoSec">
+          <div class="logoWrap">
+            <ion-img [src]="imgBaseUrl + resultList.awayClubLogo"></ion-img>
+          </div>
+          <div class="nameWrap">
+            <ion-text>{{resultList.awayTeamName}}</ion-text>
+          </div>
+        </div>
+        <!-- <div class="scoreSec">
+          <ion-text [ngClass]="resultList.homeScore > resultList.awayScore ? 'loss': ''">{{resultList.awayScore}}
+          </ion-text>
+        </div> -->
+
+        <div class="scoreSec">
+
+          <ng-container *ngIf="resultList.sportFlag == 20 else tireScoreAway">
+            <ion-text [ngClass]="resultList.homeScore > resultList.awayScore ? 'loss': ''">
+              {{resultList.awayScore }}
+            </ion-text>
+
+            <ion-text *ngIf="resultList.tier2AwayScore.toString().trim().length"
+              [ngClass]="resultList.tier2HomeScore > resultList.tier2AwayScore ? 'loss': ''">
+              {{resultList.tier2AwayScore}}
+            </ion-text>
+
+          </ng-container>
+
+          <ng-template #tireScoreAway>
+
+            <ion-text *ngIf="resultList.tier2AwayScore.toString().trim().length"
+              [ngClass]="resultList.tier2HomeScore > resultList.tier2AwayScore ? 'loss': ''">
+              {{resultList.tier2AwayScore}}
+            </ion-text>
+
+            <ion-text *ngIf="resultList.tier3AwayScore.toString().trim().length"
+              [ngClass]="resultList.tier3HomeScore > resultList.tier3AwayScore ? 'loss': ''">
+              {{resultList.tier3AwayScore}}
+            </ion-text>
+
+            <ion-text *ngIf="resultList.tier4AwayScore.toString().trim().length"
+              [ngClass]="resultList.tier4HomeScore > resultList.tier4AwayScore ? 'loss': ''">
+              {{resultList.tier4AwayScore}}
+            </ion-text>
+
+            <div *ngIf="resultList.tier2AwayScore.toString().trim().length > 0" class="resultBorder resultBorderBottom">
+            </div>
+
+            <ion-text *ngIf="resultList.awayScore.toString().trim().length"
+              [ngClass]="resultList.homeScore > resultList.awayScore ? 'loss': ''">
+              {{resultList.awayScore }}
+            </ion-text>
+
+          </ng-template>
+
+          <div class="iconWrap" *ngIf="showLabel">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="live-stream-wrap" *ngIf="resultList.isLiveScoring"
+        (click)="openLiveStreamURL(resultList.liveStreaming_url)">
+        <ion-img src='assets/svg/live.svg'></ion-img>
+        <ion-text>LIVESTREAM</ion-text>
+      </div>
+    </div>
+
+    <!-- <div class="bottomBtnWrap" *ngIf="showLabel && resultList.showAcceptRejectButton === 1">
+      <div class="btnProtest">
+        <ion-button slot="primary" type="button" color="danger" fill="outline" (click)="protest()" mode="ios">
+          Protest
+        </ion-button>
+      </div>
+      <div class="btnAccept">
+        <ion-button slot="primary" type="button" color="danger" fill="outline" (click)="accept()" mode="ios">
+          Accept
+        </ion-button>
+      </div>
+    </div> -->
+  </div>
+
+
+</ion-item>

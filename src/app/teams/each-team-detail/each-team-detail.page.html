@@ -1,0 +1,42 @@
+<!-- <ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" defaultHref="home/tabs/teams/1" icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+
+   
+    <ion-title mode="md" class="innerPageTitle">TEAMS</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        mode="md"
+        defaultHref="home/tabs/teams/1"
+        text="TEAMS"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="! isLoading">
+    <ion-row>
+      <ion-col size="12">
+        <div class="logoCardWrap">
+          <ion-img [src]="logoPath"></ion-img>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-item *ngIf="teamByClub.length === 0 else teamList"
+      >No Teams Found</ion-item
+    >
+    <ng-template #teamList>
+      <app-team-sport-category
+        *ngFor="let sport of teamByClub"
+        [divisionData]="sport"
+      ></app-team-sport-category>
+    </ng-template>
+  </ion-grid>
+</ion-content>

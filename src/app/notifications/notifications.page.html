@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar mode="md">
+
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="toggleFilter()">
+        <ion-img class="filterIcon" src="../../assets/icon/filter/filter.png"></ion-img>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="end">
+      <app-common-scoring></app-common-scoring>      
+    </ion-buttons>
+    <ion-title mode="md" class="pageTitle">NOTIFICATIONS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <!-- Segment buttons with the first checked and the last disabled -->
+  <ion-grid [ngClass]="notifications.length == 0 ? 'fullHeight' : ''">
+    <ion-row>
+      <!-- segment section -->
+      <ion-col size-xs="6" offset-xs="3">
+        <ion-segment (ionChange)="segmentChanged($event)" mode="ios">
+          <ion-segment-button checked value="myTeams">
+            <ion-label>MY TEAM</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="all">
+            <ion-label>ALL</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height: 85%">
+      <ion-col size="12" class="noContentWrap">
+        <div *ngIf="notifications.length == 0">
+          <p>
+            No Notifications found.
+          </p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="12">
+
+        <!-- <ion-virtual-scroll
+          class="marginTop15"
+          [items]="[1,2,3,4,5]"
+          approxItemHeight="320px"
+        >
+          <ion-list mode="ios" *virtualItem="let machData" [routerLink]="['/', 'home', 'tabs', 'notification', 1]" >
+              <app-news   >
+      
+                </app-news>
+          </ion-list>
+        </ion-virtual-scroll> -->
+        <ion-list mode="ios">
+          <app-news *ngFor="let item of notifications" [routerLink]="['/', 'home', 'tabs', 'notification', item.id]"
+            [news]="item">
+          </app-news>
+          <!-- <ion-button class="seeMoreButton" expand="full" fill="clear">SEE MORE</ion-button> -->
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

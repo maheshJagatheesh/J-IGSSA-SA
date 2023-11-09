@@ -1,0 +1,196 @@
+ion-content{
+    --padding-top: env(safe-area-inset-top) !important;
+}
+
+.more-section{
+    .view1 {
+        padding: 10px 20px 10px 30px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        // .borderBottom{
+        //     border-bottom: 0.5px solid #ffffffe3;
+        // }
+        .close-wrap{
+            height: 25%;
+    
+            .close-icon-wrap{
+                color: #fff;
+                float: right;
+                margin:20px 0px;
+            
+                .close-icon{
+                    font-size: 20px;
+                }
+                .vertical-sentence{
+                    writing-mode: vertical-lr;
+                    transform: rotate(180deg);
+                  }
+                .rotate-characters{
+                    font-size: 11px;
+                    font-weight: 550;
+                    text-orientation: downright;
+                }
+            }
+        }
+        
+        .more-wrap{
+            height: 50%;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 550;
+    
+            .moreText{
+                padding-bottom: 40px;
+                border-bottom: 0.5px solid #ffffffe3;
+            }
+            .aboutText{
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+            .schoolText{
+                padding-top: 20px;
+            }
+            .arrow{
+                float: right;
+                width: 35px;
+                height: 17px;
+            }
+        }
+    
+        .details-wrap{
+            // flex-basis: 200px;
+            height: 25%;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 550;
+            // font-family: 'Helvetica-Bold';
+    
+            .detailContent{
+                margin-bottom: 20px;
+                display: block;
+            }
+        }
+    }
+
+    .header{
+        width: 100%;
+        // border-bottom: 0.5px solid #c8c7cc87;
+    
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    
+        .backArrowWrap{
+            padding: 16px 0px;
+            display: inline-block;
+    
+            img{
+                height: 14px;
+            }
+        }
+    }
+
+    .side-padding{
+        padding: 0 20px;
+    }
+
+    .view2 {
+        padding: 10px 20px 90% 30px;
+        // padding: 0;
+        height: 100%;
+        // display: flex;
+        // flex-direction: column;
+        .more-wrap{
+            height: 50%;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 550;
+    
+            .iconWrap{
+                padding-top: 20%;
+                padding-bottom: 40px;
+                border-bottom: 0.5px solid #ffffffe3;
+            }
+            .icon2Wrap{
+                padding-top: 20%;
+                padding-bottom: 40px;
+            }
+            .logo{
+                width: 35px;
+                height: 17px;
+            }
+            .textField{
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            .moreDetails{
+                padding-top: 20px;
+                line-height: 20px;
+            }
+            .displyContentwrap{
+                line-height: 20px;
+                padding-bottom: 40px;
+                border-bottom: 0.5px solid #ffffffe3;
+
+                .content{
+                    display: block;
+                }
+                .spaceBottom{
+                    padding-bottom: 15px;
+                }
+            }
+            .displyContentwrap2{
+                line-height: 20px;
+            }
+            .schoolText{
+                padding-top: 20px;
+            }
+            .arrow{
+                float: right;
+                width: 35px;
+                height: 17px;
+            }
+
+        }
+    }
+
+    .view3 {
+        padding: 10px 20px 90% 30px;
+        height: 100%;
+        .headTextwrap{
+            color: #fff;
+            font-size: 14px;
+            font-weight: 550;
+    
+            .headWrap{
+                padding-top: 35%;
+                padding-bottom: 40px;
+            }
+        }
+        .eachRowWrap{
+            color: #fff;
+            font-size: 14px;
+            font-weight: 550;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            border-top: 0.5px solid #ffffffe3;
+
+            .displyContentwrap{
+                // padding-bottom: 40px;
+                line-height: 20px;
+
+                .content{
+                    display: block;
+                }
+                .spaceBottom{
+                    padding-bottom: 15px;
+                }
+            }
+        }
+    }
+    .linkStyle{
+        color: #fff;
+    }
+}
+

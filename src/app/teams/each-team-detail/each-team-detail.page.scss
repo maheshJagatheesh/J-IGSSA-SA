@@ -1,0 +1,11 @@
+.logoCardWrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0px;
+
+    ion-img{
+        width: 110px;
+    }
+}

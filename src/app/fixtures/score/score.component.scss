@@ -1,0 +1,521 @@
+ion-toolbar {
+  --background: #15233c;
+
+  .arrow {
+    width: 30px;
+    height: 15px;
+  }
+
+  ion-label {
+    color: #fff;
+    padding: 0 10px;
+  }
+}
+
+ion-content {
+  --background: #15233c;
+  --color: #fff;
+  --padding-top: env(safe-area-inset-top) !important;
+  .contentWrap {
+    // margin: 0px 10px;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    height: 100%;
+
+    .noMargin {
+      margin: 0px;
+    }
+
+    .contentTop {
+      flex-grow: 1;
+      position: relative;
+    }
+
+    .contentBottom {
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 85px;
+      padding-left: 30px;
+      padding-right: 30px;
+
+      .scoreBtnWrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+
+        ion-button {
+          flex: 0 0 36%;
+          font-size: 10px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          height: 40px;
+        }
+      }
+    }
+
+    .heading {
+      color: #fff;
+      margin: 10% 0px;
+      font-weight: bolder;
+    }
+
+    .homeTeamWrap,
+    .awayTeamWrap {
+      color: #fff;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      flex-direction: row;
+      margin: 20% 10px 35% 0px;
+      border-bottom: 0.5px solid #c8c7cc87;
+      border-top: 0.5px solid #c8c7cc87;
+      padding: 5px 0px;
+      padding: 10px 0px;
+
+      .teamLabelWrap {
+        flex: 0 0 25%;
+        font-size: 16px;
+        min-width: 75px;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .scoreWrap {
+        flex: 0 0 25%;
+        display: flex;
+        flex-direction: row;
+
+        .eachScore {
+          flex: 0 0 25%;
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+    }
+    .homeTeamWrap {
+      .scoreWrap {
+        justify-content: flex-start;
+      }
+    }
+    .awayTeamWrap {
+      justify-content: flex-end;
+      margin: 20% 0px 35% 10px;
+
+      .scoreWrap {
+        justify-content: flex-end;
+      }
+
+      .teamLabelWrap {
+        text-align: right;
+      }
+    }
+
+    .radioOptionsWrap {
+      --background: transparent;
+
+      ion-radio {
+        width: 26px;
+        height: 17px;
+      }
+
+      .resultLabel {
+        color: #fff;
+        padding: 0px 5px;
+        font-size: 12px;
+      }
+    }
+    .radioOptionsWrap.nopadding {
+      --padding-start: 0;
+    }
+
+    .resultRadioWrap {
+      // border-top: 0.5px solid #c8c7cc87;
+      // border-bottom: 0.5px solid #c8c7cc87;
+
+      .radioWrapDiv {
+        display: flex;
+        flex-direction: row;
+        padding: 15px 0px;
+        justify-content: space-between;
+
+        .eachWrap {
+          // flex: 1;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+
+          .btnText {
+            font-size: 12px;
+            color: #fff;
+            padding: 5px;
+          }
+        }
+      }
+
+      .radioGroupWrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        .eachWrap {
+          flex: 4;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+
+          .btnText {
+            font-size: 12px;
+            color: #fff;
+            padding: 5px;
+          }
+        }
+      }
+    }
+
+    .scoreTableWrap {
+      display: flex;
+      flex-direction: column;
+
+      .eachRow {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        // padding: 15px 0px;
+        padding: 20px 0px;
+
+        .labelSec {
+          flex: 0 0 30%;
+
+          .tableHeadEachCol:nth-child(1) {
+            text-align: left;
+          }
+        }
+        .scoreSec {
+          flex: 0 0 70%;
+          display: flex;
+        }
+
+        .tableHeadEachCol {
+          flex: 0 0 20%;
+          // text-align: center;
+          color: #fff;
+          font-weight: bolder;
+          font-size: 12px;
+          text-align: center;
+        }
+        .labelSecRowing {
+          flex: 2;
+
+          .tableHeadEachColRowing:nth-child(1) {
+            text-align: left;
+          }
+        }
+        .scoreSecRowing {
+          flex: 2;
+          display: flex;
+        }
+
+        .tableHeadEachColRowing {
+          flex: 1;
+          // text-align: center;
+          color: #fff;
+          font-weight: bolder;
+          font-size: 12px;
+          text-align: center;
+        }
+
+        .cricket {
+          flex: 0 0 30%;
+        }
+      }
+    }
+
+    .bestScorerWrap {
+      padding: 20px 0px 0px 0px;
+      .teamWrap {
+        color: #fff;
+        font-size: 12px;
+        // ion-label{
+        //     font-weight: bolder;
+        // }
+        .nameWraper {
+          padding: 10px 0px 20px 0px;
+          ion-input {
+            background-color: #2b394d;
+            border: 0.5px solid #c8c7cc87;
+            border-radius: 5px;
+          }
+          .invalidBorder {
+            border: 0.5px solid #ff000d;
+          }
+        }
+        .invalid {
+          color: #ff000d;
+        }
+      }
+    }
+
+    .injuryReportWrap {
+      display: flex;
+      flex-direction: column;
+
+      .eachRow {
+        // padding: 15px 0px;
+        padding: 20px 0px;
+      }
+      .tableHeadEach {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        padding: 10px 0px;
+
+        color: #fff;
+        font-weight: bolder;
+        font-size: 12px;
+        text-align: center;
+      }
+      ion-textarea {
+        --background: #2b394d;
+        border: 0.5px solid #c8c7cc87;
+        border-radius: 5px;
+      }
+      ion-select {
+        background-color: #2b394d;
+        border: 0.5px solid #c8c7cc87;
+        border-radius: 5px;
+      }
+      ion-range {
+        --bar-background: #c8c7cc87;
+        --bar-background-active: #c8c7cc87;
+        --knob-background: var(--ion-color-danger);
+        --knob-size: 25px;
+      }
+      ion-input {
+        background-color: #2b394d;
+        border: 0.5px solid #c8c7cc87;
+        border-radius: 5px;
+      }
+      ion-label {
+        color: #fff;
+        font-weight: bolder;
+        font-size: 12px;
+        padding: 0px 10px;
+      }
+    }
+  }
+}
+
+.borderBottom {
+  border-bottom: 0.5px solid #c8c7cc87;
+}
+
+.borderTop {
+  border-top: 0.5px solid #c8c7cc87;
+}
+
+.noPadding {
+  padding: 0px;
+}
+
+.header {
+  width: 100%;
+  border-bottom: 0.5px solid #c8c7cc87;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  .backArrowWrap {
+    padding: 16px 0px;
+    display: inline-block;
+
+    img {
+      height: 14px;
+    }
+    ion-label {
+      color: #fff;
+      font-size: 14px;
+      padding: 0px 0px 0px 5px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.wheelBtn {
+  color: #f00;
+}
+.picker-button.sc-ion-picker-ios,
+.picker-button.activated.sc-ion-picker-ios {
+  color: #f00 !important;
+}
+.reportTextWrap {
+  padding: 15px 0px;
+}
+.cardLayout {
+  --background: #fff;
+  margin: 0;
+  min-height: 140px;
+  border-radius: 15px;
+
+  .notes {
+    --padding-top: 0px;
+  }
+}
+
+.addGameWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px 0px;
+
+  ion-button {
+    flex: 0 0 75%;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    height: 40px;
+  }
+}
+
+.opacity {
+  /* rgba(138, 43, 226, .5) */
+  //   color: rgba( rgba(255, 255, 225, .5) , .5);
+  color: #ffffff96;
+}
+
+.toggle-livescore {
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+.side-padding {
+  padding: 0 20px;
+}
+.live-score-bg {
+  background: #9f1818;
+}
+
+.cameraDiv {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: 20px;
+
+  ion-icon {
+    height: 50px;
+    width: 50px;
+  }
+
+  ion-img {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+.closeIcon {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  z-index: 999;
+  right: -10px;
+  top: -10px;
+}
+
+.answer-cont-wrap {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  font-size: 14px;
+  .answer-wrap {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    color: #fff;
+
+    span {
+      padding: 0px 15px;
+      display: flex;
+      align-items: center;
+      ion-label {
+        padding: 0px 5px;
+      }
+    }
+  }
+}
+.btn-wrap {
+  display: flex;
+  justify-content: center;
+  ion-button {
+    min-width: 120px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    height: 40px;
+  }
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(21, 36, 61, 0.5);
+  z-index: 999;
+}
+.caption-wrap {
+  padding-top: 13%;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline;
+
+  ion-item {
+    --background: transparent;
+    color: #fff;
+    line-height: 22px;
+    font-size: 16px;
+    text-align: center;
+
+    .caption-txt-wrap {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        display: inline-block;
+        padding: 0px 10px;
+      }
+
+      ion-icon {
+        display: inline-block;
+        font-size: 25px;
+      }
+    }
+  }
+}
+// .toastCss{
+//     –background:red;
+//     color: red;
+//     text-align: center;
+// }
+.radio-block {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 5px;
+  ion-label {
+    display: inline-block;
+
+    padding-left: 5px;
+    font-size: 12px;
+  }
+  ion-radio {
+    flex: 0 0 auto;
+  }
+}

@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+      <app-common-scoring></app-common-scoring>
+      <app-competition-filter-icon></app-competition-filter-icon>
+      <app-common-notification></app-common-notification>
+    </ion-buttons>
+    <ion-title mode="md" class="pageTitle">Teams</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Default Segment -->
+  <ion-segment (ionChange)="segmentChanged($event)" mode="md" [(ngModel)]="segment">
+    <ion-segment-button value="myTeams" checked>
+      <ion-label>My Teams</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="explore">
+      <ion-label>Explore</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <div class="container" *ngIf="! isLoading && loadMyTeam && favouriteTeams.length === 0">
+    <div class="headerWrap">
+      <h1>
+        No one around
+      </h1>
+      <p>
+        You aren’t following any teams yet. Go to EXPLORE and start adding some to your favourites
+      </p>
+      <ion-img (click)="addFavouriteTeam()" src="../../assets/img/plus.png"></ion-img>
+    </div>
+  </div>
+
+  <ion-grid *ngIf="! isLoading && loadMyTeam && favouriteTeams.length != 0">
+    <ion-row class="favouriteTeamRow">
+      <ion-col size="6" *ngFor="let team of favouriteTeams" class="eachFavTeamWrap">
+        <app-favourite [favouriteTeam]="team" [isLoggedIn]="isLoggedIn" [showDraw]="showDraw"></app-favourite>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid *ngIf="! isLoading && ! loadMyTeam" class="exploreContainer">
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-item class="searchWrap">
+
+          <!-- Animated Searchbar -->
+          <ion-searchbar [formControl]="searchControl" (ionChange)="onSearchInput()" (ionCancel)="cancelSearch()"
+            type="text" debounce="200" mode="ios" placeholder=""></ion-searchbar>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" *ngFor="let team of clubList">
+        <app-team-tile [team]="team"></app-team-tile>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+
+</ion-content>

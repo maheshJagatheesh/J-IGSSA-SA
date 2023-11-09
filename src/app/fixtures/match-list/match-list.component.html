@@ -1,0 +1,139 @@
+<div *ngIf="!isLogedIn && draw" class="matchDetailsWrap">
+  <div class="matchDetailsTop">
+    <div class="itemWrap">
+
+      <div class="eachTeamWrap">
+        <div class="eachImg">
+          <ion-img [src]="imgBaseUrl + draw.homeLogoPath"></ion-img>
+        </div>
+        <div class="teamNameWrap">
+          <ion-label class="gameTypeText">{{
+            draw.teamhome_name
+            }}</ion-label>
+        </div>
+      </div>
+      <div class="eachTeamWrap">
+        <div class="teamNameWrap">
+          <ion-label class="gameTypeText">{{
+            draw.teamaway_name
+            }}</ion-label>
+        </div>
+        <div class="eachImg">
+          <ion-img [src]="imgBaseUrl + draw.awayLogoPath"></ion-img>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="fixture && !showTileDisplay" class="matchDetailsWrap">
+  <div class="matchDetailsTop" (click)="toggleMapView()">
+    <div class="itemWrap">
+      <div *ngIf="fixture.client_name == 'Rowing'" class="listImgWrap">
+        <div class="eachImg">
+          <ion-img [src]="imgBaseUrl + fixture.homeLogoPath"></ion-img>
+        </div>
+      </div>
+      <div *ngIf="fixture.client_name != 'Rowing'" class="listImgWrap">
+        <div class="eachImg">
+          <ion-img [src]="imgBaseUrl + fixture.homeLogoPath"></ion-img>
+        </div>
+        <div class="eachImg">
+          <ion-img [src]="imgBaseUrl + fixture.awayLogoPath"></ion-img>
+        </div>
+      </div>
+
+      <div class="listContentWrap">
+        <div class="contentTop">
+          <div class="contentTopWrap">
+            <ion-label class="gameTypeText">{{
+              fixture.client_name + " " + fixture.division_name
+              }}</ion-label>
+            <ion-label *ngIf="fixture.gameRound && !hideRound" class="gameRound">{{fixture.gameRound}}</ion-label>
+            <ion-label class="gameTiming">{{ fixture.time_started }}</ion-label>
+          </div>
+          <div *ngIf="fixture.isMapArrow || fixture.showScoreButton" class="listArrowWrap">
+            <ion-icon mode="ios" [ngClass]="showBottomSection ? 'highlighted' : ''" name="arrow-down"></ion-icon>
+          </div>
+        </div>
+        <div class="contentBottom">
+          <div *ngIf="fixture.client_name == 'Rowing'" class="gameEventNameWrap">
+            <ion-text class="eventName">{{ fixture.teamaway_name }}</ion-text>
+          </div>
+          <div *ngIf="fixture.client_name != 'Rowing'" class="gameVsWrap">
+            <ion-text class="team1">{{ fixture.teamhome_name }}</ion-text>
+            <ion-text class="vs-text">VS</ion-text>
+            <ion-text class="team2">{{ fixture.teamaway_name }} </ion-text>
+          </div>
+          <div class="live-stream-wrap" *ngIf="isStreamUrlEnabled" (click)="openLiveStreamURL()">
+            <ion-img src="assets/svg/live-fixture.svg"></ion-img>
+            <ion-text>LIVESTREAM</ion-text>
+          </div>
+          <ion-text *ngIf="fixture.event_notes" class="venueAddress boldEvent" [innerHTML]=fixture.event_notes></ion-text>
+          <ion-text *ngIf="showBottomSection" class="venueAddress">
+            <span class="addressCst" *ngIf="fixture.field_name.length">{{ fixture.field_name }}</span>
+            <span class="addressCst" *ngIf="fixture.field_name.length && fixture.ground_name.length">, </span>
+            <span *ngIf="fixture.ground_name.length" class="addressCst">{{ fixture.ground_name }}</span>
+          </ion-text>
+          <ion-text *ngIf="showMap" class="venueAddress">
+            <span class="addressCst" *ngIf="fixture.event_address.length">{{ fixture.event_address }}</span>
+            <span class="addressCst" *ngIf="fixture.event_address.length && fixture.ground_suburb.length">, </span>
+            <span class="addressCst" *ngIf="fixture.ground_suburb.length">{{ fixture.ground_suburb }}</span>
+          </ion-text>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="matchDetailsBottom">
+    <div *ngIf="showBottomSection">
+      <div style="height: 200px;display: flex;justify-content: center;align-items: center;background: #00000036;"
+        *ngIf="isLoading || !showMap">
+        <ion-spinner *ngIf="isLoading; else noAddress" name="crescent"></ion-spinner>
+        <ng-template #noAddress>
+          No Location Found.
+        </ng-template>
+      </div>
+      <div class="mapViewWrap" #mapView>
+        <div class="googleMapWrap"  *ngIf="!isLoading && showMap && ( fixture.event_address.length != 0 || mvenueMapExists || svenueMapExists)"
+        (click)="launchGoogleMap()">
+        <agm-map [latitude]="lat" [longitude]="long" [zoom]="zoom" [disableDefaultUI]="true" [zoomControl]="false">
+          <agm-marker [latitude]="lat" [longitude]="long">
+            <agm-snazzy-info-window #snazzyInfoWindow [closeWhenOthersOpen]="true" [closeOnMapClick]="true"
+              [latitude]="lat" [longitude]="long">
+              <ng-template>
+                <div class="location">
+                  {{ fixture.event_address }}
+                </div>
+              </ng-template>
+            </agm-snazzy-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+
+        <ion-row *ngIf="fixture.showScoreButton && fixture.teamaway_name.toLowerCase()!='bye' && fixture.teamhome_name.toLowerCase()!='bye' " class="scoreBtnWrap">
+          <ion-col size="6" *ngIf="surveyExists">
+            <ion-button mode="ios" type="button" class="appThemeBtn" fill="outline" (click)="openScoreModal(2)"
+              [disabled]="!enableRiskAssesment">
+              RISK ASSESSMENT
+            </ion-button>
+          </ion-col>
+          <ion-col size="6" *ngIf="fixture.injuryReport===0">
+            <ion-button mode="ios" type="button" class="appThemeBtn" fill="outline" (click)="openScoreModal(3)">
+              INJURY REPORT
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button mode="ios" type="button" class="appThemeBtn" fill="outline" (click)="openScoreModal(1)">
+              SCORES
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="fixture && showTileDisplay" class="matchDetailsWrap">
+  <app-match-tile *ngFor="let events of fixture.eventDivisionData" [events]="events" [clientName]="fixture.clientName" [divisionName]="fixture.divisionName"></app-match-tile>
+</div> -->

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.233" height="20.5" viewBox="0 0 19.233 20.5">
+  <g id="Group_6425" data-name="Group 6425" transform="translate(-320.25 -626.25)">
+    <g id="trophy" transform="translate(319 626)">
+      <path id="Path_1349" data-name="Path 1349" d="M5.167,6.7H4.533A2.533,2.533,0,0,1,2,4.167V1H5.167" fill="none" stroke="#002d61" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Path_1350" data-name="Path 1350" d="M25,6.7h.633a2.533,2.533,0,0,0,2.533-2.533V1H25" transform="translate(-8.433)" fill="none" stroke="#002d61" stroke-miterlimit="10" stroke-width="1.5"/>
+      <line id="Line_485" data-name="Line 485" y1="3.8" transform="translate(10.867 13.033)" fill="none" stroke="#002d61" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Path_1351" data-name="Path 1351" d="M12.7,13.033h0A5.7,5.7,0,0,1,7,7.333V1H18.4V7.333a5.7,5.7,0,0,1-5.7,5.7Z" transform="translate(-1.833)" fill="none" stroke="#002d61" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Path_1352" data-name="Path 1352" d="M17.867,29.167H9A3.167,3.167,0,0,1,12.167,26H14.7A3.167,3.167,0,0,1,17.867,29.167Z" transform="translate(-2.567 -9.167)" fill="none" stroke="#002d61" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

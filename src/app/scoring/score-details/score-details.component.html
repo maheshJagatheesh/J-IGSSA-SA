@@ -1,0 +1,33 @@
+<ion-list-header>
+  <ion-label class="listItemHead">{{fixture.date_schedule}}</ion-label>
+</ion-list-header>
+
+<div *ngFor="let event of fixture.fixture_details">
+  <ng-container *ngIf="event?.eventDisplayType == 'Tile'; then Tile else thenBlock">
+  </ng-container>
+
+  <ng-template #thenBlock> 
+    <ng-container *ngIf="event?.eventDisplayType == 'Normal'; then Normal else Old">
+    </ng-container>
+  </ng-template> 
+
+  <ng-template #Tile >
+    <ng-container *ngFor="let eventsData of event.eventDivisionData">
+      <ion-item *ngIf="eventsData && eventsData.eventByCatData && eventsData.eventByCatData.length" [ngClass]="eventsData.isLiveScoring == 1 ? 'liveScore' : '' ">
+        <app-score-list class="listComponent" [fixture]="eventsData" [eventDiplayType]="event?.eventDisplayType" [isLogedIn]="isLogedIn" [clientName]="event.clientName" [divisionName]="event.divisionName"></app-score-list>
+      </ion-item>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #Normal >
+    <ion-item  *ngIf="!(event.client_name == 'Rowing' && event.scoreFlag == 1)">
+        <app-score-list class="listComponent" [fixture]="event.eventData" [isLogedIn]="isLogedIn"></app-score-list>
+    </ion-item>
+  </ng-template>
+
+  <ng-template #Old >
+    <ion-item  *ngIf="!(event.client_name == 'Rowing' && event.scoreFlag == 1)">
+        <app-score-list class="listComponent" [fixture]="event" [isLogedIn]="isLogedIn"></app-score-list>
+    </ion-item>
+  </ng-template>
+</div>

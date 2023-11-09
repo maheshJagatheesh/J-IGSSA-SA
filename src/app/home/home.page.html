@@ -1,0 +1,48 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button [ngClass]=" activated === 1 ? 'selescted': '' " (click)="activateTab(1)">
+      <ion-label>Teams</ion-label>
+      <ion-icon *ngIf="activated === 1" src="../../assets/svg/team-active.svg"></ion-icon>
+      <ion-icon *ngIf="activated !== 1" src="../../assets/svg/team.svg"></ion-icon>
+
+    </ion-tab-button>
+
+    <ion-tab-button [ngClass]=" activated === 2 ? 'selescted': '' " tab="fixtures" (click)="activateTab(2)">
+      <ion-label>{{!isLogedIn && showDraw? 'Draw' : 'Fixtures'}}</ion-label>
+      <ion-icon *ngIf="activated === 2" src="../../assets/svg/fixture-active.svg"></ion-icon>
+      <ion-icon *ngIf="activated !== 2" src="../../assets/svg/fixture.svg"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button [ngClass]=" activated === 3 ? 'selescted': '' " (click)="activateTab(3)">
+      <ion-label>Results</ion-label>
+      <ion-icon *ngIf="activated === 3" src="../../assets/svg/result-active.svg"></ion-icon>
+      <ion-icon *ngIf="activated !== 3" src="../../assets/svg/result.svg"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button [ngClass]=" activated === 4 ? 'selescted': '' " (click)="activateTab(4)">
+      <ion-label>Ladder</ion-label>
+      <ion-icon *ngIf="activated === 4" src="../../assets/svg/ladder-active.svg"></ion-icon>
+      <ion-icon *ngIf="activated !== 4" src="../../assets/svg/ladders.svg"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button [ngClass]=" activated === 5 ? 'selescted': '' " *ngIf="!showMoreTab" tab="notification" (click)="activateTab(5)">
+      <ion-label>Notifications</ion-label>
+      <ion-icon *ngIf="activated === 5" src="../../assets/svg/aa-active.svg"></ion-icon>
+      <ion-icon *ngIf="activated !== 5" src="../../assets/svg/notifications.svg"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button [ngClass]=" activated === 7 ? 'selescted': '' "  *ngIf="showMoreTab" tab="more" (click)="activateTab(7)">
+      <ion-label>More</ion-label>
+      <ion-icon *ngIf="activated === 7" src="../../assets/svg/more.svg"></ion-icon>
+      <ion-icon *ngIf="activated !== 7" src="../../assets/svg/more.svg"></ion-icon>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button [ngClass]=" activated === 6 ? 'selescted': '' " (click)="activateTab(6)">
+      <ion-label>Scoring</ion-label>
+      <ion-icon *ngIf="activated === 6" src="../../assets/svg/ladder-active.svg"></ion-icon>
+      <ion-icon *ngIf="activated !== 6" src="../../assets/svg/ladders.svg"></ion-icon>
+    </ion-tab-button> -->
+
+  </ion-tab-bar>
+
+</ion-tabs>

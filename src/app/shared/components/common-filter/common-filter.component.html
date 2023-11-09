@@ -1,0 +1,4 @@
+<ion-button (click)="toggleFilter()">
+  <ion-img *ngIf="!isAnyFilterChoosen" class="filterIcon" src="../../assets/icon/filter/filter.svg"></ion-img>
+  <ion-img *ngIf="isAnyFilterChoosen" class="filterIcon" src="../../assets/icon/filter/filter-active.svg"></ion-img>
+</ion-button>

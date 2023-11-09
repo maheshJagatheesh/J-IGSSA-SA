@@ -1,0 +1,12 @@
+<ion-item [ngClass]=" (teamList.isFavorite === 1 || isChecked )? 'favourite' : ''"
+  (click)="teamList.isFavorite == 0 && ! isChecked && addFavourite(teamList.club_division_id)" lines="none">
+  <div class="itemWrap">
+    <ion-text>
+      {{ teamList.divisionName + ' ' +teamList.team_name }}
+    </ion-text>
+    <div class="favIconWrap">
+      <!-- <ion-img *ngIf="teamList.isFavorite || isChecked" src="../../assets/img/favorite.svg"> </ion-img> -->
+      <ion-img *ngIf="teamList.isFavorite || isChecked" src="../../assets/icon/favorite-red.svg"> </ion-img>
+    </div>
+  </div>
+</ion-item>

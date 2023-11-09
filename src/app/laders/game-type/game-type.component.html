@@ -1,0 +1,26 @@
+<ion-card>
+  <ion-card-content mode="ios" router-direction="forward">
+    <div class="contentWrap" (click)="showDetails()">
+      <div class="leftSec">
+        <!-- <ion-img src="../../assets/icon/volleyball.svg"></ion-img> -->
+        <ion-img [src]="imgBaseUrl + game.client_logo"></ion-img>
+      </div>
+      <div class="midSec">
+        <!-- <ion-text>Basket Ball</ion-text> -->
+        <ion-text>{{ game.client_name }}</ion-text>
+      </div>
+      <div class="rightSec">
+        <!-- <ion-icon mode="ios" name="arrow-forward"></ion-icon> -->
+      </div>
+    </div>
+
+    <ion-list *ngIf=" showMore">
+      <!-- <ion-item></ion-item> -->
+      <ion-item *ngFor="let team of game.teamList"
+        [routerLink]="['/', 'home', 'tabs', 'lader', team.divisionId, game.client_id]" mode="ios">
+        {{ team.divisionName }}</ion-item>
+      <!-- <ion-item [routerLink]="['/', 'home', 'tabs', 'lader', '2']">Year 9A</ion-item>
+      <ion-item [routerLink]="['/', 'home', 'tabs', 'lader', '3']">Year 9B</ion-item> -->
+    </ion-list>
+  </ion-card-content>
+</ion-card>

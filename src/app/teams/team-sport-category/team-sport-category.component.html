@@ -1,0 +1,22 @@
+<ion-card>
+  <ion-card-content mode="ios" router-direction="forward">
+    <div class="contentWrap" (click)="showDetails()">
+      <div class="leftSec">
+        <!-- <ion-img src="../../assets/icon/volleyball.svg"></ion-img> -->
+        <ion-img [src]="imgBaseUrl + divisionData.client_logo"></ion-img>
+      </div>
+      <div class="midSec">
+        <ion-text>{{divisionData.client_name}}</ion-text>
+      </div>
+      <div class="rightSec">
+        <ion-icon mode="ios" name="arrow-forward"></ion-icon>
+      </div>
+    </div>
+
+    <ion-list *ngIf="showMore">
+      <!-- <ion-item></ion-item> -->
+      <app-team-division *ngFor="let teamList of divisionData.teamList" [teamList]="teamList" (club_division_id)="onFavoutite($event)"></app-team-division>
+
+    </ion-list>
+  </ion-card-content>
+</ion-card>

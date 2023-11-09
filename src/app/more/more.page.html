@@ -1,0 +1,152 @@
+<ion-content class="more-section" id="content">
+
+  <ng-container *ngIf="view == 1; then home else thenBlock">
+
+  </ng-container>
+
+  <ng-template #thenBlock> 
+    <div class="header side-padding">
+      <span class="backArrowWrap" (click)="toogleView(1)">
+        <img src="assets/icon/back.png" class="arrow" />
+      </span>
+    </div>
+    <ng-container *ngIf="view == 2; then more else memberSchool">
+  
+    </ng-container>
+
+  </ng-template> 
+
+  <ng-template #home>
+    <ion-grid class="view1">
+      <ion-row class="close-wrap">
+        <ion-col size="12">
+          <div class="close-icon-wrap" (click)="onClose()">
+            <ion-icon name="close" class="close-icon"></ion-icon>
+            <div class="vertical-sentence">
+              <ion-text class="rotate-characters" >CLOSE</ion-text>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row class="more-wrap">
+        <ion-col size="12">
+          <div class="moreText">
+            <ion-text>MORE</ion-text>
+          </div>
+          <div class="aboutText">
+            <ion-text>ABOUT HILLZONE</ion-text>
+            <span class="backArrowWrap" (click)="toogleView(2)">
+              <img src="assets/icon/forward.png" class="arrow" />
+            </span>
+          </div>
+          <div class="schoolText">
+            <ion-text>MEMBER SCHOOLS</ion-text>
+            <span class="backArrowWrap" (click)="toogleView(3)">
+              <img src="assets/icon/forward.png" class="arrow" />
+            </span>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row class="details-wrap">
+        <ion-col size="12">
+          <!-- <ion-text class="detailContent">About</ion-text> -->
+          <!-- <ion-text class="detailContent"><a class="linkStyle" (click)="openWebPage('https://hzsa.com.au/member-schools')">Member Schools</a></ion-text> -->
+          <ion-text class="detailContent"><a class="linkStyle" (click)="openWebPage('https://hzsa.com.au/sports/primary')">Primary Sports</a></ion-text>
+          <ion-text class="detailContent"><a class="linkStyle" (click)="openWebPage('https://hzsa.com.au/sports/secondary')">Secondary Sports</a></ion-text>
+          <ion-text class="detailContent"><a class="linkStyle" (click)="openWebPage('https://hzsa.com.au/event-calendar')">Calendar</a></ion-text>
+        </ion-col>
+      </ion-row>
+    
+    </ion-grid>
+  </ng-template>
+
+  <ng-template #more>
+    <div>
+    
+      <ion-grid class="view2">
+        <ion-row class="more-wrap">
+          <ion-col size="12">
+            <div class="iconWrap">
+              <span>
+                <img src="assets/logo/hzsa.png"/>
+              </span>
+            </div>
+            <div class="textField">
+              <ion-text>PROVIDING SPORTING ACTIVITIES</ion-text>
+            </div>
+            <div class="moreDetails">
+              <ion-text>
+                The Hills Zone Sports Association provides a pathway to AICES, CIS and state representation for secondary students of member schools. 
+                This includes the major carnivals of swimming, cross country and athletics as well as many other representative sports. 
+                In addition, championship days and summer/winter competitions across a variety of sports provide students with the opportunity to play weekly competitive sport. 
+                HZSA also has an extensive program of primary sport including gala days and weekly competitions for Years 3-6.
+              </ion-text>
+            </div>
+            <div class="icon2Wrap">
+              <span>
+                <img src="assets/logo/hzsa1.png"/>
+              </span>
+            </div>
+            <div class="displyContentwrap">
+              <ion-text class="content">c/o Rouse Hill Anglican College</ion-text>
+              <ion-text class="content">Corner Rouse Worcester Roads</ion-text>
+              <ion-text class="content">Rouse Hill NSW 2155</ion-text>
+              <ion-text class="content spaceBottom">PO Box 90 Northmead NSW 2152"</ion-text>
+              <ion-text class="content spaceBottom">HZSA Administrator: Kirsten Jackson</ion-text>
+              <ion-text class="content">kirstenjackson@hzsa.com.au</ion-text>
+            </div>
+            <div class="textField">
+              <ion-text>RHSPORTS DISCOUNT</ion-text>
+            </div>
+            <div class="displyContentwrap2">
+              <ion-text>
+                School communities of all HZSA member schools are entitled to a 10% discount from Nyda products at RHSports wholesale website.
+              </ion-text>
+            </div>
+            <div class="schoolText">
+              <ion-text>RHSPORTS DISCOUNT CODES</ion-text>
+              <span>
+                <a (click)="openWebPage('https://www.dropbox.com/s/kcb7so2darrtd0r/HZSA%20School%20Codes%20for%20Purchase%20at%20RHSports.pdf?dl=0')">
+                  <img src="assets/icon/forward.png" class="arrow" />
+                </a>
+              </span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ng-template>
+
+  <ng-template #memberSchool>
+    <div>
+      <ion-grid class="view3">
+        <ion-row class="headTextwrap">
+          <ion-col size="12">
+            <div class="headWrap">
+              <ion-text>MEMBER SCHOOLS</ion-text>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let school of schoolList" class="eachRowWrap"> 
+          <ion-col size="12">
+            <div>
+              <img [src]="school.logo" />
+            </div>
+            <div class="displyContentwrap">
+              <ion-text class="content spaceBottom">{{school.schoolName}}</ion-text>
+              <ion-text class="content">{{school.address1}}</ion-text>
+              <ion-text *ngIf="school.address2" class="content">{{school.address2}}</ion-text>
+              <ion-text *ngIf="school.address3" class="content">{{school.address3}}</ion-text>
+              <ion-text *ngIf="school.phone" class="content spaceBottom">Phone: {{school.phone}}</ion-text>
+              <ion-text *ngIf="school.urls" class="content">{{school.urls}}</ion-text>
+              <ion-text *ngIf="school.email" class="content">{{school.email}}</ion-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ng-template>
+
+</ion-content>

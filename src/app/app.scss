@@ -1,0 +1,122 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These 
+// styles are for the entire app and not just one component. Additionally, this 
+// file can hold Sass mixins, functions, and placeholder classes to be imported 
+// and used throughout the application.
+
+@import "../theme/icons";
+
+
+ion-menu{
+    --padding-top: env(safe-area-inset-top) !important;
+    --background: #15233C;
+    opacity: 0.96;
+
+    ion-content{
+        --background: transparent;
+        --padding-top: env(safe-area-inset-top)  !important;
+        margin-top: env(safe-area-inset-top) !important;
+        --padding-start: 15px;
+        --padding-end: 15px;
+    }
+
+    .menuWrap{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        ion-list{
+            background: transparent !important;
+
+            ion-item{
+                background: transparent;
+                --background: transparent;
+                color: #fff;
+                --border-color: #d7d7d7de;
+                
+            }
+        }
+
+        .menuTop{
+            flex-grow: 1;
+            // padding-top: env(safe-area-inset-top);
+        }
+
+        .menuBottom{
+            flex-shrink: 0;
+            flex-grow: 0;
+            flex-basis: 185px;
+
+            ion-list{
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    .filterLabel{
+        font-size: 13px !important;
+    }
+    .cloxseIcon{
+        font-size: 35px; 
+        color: #fff;
+    }
+
+    .filterHead, .filterEachItem{
+        --inner-padding-end: 0px;
+        --inner-padding-bottom: 4%;
+        --inner-padding-top: 0%;
+        --padding-start: 0px;
+    }
+    .filterEachItem{
+        --inner-padding-end: 10px;
+        --inner-padding-bottom: 7%;
+        --inner-padding-top: 7%;
+        --padding-start: 0px;
+
+        font-size: 14px;
+        --detail-icon-color: #fff !important;
+        --detail-icon-font-size: 22px;
+        --detail-icon-opacity: 1;
+    }
+
+    .filterEachItem.active{
+        color: var(--menu-item-active);
+    }
+
+    .filterEachItem.inActive{
+        opacity: 0.6;
+    }
+    
+    .listBottom{
+        ion-item{
+            color: rgba(255, 255, 255, 0.63);
+            --detail-icon-color: rgba(255, 255, 255, 0.63) !important;
+        }
+    }
+    .filter-image{
+        width: 25px;
+        margin-left: 15px;
+    }
+    .filterArrow{
+        width: 28px;
+        margin-right: 5px;
+    }
+
+    .toggleBotton{
+        --inner-padding-end: 5px;
+        --inner-padding-bottom: 3%;
+        --inner-padding-top: 3%;
+        --padding-start: 0px;
+        font-size: 14px;
+        --detail-icon-color: #fff !important;
+        --detail-icon-font-size: 22px;
+        --detail-icon-opacity: 1;
+    }
+
+    .transparentButton{
+        --background: transparent;
+        text-transform: none;
+    }
+}
+

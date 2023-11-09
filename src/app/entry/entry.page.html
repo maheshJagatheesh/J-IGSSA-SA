@@ -1,0 +1,30 @@
+<ion-content class="home">
+  <ion-grid padding>
+    <ion-row>
+      <ion-col size="12" text-right>
+        <ion-label class="skipText" (click)="goLandingPage()">Skip</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="pageContentsWrap" padding>
+      <ion-col size="12">
+        <div class="textSection">
+          <h1>SET UP TEAMS</h1>
+          <p>START FOLLOWING TEAMS TO QUICKLY ACCESS FIXTURES AND RESULTS</p>
+        </div>
+        <div class="imgWrap">
+          <!-- <ion-img src="../../assets/img/plus.png" (click)="goExplore()"></ion-img> -->
+          <img src="assets/img/plus.png" (click)="goExplore()" />
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="loginTextSec" *ngIf="!isLoggedIn">
+        <ion-label text-center (click)="goLoginPage()"
+          >Official ? Click here to login</ion-label
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

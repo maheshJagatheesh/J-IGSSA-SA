@@ -1,0 +1,431 @@
+.rotateOverlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #0000000d;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .rotateWrap{
+        // width: 90px;
+        // height: 90px;
+        // background: #090B33;
+        // opacity: 0.7;
+        // border-radius: 10px;
+        // padding: 10px;
+        // color: #fff;
+        // text-align: center;
+        // font-size: 12px;
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+
+            /* width: 90px; */
+    /* height: 90px; */
+    background: #090B33;
+    opacity: 0.7;
+    border-radius: 10px;
+    padding: 12px 25px;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+
+        ion-label{
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.boldText{
+    font-weight: bold;
+}
+ion-item{
+    // --inner-padding-top: 15px;
+    // --inner-padding-bottom: 15px;
+
+    --inner-padding-top: 15px;
+    --inner-padding-bottom: 15px;
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+}
+
+.themeHeadColor{
+    color: var(--ion-ladder-point-table-theme-color);
+}
+.headSecWrap{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    ion-img{
+        width: 50px;
+    }
+
+    .gameName{
+        font-size: 14px;
+        margin: 5px 0 0;
+        --color: var(--ion-ladder-point-game-name-color);
+    }
+}
+
+.eachTabHead{
+    --inner-padding-top: 5px;
+    --inner-padding-bottom: 5px;
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+
+    ion-label{
+        color: var(--ion-ladder-point-pool-head-color);
+        font-size: 14px;
+        letter-spacing: 1px;
+        // font-weight: 600;
+        text-transform: uppercase;
+    }
+}
+
+.finalSecWrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    .finalSecWrapDiv{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .eachRank{
+        flex: 1;
+        padding: 10px;
+        
+        .eachRankDiv{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+
+            .logoWrap{
+                    flex: 0 0 40%;
+
+                    ion-img{
+                        width: 100px;
+                        height: 85px;
+                    }
+                }
+            
+            .first{
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+
+                .logoWrap{
+                    flex: 0 0 40%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    ion-img{
+                        width: 100px;
+                        height: 85px;
+                    }
+                }
+                .teamNameWrap{
+                    flex: 0 0 10%;
+                    padding: 5% 0%;
+                    text-align: center;
+                    font-size: 13px;
+                    min-height: 40px;
+                }
+                .teamPositionWrap{
+                    flex: 0 0 41%;  
+                    background: #fff; 
+                    border-radius: 15px 15px 0px 0px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 25px 0px;
+                }
+                    
+            }
+    
+            .second{
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                padding-top: 25px;
+
+                .logoWrap{
+                    flex: 0 0 40%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .teamNameWrap{
+                    flex: 0 0 10%; 
+                    padding: 5% 0%;
+                    text-align: center;
+                    font-size: 13px;
+                    min-height: 40px;
+                }
+                .teamPositionWrap{
+                    flex: 0 0 30%;  
+                    background: #fff; 
+                    border-radius: 15px 15px 0px 0px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 10px 0px;
+                }
+            }
+    
+            .third{
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                padding-top: 45px;
+
+                .logoWrap{
+                    flex: 0 0 40%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .teamNameWrap{
+                    flex: 0 0 10%; 
+                    padding: 5% 0%;
+                    text-align: center;
+                    font-size: 13px;
+                    min-height: 40px;
+                }
+                .teamPositionWrap{
+                    flex: 0 0 20%;  
+                    background: #fff; 
+                    border-radius: 15px 15px 0px 0px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 22px;
+                }
+            }
+
+            // .logoWrap{
+            //         flex: 0 0 40%;
+            //     }
+            //     .teamNameWrap{
+            //         flex: 0 0 10%; padding: 5%;
+            //     }
+            //     .teamPositionWrap{
+            //         flex: 0 0 50%;  
+            //         background: #fff; 
+            //         border-radius: 15px 15px 0px 0px;
+            //         display: flex;
+            //         align-items: center;
+            //         justify-content: center;
+            //     }
+        }
+
+    }
+}
+
+.pointTableWrap{
+    .eachRow:nth-child(even){
+        background: #fff;
+    }
+    .eachRow, .tableHead{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0px;
+    }
+
+    .tableHead{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0px;
+        color: var(--ion-ladder-point-table-head-color);
+
+        .labelSchoo{
+            // flex: 0 0 48%;
+            // font-size: 12px;
+
+            flex: 0 0 55%;
+            font-size: 12px;
+            padding-left: 15px;
+        }
+
+        .pointSecWrap{
+            flex: 0 0 45%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+        .labelPld, .labelWin, .labelLoss, .labelPts{
+            flex: 0 0 25%;
+            font-size: 12px;
+            min-width: 35px;
+                text-align: center;
+        }
+    }
+
+    .eachRow{
+
+        .labelSchoo{
+            // flex: 0 0 48%;
+            // font-size: 12px;
+
+            flex: 0 0 55%;
+            font-size: 12px;
+            padding-left: 15px;
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        .pointSecWrap{
+            flex: 0 0 45%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+        .points{
+            // flex: 0 0 5%;
+            // min-width: 15px;
+
+            flex: 0 0 25%;
+            font-size: 12px;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .logo{
+            flex: 0 0 25%;
+
+            ion-img{
+                width: 35px;
+                height: 35px;
+            }
+        }
+        .logoName{
+            flex: 0 0 75%;
+            word-break: break-all;
+        }
+    }
+}
+.landscapeView{
+    display: none;
+}
+
+@media only screen and (orientation: landscape) {
+    .landscapeView{
+        display: block;
+    }
+    .pointTableWrap{
+        padding: 0px 20px;
+    }
+    .pointTableWrap{
+        .eachRow:nth-child(even){
+            background: #fff;
+        }
+        .eachRow, .tableHead{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0px;
+        }
+    
+        .tableHead{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0px;
+            color: var(--ion-ladder-point-table-head-color);
+    
+            .labelSchoo{
+                // flex: 0 0 48%;
+                // font-size: 12px;
+    
+                flex: 0 0 37%;
+                font-size: 12px;
+                padding-left: 15px;
+            }
+    
+            .pointSecWrap{
+                flex: 0 0 63%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+            .labelPld, .labelWin, .labelLoss, .labelPts{
+                flex: 0 0 13%;
+                font-size: 12px;
+                min-width: 35px;
+                    text-align: center;
+            }
+        }
+    
+        .eachRow{
+    
+            .labelSchoo{
+                // flex: 0 0 48%;
+                // font-size: 12px;
+    
+                flex: 0 0 37%;
+                font-size: 12px;
+                padding-left: 15px;
+                display: flex;
+                /* justify-content: center; */
+                align-items: center;
+            }
+    
+            .pointSecWrap{
+                flex: 0 0 63%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+            .points{
+                // flex: 0 0 5%;
+                // min-width: 15px;
+    
+                flex: 0 0 13%;
+                font-size: 12px;
+                min-width: 35px;
+                text-align: center;
+            }
+    
+            .logo{
+                flex: 0 0 25%;
+    
+                ion-img{
+                    width: 35px;
+                    height: 35px;
+                }
+            }
+            .logoName{
+                flex: 0 0 75%;
+                word-break: break-all;
+            }
+        }
+    }
+}

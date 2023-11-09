@@ -1,0 +1,17 @@
+ion-tab-button{
+    // --color-selected: var(--ion-color-highlight-nav);
+     --color-selected: var(--ion-color-highlight-nav);
+
+    ion-icon{
+        max-width: 20px;
+        max-height: 20px;
+    }
+}
+.selescted{
+    background: var(--nav-selected);
+    color: var(--ion-color-highlight-nav);
+}
+
+ion-tab-bar{
+    --ion-tab-bar-background: #fff;
+}

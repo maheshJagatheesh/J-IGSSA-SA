@@ -1,0 +1,30 @@
+// ion-title {
+//     --color: var(--ion-toolbar-text-color) !important;
+//     font-size: 14px;
+//     font-family: var(--ion-font-family);
+//     font-weight: 600;
+// }
+
+.headerWrap {
+
+    border-bottom: 1px solid #ddd;
+    .subHead{
+        color: #CD051C;
+        margin-bottom: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+    }
+    .mainHead{
+        font-size: 18px;
+        letter-spacing: 2px;
+        font-weight: 600;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        --color: var(--ion-toolbar-text-color) !important;
+    }
+}
+        p{
+            --color: var(--ion-toolbar-text-color) !important;
+            line-height: 1.35;
+        }

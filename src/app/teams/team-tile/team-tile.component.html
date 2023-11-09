@@ -1,0 +1,14 @@
+<ion-card [routerLink]="['/', 'home', 'tabs', 'teams', 'club',team.club_id]">
+  <ion-card-content text-center>
+    <ion-img [src]="imgBaseUrl + team.logopath"></ion-img>
+    <!-- <ion-img [src]="team.logopath"></ion-img> -->
+    <!-- <ion-label class="upperCase">{{team.totalTeam}} teams</ion-label> -->
+    <!-- <ion-item lines="none" style="--padding-start: 0px;
+      --background: transparent;
+      text-align: center; 
+      --min-height: 0px;"> -->
+
+    <ion-label class="upperCase">{{team.club_name}} </ion-label>
+    <!-- </ion-item> -->
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,323 @@
+<div class="matchDetailsWrap" *ngIf="!showTileDisplay">
+
+  <div class="matchDetailsTop" (click)="showScoring()" *ngIf="fixture.scoreFlag == 0 else resultSec">
+    <div class="itemWrap">
+      <div *ngIf="fixture.client_name == 'Rowing'" class="listImgWrap">
+        <div class="eachImg">
+          <ion-img [src]="imgBaseUrl + fixture.homeLogoPath"></ion-img>
+        </div>
+      </div>
+      <div *ngIf="fixture.client_name != 'Rowing'" class="listImgWrap">
+        <div class="eachImg">
+          <ion-img [src]='imgBaseUrl + fixture.homeLogoPath'></ion-img>
+        </div>
+        <div class="eachImg">
+          <ion-img [src]='imgBaseUrl + fixture.awayLogoPath'></ion-img>
+        </div>
+      </div>
+
+      <div class="listContentWrap">
+        <div class="contentTop">
+          <div class="contentTopWrap">
+            <ion-label class="gameTypeText">{{ fixture.sportName }} {{ fixture.division_name }}</ion-label>
+            <ion-label class="gameTiming">{{ fixture.time_started }}</ion-label>
+          </div>
+          <div class="listArrowWrap">
+            <ion-icon mode="ios" [ngClass]="showMap ? 'highlighted' : '' " name="arrow-forward"></ion-icon>
+          </div>
+        </div>
+        <div class="contentBottom">
+          <div *ngIf="fixture.client_name == 'Rowing'" class="gameEventNameWrap">
+            <ion-text class="eventName">{{ fixture.teamaway_name }}</ion-text>
+          </div>
+          <div *ngIf="fixture.client_name != 'Rowing'" class="gameVsWrap">
+            <ion-text class="team1">{{ fixture.teamhome_name }}</ion-text>
+            <ion-text class="vs-text">VS</ion-text>
+            <ion-text class="team2">{{ fixture.teamaway_name }} </ion-text>
+          </div>
+          <!-- <ion-text *ngIf="showMap"> {{ fixture.event_address }} </ion-text> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <h1 *ngIf="fixture.isFixture == 0">
+    Result
+  </h1> -->
+
+  <ng-template #resultSec>
+
+    <ion-list-header slot="primary" mode="md">
+      <!-- <ion-list-header slot="primary" *ngIf="showSportLabel" mode="md"> -->
+      <div class="listSubHeadWrap">
+        <div>
+          <ion-label class="listSubHead" slot="start">{{ fixture.sportName }} {{ fixture.division_name }}</ion-label>
+        </div>
+        <div>
+        </div>
+      </div>
+    </ion-list-header>
+
+    <!-- <ion-item *ngFor="let resultList of resulList.eventGroup" [ngClass]="fixture.isLiveScoring == 1 ? 'liveScore' : '' "> -->
+    <div class="inner-padding" [ngClass]="fixture.isLiveScoring == 1 ? 'liveScore' : '' ">
+
+      <div class="mainContentWrap">
+
+        <div>
+
+          <img *ngIf="fixture.isLiveScoring == 1" src="../../../assets/live-blinking.gif">
+        </div>
+
+        <div>
+
+          <!-- Head sec -->
+
+          <div class="headWrap">
+            <div class="resultHeadSec">
+
+              <div class="divisionNameWrap">
+                <ion-text>
+                  <span class="divisionHighlighted">
+                    {{ fixture.division_name }}
+                  </span> - {{fixture.time_started}} <span></span>
+                </ion-text>
+              </div>
+            </div>
+            <div class="scoreSecHead">
+
+              <ion-text
+                *ngIf="fixture.tier2HomeScore.toString().trim().length || fixture.tier2AwayScore.toString().trim().length">
+                <ng-container
+                  *ngIf="fixture.homeAwayT2ScoreLabel && fixture.homeAwayT2ScoreLabel.toString().length; else set1">
+                  {{ fixture.homeAwayT2ScoreLabel }}
+
+                </ng-container>
+                <ng-template #set1>
+                  Set1
+                </ng-template>
+              </ion-text>
+
+              <ion-text
+                *ngIf="fixture.tier3HomeScore.toString().trim().length || fixture.tier3AwayScore.toString().trim().length">
+                <ng-container
+                  *ngIf="fixture.homeAwayT3ScoreLabel && fixture.homeAwayT3ScoreLabel.toString().length; else set2">
+                  {{ fixture.homeAwayT3ScoreLabel }}
+
+                </ng-container>
+                <ng-template #set2>
+                  Set2
+                </ng-template>
+              </ion-text>
+
+              <ion-text
+                *ngIf="fixture.tier4HomeScore.toString().trim().length || fixture.tier4AwayScore.toString().trim().length">
+                <ng-container
+                  *ngIf="fixture.homeAwayT4ScoreLabel && fixture.homeAwayT4ScoreLabel.toString().length; else set3">
+                  {{ fixture.homeAwayT4ScoreLabel }}
+
+                </ng-container>
+                <ng-template #set3>
+                  Set3
+                </ng-template>
+              </ion-text>
+
+              <ion-text
+                *ngIf="fixture.simpleHomeScore.toString().trim().length || fixture.simpleAwayScore.toString().trim().length">
+                <ng-container
+                  *ngIf="fixture.homeAwayScoreLabel && fixture.homeAwayScoreLabel.toString().length; else pts">
+                  {{ fixture.homeAwayScoreLabel }}
+
+                </ng-container>
+                <ng-template #pts>
+                  Pt
+                </ng-template>
+              </ion-text>
+
+              <div class="iconWrap" *ngIf="showLabel">
+
+              </div>
+            </div>
+
+          </div>
+
+          <!--Home team-->
+          <div class="wrap">
+            <div class="logoSec">
+              <div class="logoWrap">
+                <ion-img [src]="imgBaseUrl + fixture.homeLogoPath"></ion-img>
+              </div>
+              <div class="nameWrap">
+                <ion-text>{{fixture.teamhome_name}}</ion-text>
+              </div>
+            </div>
+            <div class="scoreSec">
+
+              <!-- <ng-container *ngIf="fixture.sportId == 20 else tireScore">
+                <ion-text *ngIf="fixture.simpleHomeScore.toString().trim().length"
+                  [ngClass]="fixture.simpleHomeScore < fixture.simpleAwayScore ? 'loss': ''">
+                  {{fixture.simpleHomeScore}}
+                </ion-text>
+
+                <ion-text *ngIf="fixture.tier2HomeScore.toString().trim().length"
+                  [ngClass]="fixture.tier2HomeScore < fixture.tier2AwayScore ? 'loss': ''">
+                  {{fixture.tier2HomeScore}}
+                </ion-text>
+
+              </ng-container> -->
+
+              <!-- <ng-template #tireScore> -->
+              <ion-text
+                *ngIf="fixture.tier2HomeScore.toString().trim().length || fixture.tier2AwayScore.toString().trim().length"
+                [ngClass]="fixture.tier2HomeScore < fixture.tier2AwayScore ? 'loss': ''">
+                {{fixture.tier2HomeScore}}
+              </ion-text>
+
+              <ion-text
+                *ngIf="fixture.tier3HomeScore.toString().trim().length || fixture.tier3AwayScore.toString().trim().length"
+                [ngClass]="fixture.tier3HomeScore < fixture.tier3AwayScore ? 'loss': ''">
+                {{fixture.tier3HomeScore}}
+              </ion-text>
+
+              <ion-text
+                *ngIf="fixture.tier4HomeScore.toString().trim().length || fixture.tier4AwayScore.toString().trim().length"
+                [ngClass]="fixture.tier4HomeScore < fixture.tier4AwayScore ? 'loss': ''">
+                {{fixture.tier4HomeScore}}
+              </ion-text>
+
+              <!-- <div *ngIf="fixture.tier2HomeScore.toString().trim().length" class="resultBorder resultBorderTop"></div> -->
+
+              <ion-text
+                *ngIf="fixture.simpleHomeScore.toString().trim().length || fixture.simpleAwayScore.toString().trim().length"
+                [ngClass]="fixture.simpleHomeScore < fixture.simpleAwayScore ? 'loss': ''">
+                {{fixture.simpleHomeScore}}
+              </ion-text>
+              <!-- </ng-template> -->
+
+              <div class="iconWrap" *ngIf="showLabel && showAcceptProtestSign">
+                <ion-img *ngIf="fixture.acceptProtestStatus === 0 " src="/assets/svg/tick_icon.svg"></ion-img>
+
+                <ion-img *ngIf=" fixture.acceptProtestStatus === 1 " src="/assets/svg/danger.svg">
+                </ion-img>
+              </div>
+            </div>
+            <div class="labelSec" *ngIf="showLabel">
+              <ion-badge *ngIf="fixture.seeAllFlag" mode="ios" color="warning">
+                {{ fixture.homeDivisionName | slice:0:6 }}
+              </ion-badge>
+
+              <ion-text *ngIf="fixture.seeAllFlag == 0" class="seeAllLabel">
+                {{ fixture.homeDivisionName | slice:0:6 }} </ion-text>
+            </div>
+          </div>
+
+          <!--Away team name-->
+          <div class="wrap">
+            <div class="logoSec">
+              <div class="logoWrap">
+                <ion-img [src]="imgBaseUrl + fixture.awayLogoPath"></ion-img>
+              </div>
+              <div class="nameWrap">
+                <ion-text>{{fixture.teamaway_name}}</ion-text>
+              </div>
+            </div>
+            <div class="scoreSec">
+
+              <!-- <ng-container *ngIf="fixture.sportId == 20 else tireScoreAway">
+                <ion-text [ngClass]="fixture.simpleHomeScore > fixture.simpleAwayScore ? 'loss': ''">
+                  {{fixture.simpleAwayScore }}
+                </ion-text>
+
+                <ion-text *ngIf="fixture.tier2AwayScore.toString().trim().length"
+                  [ngClass]="fixture.tier2HomeScore > fixture.tier2AwayScore ? 'loss': ''">
+                  {{fixture.tier2AwayScore}}
+                </ion-text>
+
+              </ng-container> -->
+
+              <!-- <ng-template #tireScoreAway> -->
+              <ion-text
+                *ngIf="fixture.tier2HomeScore.toString().trim().length || fixture.tier2AwayScore.toString().trim().length"
+                [ngClass]="fixture.tier2HomeScore > fixture.tier2AwayScore ? 'loss': ''">
+                {{fixture.tier2AwayScore}}
+              </ion-text>
+
+              <ion-text
+                *ngIf="fixture.tier3HomeScore.toString().trim().length || fixture.tier3AwayScore.toString().trim().length"
+                [ngClass]="fixture.tier3HomeScore > fixture.tier3AwayScore ? 'loss': ''">
+                {{fixture.tier3AwayScore}}
+              </ion-text>
+
+              <ion-text
+                *ngIf="fixture.tier4HomeScore.toString().trim().length || fixture.tier4AwayScore.toString().trim().length"
+                [ngClass]="fixture.tier4HomeScore > fixture.tier4AwayScore ? 'loss': ''">
+                {{fixture.tier4AwayScore}}
+              </ion-text>
+
+              <!-- <div *ngIf="fixture.tier2AwayScore.toString().trim().length > 0" class="resultBorder resultBorderBottom">
+              </div> -->
+
+              <ion-text
+                *ngIf="fixture.simpleHomeScore.toString().trim().length || fixture.simpleAwayScore.toString().trim().length"
+                [ngClass]="fixture.simpleHomeScore > fixture.simpleAwayScore ? 'loss': ''">
+                {{fixture.simpleAwayScore }}
+              </ion-text>
+              <!-- </ng-template> -->
+
+              <div class="iconWrap" *ngIf="0">
+              </div>
+            </div>
+            <div class="labelSec" *ngIf="0">
+
+              <ion-text *ngIf="fixture.seeAllFlag" class="seeAllLabel" style="padding: 1px 0px;"
+                [routerLink]="['/', 'home', 'tabs', 'results', fixture.awayDivisionID ]">
+                See All</ion-text>
+              <ion-text *ngIf="fixture.seeAllFlag == 0" class="seeAllLabel">
+                {{ fixture.awayDivisionName | slice:0:6 }} </ion-text>
+            </div>
+          </div>
+
+          <!-- <div class="live-stream-wrap" *ngIf="fixture.isLiveScoring"
+            (click)="openLiveStreamURL(fixture.liveStreaming_url)">
+            <ion-img src='assets/svg/live.svg'></ion-img>
+            <ion-text>LIVESTREAM</ion-text>
+          </div> -->
+
+          <div class="bottomBtnWrap"
+            *ngIf="fixture.simpleHomeScore.toString().trim().length != 0 && fixture.simpleAwayScore.toString().trim().length != 0">
+            <div class="btnProtest">
+              <ion-button slot="primary" type="button" class="appThemeBtn" fill="outline"
+                (click)="protest(fixture.event_id)" mode="ios">
+                PROTEST
+              </ion-button>
+            </div>
+            <div class="btnAccept">
+              <ion-button slot="primary" type="button" class="appThemeBtn appThemeSolidBtn" fill="solid"
+                (click)="accept(fixture.event_id)" mode="ios">
+                ACCEPT
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
+<ng-container *ngIf="showTileDisplay">
+    <div class="matchDetailsWrap" (click)="showTileEventScoring(fixture.eventByCatData)">
+      <div class="competionItemWrap" >
+        <div class="listHeadWrap">
+          <div class="listHead1">{{fixture.categoryName}}</div>
+          <div class="listHead2">{{clientName + " " + divisionName}}</div>
+        </div>
+        <div class="listImgWrap">
+          <div class="eachImg" *ngFor="let item of fixture.eventByCatData">
+            <ion-img [src]="imgBaseUrl + item.homeLogoPath"></ion-img>
+            <ion-text>{{item.scoreFlag? item.simpleHomeScore: ''}}</ion-text>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>

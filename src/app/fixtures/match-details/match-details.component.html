@@ -1,0 +1,46 @@
+<ion-list-header *ngIf="fixture && showDate" mode="md">
+  <ion-label>{{fixture?.date_schedule | date: 'MMM dd yyyy'}}</ion-label>
+</ion-list-header>
+<div class="listItemHead">
+  <ion-list-header *ngIf="draw && showDate" mode="md">
+    <ion-label>{{draw?.date_schedule | date: 'MMM dd yyyy'}}</ion-label>
+  </ion-list-header>
+</div>
+
+<!-- <ion-item *ngFor="let fixtures of fixture?.fixture_details">
+  <app-match-list class="listComponent" [fixture]="fixtures" [eventDiplayType]="fixture?.EVENTDISPLAYTYPE" [isLogedIn]="isLogedIn"></app-match-list>
+</ion-item> -->
+
+<ng-container *ngFor="let event of fixture.fixture_details">
+  <ng-container *ngIf="event?.eventDisplayType == 'Tile'; then Tile else thenBlock">
+  </ng-container>
+
+  <ng-template #thenBlock> 
+    <ng-container *ngIf="event?.eventDisplayType == 'Normal'; then Normal else Old">
+    </ng-container>
+  </ng-template> 
+
+  <ng-template #Tile >
+    <ng-container *ngFor="let eventsData of event.eventDivisionData">
+      <ion-item *ngIf="eventsData && eventsData.eventByCatData && eventsData.eventByCatData.length" [ngClass]="eventsData.isLiveScoring == 1 ? 'liveScore' : '' ">
+        <app-match-tile class="listComponent" [events]="eventsData" [eventDiplayType]="event?.eventDisplayType" [isLogedIn]="isLogedIn" [clientName]="event.clientName" [divisionName]="event.divisionName"></app-match-tile>
+      </ion-item>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #Normal >
+    <ion-item>
+      <app-match-list class="listComponent" [fixture]="event.eventData" [eventDiplayType]="event?.eventDisplayType" [isLogedIn]="isLogedIn"></app-match-list>
+    </ion-item>
+  </ng-template>
+
+  <ng-template #Old >
+    <ion-item>
+      <app-match-list class="listComponent" [fixture]="event" [isLogedIn]="isLogedIn"></app-match-list>
+    </ion-item>
+  </ng-template>
+</ng-container>
+
+<ion-item *ngFor="let draw of draw?.fixture_details">
+  <app-match-list class="listComponent" [draw]="draw" [isLogedIn]="isLogedIn"></app-match-list>
+</ion-item>

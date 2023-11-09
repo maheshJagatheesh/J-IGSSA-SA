@@ -1,0 +1,46 @@
+
+
+    .item-inner{
+        // padding: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    ion-list-header{
+        --color: var(--ion-toolbar-text-color) !important;
+        font-size: 18px;
+        font-weight: 600;
+        border-bottom: 1px solid;
+        padding: 0;
+        margin-top: 15px;
+    }
+    
+    .listItemHead{
+        ion-list-header{
+            --color: var(--ion-toolbar-text-color) !important;
+            font-size: 16px;
+            font-weight: 600;
+            border-bottom: 1px solid;
+            padding: 0;
+            margin-top: 0;
+        }
+    }
+
+    ion-item {
+        --background: var(--ion-page-background);
+        --inner-padding-end: 0px;
+        // --padding-start: 5px;
+        // --padding-end: 5px;
+        --padding-start: 0px;
+        --padding-end: 0px;
+
+        .listComponent{
+            width: 100%;
+        }
+
+        
+    }
+
+    agm-map {
+        height: 250px;
+    }

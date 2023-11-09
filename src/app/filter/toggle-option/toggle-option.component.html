@@ -1,0 +1,11 @@
+<!-- <p>
+  toggle-option works!
+</p> -->
+
+<ion-item class="filterEachItem toggleBotton">
+  {{team.sportName}}
+  {{ team.teamName}}
+  {{team.divisionName}}
+  <ion-toggle slot="end"  checked [(ngModel)]="radioBtn" (ionChange)="onTeamChange(team.favouriteTeamId)">
+  </ion-toggle>
+</ion-item>

@@ -1,0 +1,116 @@
+<ion-app>
+  <ion-menu mode="md" side="end" menuId="first" content-id="main">
+    <ion-content>
+
+      <div class="menuWrap">
+        <div class="menuTop">
+
+          <ion-list *ngIf="filterType == 0">
+            <ion-item class="filterHead">
+              <ion-label class="filterLabel"> FILTER</ion-label>
+              <ion-icon class="cloxseIcon" mode="ios" slot="end" name="close" (click)="toggleFilter()"></ion-icon>
+
+            </ion-item>
+            <!-- <ion-item class="filterEachItem" *ngIf="!isDrawTabEnabled" [ngClass]="filterService.selectedFavourites.length ? 'active' : '' "
+              (click)="showFilter(1)" detail>My Teams</ion-item> -->
+            <ion-item class="filterEachItem"
+              [ngClass]="[filterService.selectedSports.length || filterService.selectedDivision.length? 'active' : '', filterService.selectedFavourites.length ? 'inActive' : '' ] "
+              (click)="filterService.selectedFavourites.length ? '': showFilter(2)" detail>Sport</ion-item>
+            <!-- <ion-item class="filterEachItem" (click)="showFilter(3)" detail>Division</ion-item> -->
+            <ion-item class="filterEachItem" *ngIf="!isDrawTabEnabled"
+              [ngClass]="[filterService.selectedSchools.length ? 'active' : '', filterService.selectedFavourites.length ? 'inActive' : '' ] "
+              (click)="filterService.selectedFavourites.length ? '': showFilter(4)" detail>School</ion-item>
+            <!-- <ion-item class="filterEachItem" (click)="showFilter(5)" detail>Round</ion-item> -->
+            <app-toggle-option [currentPage]="currentPage" *ngFor="let team of favouriteTeamList" [team]="team">
+            </app-toggle-option>
+          </ion-list>
+
+          <ion-list class="sportsList" *ngIf="filterType != 0">
+            <ion-item class="filterHead">
+              <!-- <ion-img class="filterArrow" src="../../assets/icon/back.png" (click)="backToFilter()"></ion-img> -->
+              <ion-button class="transparentButton" (click)="backToFilter()">
+
+                <img class="filterArrow" src="../../assets/icon/back.png">
+                <ion-label class="filterLabel">
+                  {{heading}}
+                </ion-label>
+              </ion-button>
+              <ion-icon class="cloxseIcon" mode="ios" slot="end" name="close" (click)="toggleFilter()"></ion-icon>
+
+            </ion-item>
+
+            <ng-container *ngIf="filterType == 1">
+
+              <!-- <ion-item class="filterEachItem"  >
+                Icon End
+                <ion-img style="width: 20px" src="../../assets/icon/tick.png" slot="end"></ion-img>
+              </ion-item> -->
+
+              <app-toggle-option [currentPage]="currentPage" *ngFor="let team of favouriteTeamList" [team]="team">
+              </app-toggle-option>
+              <!-- <ion-item class="filterEachItem toggleBotton" *ngFor="let team of favouriteTeamList">
+                {{ team.teamName }}
+                <ion-toggle slot="end" color="success" (ionChange)="toggleFav($event ,team.favouriteTeamId)">
+                </ion-toggle>
+              </ion-item> -->
+
+            </ng-container>
+
+            <ng-container *ngIf="filterType == 2">
+
+              <app-filter-option [currentPage]="currentPage" *ngFor="let data of sportList"
+                [data]="{client_name: data.client_name, id: data.client_id, type: 2, data: data.divisionList }">
+              </app-filter-option>
+            </ng-container>
+
+            <!-- <ng-container *ngIf="filterType == 3">
+
+              <app-filter-option [currentPage]="currentPage" *ngFor="let data of divisionList"
+                [data]="{client_name: data.division_name, id: data.division_id, type: 3}"></app-filter-option>           
+
+            </ng-container> -->
+
+            <ng-container *ngIf="filterType == 4">
+
+              <app-filter-option [currentPage]="currentPage" *ngFor="let data of schoolList"
+                [data]="{client_name: data.club_name_short, id: data.club_id, type: 4}"></app-filter-option>
+
+              <!-- <ion-item class="filterEachItem" *ngFor="let data of schoolList">
+                <ion-label>
+                  {{ data.club_name_short }}
+                </ion-label>
+                <ion-img style="width: 20px" src="../../assets/icon/tick.png" slot="end"></ion-img>
+              </ion-item> -->
+
+            </ng-container>
+
+            <!-- <ng-container *ngIf="filterType == 5">
+
+              <app-filter-option [currentPage]="currentPage" *ngFor="let data of roundList"
+                [data]="{client_name: data.gameround, id: data.gameround, type: 5}"></app-filter-option>
+
+            </ng-container> -->
+
+
+          </ion-list>
+        </div>
+        <div class="menuBottom">
+
+          <ion-list class="listBottom">
+            <ion-item class="filterEachItem"></ion-item>
+            <ion-item class="filterEachItem" *ngIf="isLogedIn && showInjuryIcon" (click)="redirectInjury()">Injury
+              Report <img class="filter-image" src="../assets/icon/injury.png" alt=""></ion-item>
+            <ion-item class="filterEachItem" (click)="showAboutAlert()" detail>About us</ion-item>
+            <ion-item class="filterEachItem" *ngIf="isLogedIn" (click)="onLogOut()" detail>Logout</ion-item>
+            <ion-item class="filterEachItem" *ngIf="! isLogedIn" (click)="goLogin()" detail>Official ? Click
+              here for Login</ion-item>
+          </ion-list>
+        </div>
+      </div>
+
+
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

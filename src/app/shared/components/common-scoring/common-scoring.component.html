@@ -1,0 +1,4 @@
+<ion-button *ngIf="isLoggedIn" (click)="showScoring()">
+  <ion-img *ngIf="isLoggedIn && !showActiveIcon" class="filterIcon" src="../../assets/svg/scoring_inactive_icon.svg"></ion-img>
+  <ion-img *ngIf="isLoggedIn && showActiveIcon" class="filterIcon" src="../../assets/svg/scoring_active_icon.svg"></ion-img>
+</ion-button>

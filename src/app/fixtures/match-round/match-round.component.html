@@ -1,0 +1,5 @@
+<div class="listHearder" *ngIf="drawData && showDate">
+    <ion-label class="listItemHead">Round {{drawData?.round}}</ion-label>
+</div>
+<app-match-details *ngFor="let draw of drawData.Draw_data" [draw]="draw" [isLogedIn]="isLogedIn">
+</app-match-details>

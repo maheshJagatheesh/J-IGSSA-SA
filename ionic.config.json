@@ -1,0 +1,7 @@
+{
+  "name": "Association_ACC_MELB",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

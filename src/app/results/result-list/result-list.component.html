@@ -1,0 +1,14 @@
+<div class="listHearder" *ngIf="showDate">
+  <ion-label class="listItemHead">{{ resultData.dateHeader }}</ion-label>
+</div>
+
+<!-- <ion-virtual-scroll
+[items]="resultData.gameGroup"
+approxItemHeight="70px"
+>
+  <app-result-list-item *virtualItem="let result" [resulList]="result"  ></app-result-list-item>
+
+</ion-virtual-scroll> -->
+
+<app-result-list-item *ngFor="let result of resultData.gameGroup" [showLabel]="showLabel" [resulList]="result" [isLogedIn]="isLogedIn">
+</app-result-list-item>

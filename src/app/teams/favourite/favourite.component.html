@@ -1,0 +1,71 @@
+<!-- <ion-card (click)="selectTeam()" [ngClass]="isSelected?'cardSelected':' '">
+  <ion-card-content>
+    <div class="unFavouriteIcon" *ngIf="isSelected">
+      <img src="assets/icon/unfavored.png">
+    </div>
+    <ion-img [src]="imgBaseUrl + favouriteTeam.logopath"></ion-img>
+    <ion-item class="item" lines="none">
+      <ion-label class="upperCase colorRed">{{favouriteTeam.clientName}} </ion-label>
+
+    </ion-item>
+    <ion-item class="item" lines="none">
+      <ion-label class="upperCase ">{{favouriteTeam.teamName}} </ion-label>
+    </ion-item>
+  </ion-card-content>
+</ion-card>
+
+<div class="deleteBtnWrap" *ngIf="isSelected">
+  <ion-button slot="primary" type="button" color="danger" fill="outline" mode="ios"
+    (click)="removeFavouriteTeam(favouriteTeam.favouriteTeamId)">
+    Delete
+  </ion-button>
+</div> -->
+<!-- <div class="favDivContWrap"> -->
+
+<!-- <div class="fav-card-wrap"> -->
+
+<ion-card class="favDivContWrap" (click)="selectTeam()" [ngClass]="isSelected?'cardSelected':' '">
+  <ion-card-content [ngClass]="favouriteTeam.isAdmin ? 'bgHighlight' : '' " class="">
+    <div class="adminLabel">
+      <ion-text *ngIf="favouriteTeam.isAdmin" color="light">Admin</ion-text>
+    </div>
+
+    <div class="tileContWrap">
+
+      <div class="unFavouriteIcon" *ngIf="isSelected" (click)="removeFavouriteTeam(favouriteTeam.favouriteTeamId)">
+        <img src="assets/icon/unfavored.png">
+      </div>
+      <ion-img [src]="imgBaseUrl + favouriteTeam.logopath"></ion-img>
+      <!-- <ion-img [src]="team.logopath"></ion-img> -->
+      <ion-item class="item" lines="none">
+        <ion-label class="upperCase colorRed">{{favouriteTeam.clientName}} </ion-label>
+
+      </ion-item>
+      <!-- <ion-item class="item" lines="none"> -->
+      <ion-label class="upperCase ">{{favouriteTeam.teamName}} {{favouriteTeam.divisionName}} </ion-label>
+      <!-- </ion-item> -->
+    </div>
+
+    <div class="bottom-icons">
+      <ng-container *ngFor="let result of resultsLabel">
+        <div class="each-icon" [ngClass]="result.class"> {{ result.label }}</div>
+      </ng-container>
+      <!-- <div class="each-icon"> D</div>
+        <div class="each-icon"> L</div> -->
+    </div>
+  </ion-card-content>
+</ion-card>
+
+<div class="deleteBtnWrap" *ngIf="isSelected">
+  <!-- <ion-button slot="primary" type="button" class=" appThemeBtn" fill="outline" mode="ios"
+      (click)="removeFavouriteTeam(favouriteTeam.favouriteTeamId)">
+      Delete
+    </ion-button> -->
+  <ion-img *ngIf="isLoggedIn || (!isLoggedIn && !showDraw)" src="../../assets/svg/fixture-active-icon.svg"
+    routerLink="/home/tabs/fixtures/{{favouriteTeam.favouriteTeamId}}"></ion-img>
+  <ion-img *ngIf="isLoggedIn || (!isLoggedIn && !showDraw)" src="../../assets/svg/result-active-icon.svg"
+    routerLink="/home/tabs/results/{{favouriteTeam.favouriteTeamId}}"></ion-img>
+  <ion-img src="../../assets/svg/ladder-active-icon.svg"
+    [routerLink]="['/', 'home', 'tabs', 'lader', favouriteTeam.divisionId, favouriteTeam.clientId]"></ion-img>
+</div>
+<!-- </div> -->

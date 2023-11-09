@@ -1,0 +1,341 @@
+<!-- <ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" defaultHref="home/tabs/lader" icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+    </ion-buttons>
+    <ion-title mode="md" class="innerPageTitle">LADDER</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        mode="md"
+        defaultHref="home/tabs/lader"
+        text="LADDER"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+  <div class="rotateOverlay" *ngIf="! isLoading && showElement && isPortrait">
+    <div class="rotateWrap" (click)="changeOrientation()">
+      <ion-label>ROTATE</ion-label>
+      <ion-img src="/assets/svg/screen-rotation.svg"></ion-img>
+    </div>
+  </div>
+  <ion-grid no-padding style="height: 100%">
+    <ion-row *ngIf="! isLoading">
+      <ion-col size="12">
+        <ion-item lines="none">
+          <div class="headSecWrap">
+            <ion-img
+              *ngIf="resultMicroTierBased.clientLogo.length"
+              [src]="imgBaseUrl + resultMicroTierBased.clientLogo"
+            ></ion-img>
+            <ion-label class="gameName boldText"
+              >{{resultMicroTierBased.clientName}}</ion-label
+            >
+            <ion-label
+              *ngIf="resultMicroTierBased.divisionGroup.length "
+              class="boldText"
+            >
+              {{ resultMicroTierBased.divisionGroup[0].divisionName
+              }}</ion-label
+            >
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="! isLoading">
+      <!-- Finals -->
+      <ion-col *ngIf="0 && finalScore.length" size="12">
+        <ion-item text-center class="eachTabHead">
+          <ion-label class="boldText">{{labelFinal}}</ion-label>
+        </ion-item>
+        <div class="finalSecWrap">
+          <div class="finalSecWrapDiv" *ngIf="finalScore.length == 3">
+            <div class="eachRank">
+              <div class="eachRankDiv">
+                <div class="second">
+                  <div class="logoWrap">
+                    <ion-img
+                      [src]="imgBaseUrl + finalScore[1].clubLogoPath"
+                    ></ion-img>
+                  </div>
+                  <div class="teamNameWrap">{{ finalScore[1].teamName }}</div>
+                  <div class="teamPositionWrap">
+                    {{ finalScore[1].position }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="eachRank">
+              <div class="eachRankDiv">
+                <div class="first">
+                  <div class="logoWrap">
+                    <ion-img
+                      [src]="imgBaseUrl + finalScore[0].clubLogoPath"
+                    ></ion-img>
+                  </div>
+                  <div class="teamNameWrap">{{ finalScore[0].teamName }}</div>
+                  <div class="teamPositionWrap">
+                    {{ finalScore[0].position }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="eachRank">
+              <div class="eachRankDiv">
+                <div class="third">
+                  <div class="logoWrap">
+                    <ion-img
+                      [src]="imgBaseUrl + finalScore[2].clubLogoPath"
+                    ></ion-img>
+                  </div>
+                  <div class="teamNameWrap">{{ finalScore[2].teamName }}</div>
+                  <div class="teamPositionWrap">
+                    {{ finalScore[2].position }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="finalSecWrapDiv" *ngIf="finalScore.length == 2">
+            <div class="eachRank">
+              <div class="eachRankDiv">
+                <div class="second">
+                  <div class="logoWrap">
+                    <ion-img
+                      [src]="imgBaseUrl + finalScore[1].clubLogoPath"
+                    ></ion-img>
+                  </div>
+                  <div class="teamNameWrap">{{ finalScore[1].teamName }}</div>
+                  <div class="teamPositionWrap">
+                    {{ finalScore[1].position }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="eachRank">
+              <div class="eachRankDiv">
+                <div class="first">
+                  <div class="logoWrap">
+                    <ion-img
+                      [src]="imgBaseUrl + finalScore[0].clubLogoPath"
+                    ></ion-img>
+                  </div>
+                  <div class="teamNameWrap">{{ finalScore[0].teamName }}</div>
+                  <div class="teamPositionWrap">
+                    {{ finalScore[0].position }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- Competition -->
+      <ion-col *ngIf="0 && competition.length" size="12" no-padding>
+        <ion-item text-center class="eachTabHead">
+          <ion-label class="boldText">{{labelComputation}}</ion-label>
+        </ion-item>
+        <div class="pointTableWrap">
+          <div class="tableHead">
+            <div class="labelSchoo">SCHOOLS</div>
+
+            <div class="pointSecWrap">
+              <div class="labelPld">PLD</div>
+              <div class="labelWin">WIN</div>
+              <div class="labelWin landscapeView">DRAW</div>
+              <div class="labelLoss">LOSS</div>
+              <!-- <div class="labelLoss">%W</div> -->
+              <div class="labelWin landscapeView">FOR/AGN</div>
+              <div class="labelWin landscapeView">%</div>
+              <div class="labelPts">PTS</div>
+            </div>
+          </div>
+
+          <div class="eachRow" *ngFor="let result of competition">
+            <div class="labelSchoo">
+              <div class="logo">
+                <ion-img [src]="imgBaseUrl + result.clubLogoPath"></ion-img>
+              </div>
+              <div class="logoName">{{result.teamName}}</div>
+            </div>
+            <div class="pointSecWrap">
+              <div class="points pld">{{result.gamePlay}}</div>
+              <div class="points win">{{result.win}}</div>
+              <div class="points draw landscapeView">{{result.draw}}</div>
+              <div class="points loss">{{result.loss}}</div>
+              <div class="points draw landscapeView">{{result.forAgainst}}</div>
+              <div class="points draw landscapeView">{{result.percent}}</div>
+              <div class="points pts boldText">{{result.point}}</div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- Grading -->
+      <ion-col
+        *ngIf="isGradingShowing && 0 && grading.length"
+        size="12"
+        no-padding
+      >
+        <ion-item text-center class="eachTabHead">
+          <ion-label class="boldText">{{labelGrading}}</ion-label>
+        </ion-item>
+        <div class="pointTableWrap">
+          <div class="tableHead">
+            <div class="labelSchoo">SCHOOLS</div>
+
+            <div class="pointSecWrap">
+              <div class="labelPld">PLD</div>
+              <div class="labelWin">WIN</div>
+              <div class="labelWin landscapeView">DRAW</div>
+              <div class="labelLoss">LOSS</div>
+              -->
+              <!-- Already commented line   <div class="labelLoss">%W</div> -->
+              <div class="labelWin landscapeView">FOR/AGN</div>
+              <div class="labelWin landscapeView">%</div>
+              <div class="labelPts">PTS</div>
+            </div>
+          </div>
+
+          <div class="eachRow" *ngFor="let result of grading">
+            <div class="labelSchoo">
+              <div class="logo">
+                <ion-img [src]="imgBaseUrl + result.clubLogoPath"></ion-img>
+              </div>
+              <div class="logoName">{{result.teamName}}</div>
+            </div>
+            <div class="pointSecWrap">
+              <div class="points pld">{{result.gamePlay}}</div>
+              <div class="points win">{{result.win}}</div>
+              <div class="points draw landscapeView">{{result.draw}}</div>
+              <div class="points loss">{{result.loss}}</div>
+              <div class="points draw landscapeView">{{result.forAgainst}}</div>
+              <div class="points draw landscapeView">{{result.percent}}</div>
+              <div class="points pts boldText">{{result.point}}</div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- Pool -->
+
+      <ion-col
+        *ngIf="resultMicroTierBased.divisionGroup.length"
+        size="12"
+        no-padding
+      >
+        <div
+          *ngFor="let pool of resultMicroTierBased.divisionGroup[0].gradingPoolPoints; let index = index"
+        >
+          <ion-item text-center class="eachTabHead">
+            <ion-label *ngIf="pool?.poolName.length" class="boldText"
+              >{{(clientId == 1282 || clientId == 1284)? 'POOL': ''}}
+              {{pool?.poolName}}</ion-label
+            >
+            <!-- <ng-template #noPoolBlock>
+              <ion-label class="boldText">GRADING</ion-label>
+            </ng-template> -->
+          </ion-item>
+
+          <div class="pointTableWrap">
+            <div class="tableHead">
+              <div class="labelSchoo">SCHOOLS</div>
+
+              <div class="pointSecWrap">
+                <ng-container
+                  *ngFor="let header of ladderHeaders; let index1 = index"
+                >
+                  <div *ngIf="index1 <= 3" class="labelWin">
+                    {{header.label}}
+                  </div>
+                  <div *ngIf="index1 > 3" class="labelWin landscapeView">
+                    {{header.label}}
+                  </div>
+                  <!-- <div *ngIf="header.databaseColumn=='win'" class="labelWin">{{header.label}}</div> -->
+                  <!-- <div *ngIf="header.databaseColumn=='loss'" class="labelWin">{{header.label}}</div>
+                  <div *ngIf="header.databaseColumn=='forAgainst'" class="labelWin landscapeView">{{header.label}}</div>
+                  <div *ngIf="header.databaseColumn=='percent'" class="labelWin landscapeView">{{header.label}}</div>
+                  <div *ngIf="header.databaseColumn=='point'" class="labelWin">{{header.label}}</div>
+                  <div *ngIf="header.databaseColumn=='rank'" class="labelWin landscapeView">{{header.label}}</div> -->
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="eachRow" *ngFor="let result of pool?.gradingLadder">
+              <div class="labelSchoo">
+                <div class="logo">
+                  <ion-img [src]="imgBaseUrl + result.clubLogoPath"></ion-img>
+                </div>
+                <!-- clubName for PSA -->
+                <!-- teamName for all other apps -->
+                <div class="logoName">{{result.teamName}}</div>
+              </div>
+              <div class="pointSecWrap">
+                <ng-container
+                  *ngFor="let header of ladderHeaders; let index1 = index"
+                >
+                  <div *ngIf="index1 <= 3" class="points pld">
+                    {{result[header.databaseColumn]}}
+                  </div>
+                  <div *ngIf="index1 > 3" class="points pld landscapeView">
+                    {{result[header.databaseColumn]}}
+                  </div>
+                </ng-container>
+                <!-- <div *ngIf="columnHeaderKeys.includes('gamePlay')" class="points pld">
+                  {{result.gamePlay}}
+                </div>
+                <div *ngIf="columnHeaderKeys.includes('win')" class="points win">
+                  {{result.win}}
+                </div>
+                <div *ngIf="columnHeaderKeys.includes('draw')" class="points draw landscapeView">
+                  {{result.draw}}
+                </div>
+                <div *ngIf="columnHeaderKeys.includes('loss')" class="points loss">
+                  {{result.loss}}
+                </div>
+                <div *ngIf="columnHeaderKeys.includes('forAgainst')" class="points draw landscapeView">
+                  {{result.forAgainst}}
+                </div>
+                <div *ngIf="columnHeaderKeys.includes('percent')" class="points draw landscapeView">
+                  {{result.percent}}
+                </div>
+                <div *ngIf="columnHeaderKeys.includes('point')" class="points pts">
+                  {{result.point}}
+                </div>
+                <div *ngIf="columnHeaderKeys.includes('rank')" class="points draw landscapeView">
+                  {{result.rank}}
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row
+      style="height: 80%"
+      *ngIf="! isLoading && resultMicroTierBased.length == 0"
+    >
+      <ion-col size="12" class="noContentWrap" #noData>
+        <div class="noDataFound">
+          <p>No Ladder to show</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

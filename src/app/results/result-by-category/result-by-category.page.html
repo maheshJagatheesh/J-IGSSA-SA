@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button  mode="md" defaultHref="home/tabs/notification"></ion-back-button> -->
+      <ion-back-button mode="md" defaultHref="home/tabs/results" icon="arrow-round-back"></ion-back-button>
+    </ion-buttons>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <ion-img class="filterIcon" src="../../assets/icon/filter/filter.png" (click)="toggleFilter()"></ion-img>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title mode="md" class="innerPageTitle">RESULTS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!-- skelton loading -->
+  <div *ngIf="isLoading">
+    <ion-list *ngFor="let i of [1,2,3,4,5,6,7]">
+      <ion-list-header style="width: 100%" *ngIf="i % 2 != 0">
+        <ion-label style="width: 100%">
+
+          <h1>
+            <ion-skeleton-text animated style="width: 100%; height: 20px; margin-bottom: 10px"></ion-skeleton-text>
+          </h1>
+
+          <h1>
+            <ion-skeleton-text animated style="width: 100%; height: 15px;"></ion-skeleton-text>
+          </h1>
+        </ion-label>
+      </ion-list-header>
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+
+          </h3>
+        </ion-label>
+
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+
+          </h3>
+        </ion-label>
+
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- skelton loading ends -->
+
+  <ion-list mode="ios" *ngIf="(! isLoading ) && resultList.length != 0">
+
+    <app-result-category-list *ngFor="let machData of resultList" [result]="machData"></app-result-category-list>
+
+  </ion-list>
+
+  <ion-infinite-scroll *ngIf="! isLoading" threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

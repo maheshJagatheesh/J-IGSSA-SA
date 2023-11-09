@@ -1,0 +1,107 @@
+<ion-content class="home">
+  <ion-grid>
+    <ion-row class="top">
+      <ion-col size="12">
+        <ion-slides pager="true" [options]="slideOpts" class="slider">
+          <ion-img
+            class="acc_logo"
+            src="../../assets/img/landingPage/gsvicon.png"
+          ></ion-img>
+          <ion-slide *ngFor="let item of latestNews">
+            <div class="sliderContWrap">
+              <h1>{{ item.eventName }}</h1>
+              <p class="sliderNote">{{ item.message }}</p>
+              <div class="readMoreWrap">
+                <ion-button
+                  color="dark"
+                  [routerLink]="['/', 'home', 'tabs', 'notification', item.id ]"
+                  class="readMoreBtn"
+                  >READ MORE</ion-button
+                >
+              </div>
+            </div>
+          </ion-slide>
+
+          <!-- <ion-slide>
+            <div class="sliderContWrap">
+              <h1>Welcome to the<br> Volleyball Australia App.</h1>
+              <p class="sliderNote">
+                We are currently beta testing in preparation for upcoming events in Q4 2019.
+              </p>
+              <div class="readMoreWrap">
+                 <ion-button color="dark" class="readMoreBtn">READ
+                  MORE</ion-button>
+              </div>
+            </div>
+          </ion-slide> -->
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="shadedOutline">
+      <ion-col size="12" class="container-wrap">
+        <div class="container">
+          <div class="top">
+            <div class="eachSecWrap">
+              <div class="eachSec" (click)="navigate(1)">
+                <div class="eachImg">
+                  <ion-img
+                    src="../../assets/img/landingPage/teams.png"
+                  ></ion-img>
+                </div>
+              </div>
+              <div class="eachSecLine"></div>
+              <div class="eachSec" (click)="navigate(2)">
+                <div class="eachImg">
+                  <ion-img
+                    src="../../assets/img/landingPage/fixtures.png"
+                  ></ion-img>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="midLineWrap">
+            <div class="horizontalLineLeft"></div>
+            <div class="horizontalLineRight"></div>
+          </div>
+          <div class="bottom">
+            <div class="eachSecWrap">
+              <div class="eachSec" (click)="navigate(3)">
+                <div class="eachImg">
+                  <ion-img
+                    src="../../assets/img/landingPage/result.png"
+                  ></ion-img>
+                </div>
+              </div>
+              <div class="eachSecLine"></div>
+              <div class="eachSec" (click)="navigate(4)">
+                <div class="eachImg">
+                  <ion-img
+                    src="../../assets/img/landingPage/ladders.png"
+                  ></ion-img>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="column">
+            50%
+          </div>
+          <div class="column">
+            50%
+          </div>
+          <div class="column">
+            50%
+          </div>
+          <div class="column">
+            50%
+          </div> -->
+        </div>
+        <div class="logWrap" *ngIf="!isLoggedIn">
+          <ion-label text-center (click)="goLoginPage()"
+            >Official ? Click here to login</ion-label
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,153 @@
+ion-card {
+    margin: 0;
+    --background: #fff;
+    border-radius: 15px;
+
+    .bgHighlight{
+        background: var(--ion-color-danger);
+        background: #9A9A9A;
+    }
+
+    ion-card-content{
+
+        // padding-left: unset;
+        // padding-right: unset;
+        padding-inline-start: 1px;
+        padding-inline-end: 1px;
+        padding-bottom: 1px;
+        padding-top: 0px;  
+        
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+
+        .adminLabel{
+            text-align: center;
+            font-size: 14px;
+            flex: 0 0 5%;
+        }
+
+        .tileContWrap{
+            border-radius: 0px 0px 15px 15px;
+            background: #fff;
+            padding: 5px 10px;
+            flex: 0 0 80%;
+        }
+
+        .unFavouriteIcon{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 6%;
+        
+        }
+
+        ion-img{
+            width: 90%;
+            // max-width: 105px;
+            height: 85px;
+            margin: 5px auto 15px;
+        }
+
+        ion-label{
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .colorRed{
+            color: var(--fav-team-text-color);
+            margin: 0;
+        }
+        .item{
+
+            --padding-start: 0px;
+            --background: transparent;
+            --min-height: 0px;
+            
+            ion-label{
+                margin: 0;
+            }
+        }
+    }
+}
+.cardSelected{
+    // --background: #CD051C;
+    --background: var(--ion-color-highlight-selection);
+    ion-label , .colorRed{
+        color: #fff !important;
+    }
+    ion-card-content{
+
+        .tileContWrap{
+            // background: var(--ion-color-danger);
+            background: var(--ion-color-highlight-selection);
+        }
+    }
+}
+
+
+.bottom-icons{
+    width: 100%;
+    display: flex;
+    padding: 5px;
+    flex: 0 0 15%;
+
+    .each-icon{
+        flex: 0 0 18%;
+        padding: 5px;
+        border: 1px solid #fff;
+        background-color: #F00;
+        border-radius: 5px;
+        margin-right: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+        &:last-child{
+            margin-right: 0;
+        }
+    }
+    .icon-w{
+        background-color: #06c106;
+    }
+    .icon-d{
+        background-color: #bfbfbf;
+    }
+}
+
+.deleteBtnWrap{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: space-around;
+    ion-button {
+        // width: 95px;
+        height: 35px;
+    }
+    ion-img{
+        max-width: 40px;
+    }
+}
+.btnBorder{
+    --border-color: #9A9A9A;
+    background: transparent;
+    color: #000;
+    text-transform: uppercase;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    --border-radius: 10px;
+    --border-width: 1px;
+    --border-style: solid;
+    --background-activated: #9A9A9A;
+    --background-focused: #9A9A9A;
+    --color-activated: #9A9A9A;
+}
+
+.favDivContWrap{
+    min-height: 230px;
+    display: flex;
+    padding: 5px 0px;
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="15" viewBox="0 0 17 15">
+  <defs>
+    <clipPath id="clip-love-green">
+      <rect width="17" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="love-green" clip-path="url(#clip-love-green)">
+    <g id="Group_7" data-name="Group 7" transform="translate(-154.272 -7.625)">
+      <g id="Group_7-2" data-name="Group 7" transform="translate(154.712 8.125)">
+        <path id="Path_177" data-name="Path 177" d="M169.549,9.288a4.31,4.31,0,0,0-2.979-1.163,4.748,4.748,0,0,0-3.347,1.392l-.391.392-.392-.393a4.752,4.752,0,0,0-3.347-1.39,4.31,4.31,0,0,0-2.979,1.163,4.451,4.451,0,0,0-.1,6.389l6.816,6.818,6.816-6.818A4.451,4.451,0,0,0,169.549,9.288Z" transform="translate(-154.712 -8.125)" fill="#b40419"/>
+      </g>
+    </g>
+  </g>
+</svg>

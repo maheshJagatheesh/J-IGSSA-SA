@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar mode="md">
+
+    <ion-buttons slot="end">
+      <app-common-scoring></app-common-scoring>
+      <app-competition-filter-icon></app-competition-filter-icon>
+      <app-common-filter></app-common-filter>
+      <!-- <ion-button (click)="toggleFilter()">
+        <ion-img class="filterIcon" src="../../assets/icon/filter/filter.png"></ion-img>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title mode="md" class="pageTitle">Scoring</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="isLoading">
+    <ion-list *ngFor="let i of [1,2,3,5,6,7]">
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-list mode="ios" *ngIf="! isLoading && fixtureModel.length > 0">
+    <app-score-details *ngFor="let machData of fixtureModel" [fixture]="machData">
+    </app-score-details>
+  </ion-list>
+
+  <ion-row style="height: 100%" *ngIf="! isLoading && fixtureModel.length == 0">
+    <ion-col size="12" class="noContentWrap">
+      <div class="noDataFound">
+        <p>
+          You're all caught up with scores, nothing to do here.
+        </p>
+      </div>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

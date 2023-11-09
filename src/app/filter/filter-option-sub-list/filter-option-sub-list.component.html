@@ -1,0 +1,10 @@
+<ion-item class="filterEachItem" (click)="toggleOption(data.id)">
+  <!-- <ion-item class="filterEachItem"> -->
+  <ion-label>
+    {{data.client_name }}
+  </ion-label>
+  <!-- <ion-img *ngIf="isChecked" style="width: 20px" src="../../assets/icon/tick.png" slot="end"></ion-img> -->
+  <img *ngIf="isChecked" style="width: 20px" src="../../assets/icon/tick.png" class="arrow">
+
+
+</ion-item>

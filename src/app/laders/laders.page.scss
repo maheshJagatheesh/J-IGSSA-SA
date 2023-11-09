@@ -1,0 +1,76 @@
+ion-app {
+    margin-top: env(safe-area-inset-top) !important;
+}
+
+ion-card{
+    --background: var(--ion-page-background);
+}
+
+
+
+.favouriteTileWrap{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+     }
+
+     ion-card{
+        --background: #fff;
+        margin-top: 6px;
+        margin-bottom: 9px;
+        border-radius: 10px;
+        // display: inline-block;
+
+        margin-inline-start: 5px;
+        margin-inline-end: 5px;
+        display: flex;
+        width: 100%;
+
+        //width: 120px; height: 120px; display : inline-block;
+
+        .colorRed{
+            color: var(--fav-team-text-color);
+            margin: 0;
+        }
+
+        .item{
+
+            --padding-start: 0px;
+            --background: transparent;
+            --min-height: 0px;
+        }
+        ion-label{
+            margin: 0;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+    }
+}
+
+.favTeamWrapScroll{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 5px 0px;
+    overflow: scroll;
+    margin: 0px 10px;
+
+    .eachFavTeam{
+        min-width: 50%;
+        max-width: 50%;
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+
+        ion-img{
+           
+            width: 90%;
+            height: 85px;
+            margin: 5px auto 15px;
+        }
+    }
+}

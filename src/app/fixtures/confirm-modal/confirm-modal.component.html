@@ -1,0 +1,223 @@
+<ion-header class="background">
+  <div class="modalWrapper">
+    <div class="modalHead p-3">
+      <ion-label color="danger">
+        SUBMIT SCORE
+      </ion-label>
+    </div>
+  </div>
+</ion-header>
+<ion-content>
+  <div class="modalWrapper">
+  
+    <ng-container *ngIf="scoreParams.isRowing== 1 || scoreParams.isTileEvent==1; then rowingScore else scoreSort">
+    </ng-container>
+
+    <ng-template #scoreSort>
+      <ng-container  
+        *ngIf="scoreParams.display_reverse_tiers == 1;
+        then reverseScore;
+        else defaultScore;
+      ">
+
+      </ng-container>
+    </ng-template>
+  
+    <ng-template #rowingScore>
+      <div class="modalContent p-3">
+        <ion-grid>
+          <ion-row >
+            <ion-col size="6" class="">
+                <ion-label></ion-label>
+            </ion-col>
+            <ion-col size="4">
+                <ion-label *ngIf="scoreParams.labels[0].toString().length; else ptHardCoded">                  
+                    {{scoreParams.labels[0]}}                  
+                </ion-label>
+              <ng-template #ptHardCoded>
+                <ion-label class="opacity">
+                  PT
+                </ion-label>
+              </ng-template>
+  
+              <ion-label></ion-label>
+            </ion-col>
+          </ion-row>
+  
+          <!-- <div> -->
+            <ion-row *ngFor="let homeTeam of scoreParams.rowingHomeTeams; let index = index">
+              <ion-col size="6" class="ion-text-left">
+                  <ion-label>{{homeTeam}}</ion-label>
+              </ion-col>
+              <ion-col size="4">                
+                <ion-label class="opacity">
+                  {{ scoreParams.rowingHomeScore[index] }}
+                </ion-label>
+              </ion-col>
+            </ion-row>
+          <!-- </div> -->
+  
+        </ion-grid>
+      </div>
+    </ng-template>
+  
+    <ng-template #defaultScore>
+      <div class="modalContent p-3">
+        <ion-grid >
+          <ion-row >
+              <ion-col size="4" class="">
+                  <ion-label></ion-label>
+              </ion-col>
+              <ion-col size="2" *ngFor="let score of scoreParams.homeScores; let index = index">
+                <div *ngIf="index == 0; then firstBlock else successive"></div>
+                <ng-template #firstBlock>
+                  <ion-label *ngIf="scoreParams.labels[0].toString().length; else ptHardCoded">                  
+                      {{scoreParams.labels[0]}}                  
+                  </ion-label>
+                </ng-template>
+                <ng-template #ptHardCoded>
+                  <ion-label class="opacity">
+                    PT
+                  </ion-label>
+                </ng-template>
+    
+                <ng-template #successive>
+                  <ion-label *ngIf="scoreParams.labels[index].toString().trim().length; else haedCodedLabel">               
+                      {{scoreParams.labels[index]}}               
+                  </ion-label>
+                </ng-template>
+    
+                <ng-template #haedCodedLabel>
+                  <ion-label class="opacity">
+                    Set {{ index  }}
+                  </ion-label>
+                </ng-template>
+    
+                <ion-label></ion-label>
+              </ion-col>
+             
+          </ion-row>
+    
+          <ion-row >
+              <ion-col size="4" class="ion-text-left">
+                  <ion-label>{{scoreParams.homeTeam}}</ion-label>
+              </ion-col>
+              <ion-col size="2" *ngFor="let score of scoreParams.homeScores; let index = index">                
+                <ion-label class="opacity">
+                  {{ score  }}
+                </ion-label>
+              </ion-col>
+              
+          </ion-row>
+    
+          <ion-row >
+              <ion-col size="4" class="ion-text-left">
+                  <ion-label >{{scoreParams.awayTeam}}</ion-label>
+              </ion-col>
+              <ion-col size="2" *ngFor="let score of scoreParams.awayScores; let index = index">                
+                <ion-label class="opacity">
+                  {{ score  }}
+                </ion-label>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-template>
+
+    <ng-template #reverseScore>
+      <div class="modalContent p-3">
+        <ion-grid >
+          <ion-row >
+              <ion-col size="4" class="">
+                  <ion-label></ion-label>
+              </ion-col>
+              <ion-col size="2" *ngFor="let score of scoreParams.homeScores; let index = index">
+                <div *ngIf="index == 0; then firstBlock else successive"></div>
+                <ng-template #firstBlock>
+                  <ion-label *ngIf="scoreParams.labels[scoreParams.homeScores.length-1].toString().length; else ptHardCoded">                  
+                      {{scoreParams.labels[scoreParams.homeScores.length-1]}}                  
+                  </ion-label>
+                </ng-template>
+                <ng-template #ptHardCoded>
+                  <ion-label class="opacity" *ngIf="index == scoreParams.homeScores.length-1; else setValue">
+                    PT
+                  </ion-label>
+                  <ng-template #setValue>
+                    <ion-label class="opacity" >
+                      SET {{ scoreParams.homeScores.length-1 }}
+                    </ion-label>
+                  </ng-template>
+                </ng-template>
+    
+                <ng-template #successive>
+                  <ion-label *ngIf="scoreParams.labels[scoreParams.homeScores.length-index-1].toString().trim().length; else haedCodedLabel">               
+                      {{scoreParams.labels[scoreParams.homeScores.length-index-1]}}               
+                  </ion-label>
+                </ng-template>
+    
+                <ng-template #haedCodedLabel>
+                  <div
+                  *ngIf="
+                    index == scoreParams.homeScores.length-1;
+                    then lastBlock;
+                    else intermediate
+                  "
+                ></div>
+                <ng-template #lastBlock>
+                  <ion-label class="opacity">
+                    PT
+                  </ion-label>
+                </ng-template>
+                <ng-template #intermediate>
+                  <ion-label class="opacity">
+                    SET {{ scoreParams.homeScores.length-index-1 }} 
+                  </ion-label>
+                </ng-template>
+
+                  
+                </ng-template>
+    
+                <ion-label></ion-label>
+              </ion-col>
+             
+          </ion-row>
+    
+          <ion-row >
+              <ion-col size="4" class="ion-text-left">
+                  <ion-label>{{scoreParams.homeTeam}}</ion-label>
+              </ion-col>
+              <ion-col size="2" *ngFor="let score of scoreParams.homeScores; let index = index">                
+                <ion-label class="opacity">
+                  {{ score  }}
+                </ion-label>
+              </ion-col>
+              
+          </ion-row>
+    
+          <ion-row >
+              <ion-col size="4" class="ion-text-left">
+                  <ion-label >{{scoreParams.awayTeam}}</ion-label>
+              </ion-col>
+              <ion-col size="2" *ngFor="let score of scoreParams.awayScores; let index = index">                
+                <ion-label class="opacity">
+                  {{ score  }}
+                </ion-label>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-template>
+  </div>
+</ion-content>
+<ion-footer class="background">
+  <div class="modalWrapper">
+    <div class="modalBtns">
+      <div>
+          <ion-label (click)="onCancel()">NO</ion-label>
+      </div>
+      <div>
+          <ion-label (click)="finish()" color="danger">YES</ion-label>
+      </div>
+    </div>
+  </div>
+</ion-footer>

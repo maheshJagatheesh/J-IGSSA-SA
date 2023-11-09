@@ -1,0 +1,168 @@
+<div class="listHearder" *ngIf="showDate">
+  <ion-label class="listItemHead"> {{result.dateHeader }}</ion-label>
+</div>
+
+<!-- <ion-virtual-scroll
+[items]="resultData.gameGroup"
+approxItemHeight="70px"
+>
+  <app-result-list-item *virtualItem="let result" [resulList]="result"  ></app-result-list-item>
+
+</ion-virtual-scroll> -->
+
+<app-result-category-list-item *ngFor="let result of result.gameGroup" [resulList]="result">
+</app-result-category-list-item>
+
+<!-- 
+  Old
+ -->
+<!-- 
+
+<ion-list-header slot="primary">
+  <ion-label class="listItemHead">Head</ion-label>
+  <div class="listSubHeadWrap">
+    <div>
+      <ion-label class="listSubHead" slot="start">{{result.sportName}}</ion-label>
+    </div>
+    <div>
+      <ion-badge mode="ios" color="danger" class="bordered" slot="range-left">1St IV</ion-badge>
+    </div>
+  </div>
+</ion-list-header>
+
+<ng-template *ngFor="let resultList of result.gameGroup">
+  {{ resultList.homeClubName }}
+</ng-template>
+
+<ion-item *ngFor="let resultList of result.eventGroup">
+
+  <div class="mainContentWrap">
+
+    <div class="wrap">
+      <div class="logoSec">
+        <div class="logoWrap">
+          <ion-img [src]="imgBaseUrl + resultList.homeClubLogo"></ion-img>
+        </div>
+        <div class="nameWrap">
+          <ion-text>{{resultList.homeTeamName}}</ion-text>
+        </div>
+      </div>
+      <div class="scoreSec">
+        <ion-text>{{resultList.homeScore}}</ion-text>
+        <div class="iconWrap">
+          <ion-img *ngIf="resultList.acceptProtestStatus && resultList.acceptProtestStatus === 1 "
+            src="/assets/icon/red-tick.png"></ion-img>
+
+          <ion-img *ngIf="resultList.acceptProtestStatus && resultList.acceptProtestStatus === 0 "
+            src="/assets/svg/danger.svg">
+          </ion-img>
+        </div>
+      </div>
+      <div class="labelSec">
+        <ion-badge *ngIf="resultList.seeAllFlag" mode="ios" color="danger">{{ resultList.homeDivisionName | slice:0:6 }}
+        </ion-badge>
+
+        <ion-text *ngIf="resultList.seeAllFlag == 0" class="seeAllLabel">
+          {{ resultList.homeDivisionName | slice:0:6 }} </ion-text>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="logoSec">
+        <div class="logoWrap">
+          <ion-img [src]="imgBaseUrl + resultList.awayClubLogo"></ion-img>
+        </div>
+        <div class="nameWrap">
+          <ion-text>{{resultList.awayTeamName}}</ion-text>
+        </div>
+      </div>
+      <div class="scoreSec">
+        <ion-text>{{resultList.awayScore}}</ion-text>
+        <div class="iconWrap">
+        </div>
+      </div>
+      <div class="labelSec">
+
+        <ion-text *ngIf="resultList.seeAllFlag" class="seeAllLabel" style="padding: 10px 0px;"
+          [routerLink]="['/', 'home', 'tabs', 'results', 1]">
+          See All</ion-text>
+        <ion-text *ngIf="resultList.seeAllFlag == 0" class="seeAllLabel">
+          {{ resultList.awayDivisionName | slice:0:6 }} </ion-text>
+      </div>
+    </div>
+  </div>
+
+
+</ion-item> -->
+
+
+<!--old -->
+
+<!-- <ion-item>
+  <div class="contentWrap">
+    <div class="logoWrap">
+      <ion-img src="../../assets/img/fixtures/team3.svg"></ion-img>
+    </div>
+    <div class="resultDetailWrap">
+      <div class="label">
+        <ion-label class="point">10</ion-label>
+      </div>
+      <div class="midSection">
+        <ion-badge mode="ios" color="danger" class="bordered">1St IV</ion-badge>
+      </div>
+      <div class="label">
+        <ion-label class="point">10</ion-label>
+      </div>
+    </div>
+    <div class="logoWrap">
+      <ion-img src="../../assets/img/fixtures/team2.png"></ion-img>
+    </div>
+  </div>
+
+</ion-item>
+
+<ion-item>
+  <div class="contentWrap">
+    <div class="logoWrap">
+      <ion-img src="../../assets/img/fixtures/team3.svg"></ion-img>
+    </div>
+    <div class="resultDetailWrap">
+      <div class="label">
+        <ion-label class="point">10</ion-label>
+      </div>
+      <div class="midSection">
+        <ion-badge mode="ios" color="danger" class="bordered">1St IV</ion-badge>
+      </div>
+      <div class="label">
+        <ion-label class="point">10</ion-label>
+      </div>
+    </div>
+    <div class="logoWrap">
+      <ion-img src="../../assets/img/fixtures/team2.png"></ion-img>
+    </div>
+  </div>
+
+</ion-item>
+
+<ion-item>
+  <div class="contentWrap">
+    <div class="logoWrap">
+      <ion-img src="../../assets/img/fixtures/team3.svg"></ion-img>
+    </div>
+    <div class="resultDetailWrap">
+      <div class="label">
+        <ion-label class="point">10</ion-label>
+      </div>
+      <div class="midSection">
+        <ion-badge mode="ios" color="danger" class="bordered">1St IV</ion-badge>
+      </div>
+      <div class="label">
+        <ion-label class="point">10</ion-label>
+      </div>
+    </div>
+    <div class="logoWrap">
+      <ion-img src="../../assets/img/fixtures/team2.png"></ion-img>
+    </div>
+  </div>
+
+</ion-item> -->

@@ -1,0 +1,152 @@
+ion-content {
+  --background: #fff url("../../assets/img/bg/landing-page.png") no-repeat
+    center center / cover;
+}
+
+.shadedOutline {
+  background: #1f1e1e40;
+}
+
+.home {
+  ion-grid {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  ion-row {
+    flex: 1;
+  }
+
+  .container-wrap {
+    display: flex;
+    flex-direction: column;
+
+    .logWrap {
+      padding: 20px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      color: var(--entry-font-color);
+      ion-label {
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+  .slider {
+    height: 100%;
+  }
+
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .top {
+      flex: 1;
+      .eachSecLine {
+        margin-bottom: 5px;
+      }
+    }
+
+    .midLineWrap {
+      height: 1px;
+      display: flex;
+      flex-direction: row;
+
+      .horizontalLineLeft {
+        background: #fff;
+        margin-right: 5px;
+        flex: 1;
+      }
+      .horizontalLineRight {
+        background: #fff;
+        margin-left: 5px;
+        flex: 1;
+      }
+    }
+
+    .bottom {
+      flex: 1;
+
+      .eachSecLine {
+        margin-top: 5px;
+      }
+    }
+
+    .eachSecWrap {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+
+      .eachSec {
+        flex: 1;
+        // padding: 8%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .eachImg {
+          // width: 70%;
+          // height: 75%;
+          // margin: 0 auto;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          ion-img {
+            // height: 100%;
+            width: 40%;
+          }
+        }
+      }
+      .eachSecLine {
+        width: 1px;
+        background: #fff;
+      }
+    }
+  }
+  .column {
+    flex: 1;
+  }
+
+  .sliderContWrap {
+    display: flex;
+    flex-direction: column;
+    padding: 10%;
+  }
+
+  .sliderContWrap p,
+  .sliderContWrap h1 {
+    color: var(--theme-font-color-in-bg);
+    font-size: 16px;
+  }
+
+  .sliderContWrap h1 {
+    font-weight: 500;
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .readMoreBtn {
+    --border-radius: 50px;
+    --padding-end: 23px;
+    --padding-start: 23px;
+  }
+
+  .swiper-pagination-bullet-active {
+    //   --bullet-background : #fff;
+    //   --bullet-background-active : #fff;
+  }
+  .acc_logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+  }
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24.566" height="23.816" viewBox="0 0 24.566 23.816">
+  <g id="podium" transform="translate(-0.25)">
+    <path id="Path_1353" data-name="Path 1353" d="M7.92,27.458H1V19H7.92" transform="translate(0 -4.391)" fill="none" stroke="#fbd200" stroke-linecap="round" stroke-width="1.5"/>
+    <path id="Path_1354" data-name="Path 1354" d="M22,24h6.92v4.613H22" transform="translate(-4.854 -5.547)" fill="none" stroke="#fbd200" stroke-linecap="round" stroke-width="1.5"/>
+    <rect id="Rectangle_2294" data-name="Rectangle 2294" width="9.227" height="12.302" transform="translate(7.92 10.764)" fill="none" stroke="#fbd200" stroke-linecap="round" stroke-width="1.5"/>
+    <path id="Path_1355" data-name="Path 1355" d="M14.89,0l1.142,2.313,2.552.371-1.847,1.8.436,2.542-2.283-1.2-2.283,1.2.436-2.542L11.2,2.684l2.552-.371Z" transform="translate(-2.356)" fill="#fbd200"/>
+  </g>
+</svg>

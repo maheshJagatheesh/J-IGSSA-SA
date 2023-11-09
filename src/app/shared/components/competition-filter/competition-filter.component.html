@@ -1,0 +1,79 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar class="filter-header" mode="md">
+      <!-- <ion-buttons slot="end">
+        <ion-button (click)="toggleFilter()">
+          <ion-img class="filterIcon" src="../../assets/icon/filter/filter.png"></ion-img>
+        </ion-button>
+      </ion-buttons> -->
+      <ion-title mode="md" class="pageTitle"></ion-title>
+      <ion-icon size="large" class="cloxseIcon" mode="ios" slot="end" name="close" (click)="closeFilter()">
+      </ion-icon>
+      <div class='top-line'></div>
+
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding filter-body">
+    <div class='bottom-line'></div>
+    <ion-grid class="filter-outer">
+      <ion-row>
+        <ion-col size="4" *ngFor="let competition of competitionFilterData" class='text_center'>
+          <app-filter-label [competition]="competition" [selectedID]="selectedID"></app-filter-label>
+          <!-- <div class="name-tile filter-active">
+            {{ competition.ASSOCIATIONNAME }}
+          </div> -->
+        </ion-col>
+
+        <!-- <ion-col class='text_center'>
+          <div class="name-tile">
+            NEAS
+          </div>
+        </ion-col>
+        <ion-col class='text_center'>
+          <div class="name-tile">
+            NES
+          </div>
+        </ion-col> -->
+      </ion-row>
+
+      <!-- <ion-row>
+        <ion-col class='text_center'>
+          <div class="name-tile">
+            CAS
+          </div>
+        </ion-col>
+        <ion-col class='text_center'>
+          <div class="name-tile">
+            NEAS
+          </div>
+        </ion-col>
+        <ion-col class='text_center'>
+          <div class="name-tile">
+            NES
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class='text_center'>
+          <div class="name-tile">
+            CAS
+          </div>
+        </ion-col>
+        <ion-col class='text_center'>
+          <div class="name-tile">
+            NEAS
+          </div>
+        </ion-col>
+        <ion-col class='text_center'>
+          <div class="name-tile">
+            NES
+          </div>
+        </ion-col>
+      </ion-row> -->
+
+    </ion-grid>
+  </ion-content>
+</ion-app>

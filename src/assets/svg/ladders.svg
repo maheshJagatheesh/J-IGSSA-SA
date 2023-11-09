@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="23" viewBox="0 0 22 23">
+  <defs>
+    <clipPath id="clip-results_icon_1">
+      <rect width="22" height="23"/>
+    </clipPath>
+  </defs>
+  <g id="results_icon_1" data-name="results_icon – 1" clip-path="url(#clip-results_icon_1)">
+    <rect width="22" height="23" fill="#fff"/>
+    <g id="trophy" transform="translate(-1 -0.006)">
+      <path id="Path_1349" data-name="Path 1349" d="M5.571,7.3H4.857A2.829,2.829,0,0,1,2,4.5V1H5.571" transform="translate(0 0)" fill="none" stroke="#d7d7d7" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Path_1350" data-name="Path 1350" d="M25,7.3h.714a2.829,2.829,0,0,0,2.857-2.8V1H25" transform="translate(-6.571 0)" fill="none" stroke="#d7d7d7" stroke-miterlimit="10" stroke-width="1.5"/>
+      <line id="Line_485" data-name="Line 485" y1="4.2" transform="translate(12 14.3)" fill="none" stroke="#d7d7d7" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Path_1351" data-name="Path 1351" d="M13.429,14.3h0A6.365,6.365,0,0,1,7,8V1H19.857V8a6.365,6.365,0,0,1-6.429,6.3Z" transform="translate(-1.429 0)" fill="none" stroke="#d7d7d7" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="Path_1352" data-name="Path 1352" d="M19,29.5H9A3.536,3.536,0,0,1,12.571,26h2.857A3.536,3.536,0,0,1,19,29.5Z" transform="translate(-2 -7.5)" fill="none" stroke="#d7d7d7" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>
