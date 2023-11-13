@@ -14,11 +14,11 @@ export const environment = {
   baseURL: 'http://api.gojaro.com/rest/jaro/',
   googleMapApiKey: 'AIzaSyB_4M5xwXfU1UhdC2Ur-C52C3U0e65hOGs',
   logoImgPath: 'http://database.gojaro.com/logos/',
-  masterClientId: '133',
-  masterPersonId: '236257',
+  masterClientId: '8039',
+  masterPersonId: '289252',
   liveScoringEnable: false,
   showMoreTab: false, // true only for HZSA
-  appName: 'com.association.gsv',
+  appName: 'com.gojaro.igssasa',
   appVersion: '1.0.0',
 };
 

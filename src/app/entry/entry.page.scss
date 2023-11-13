@@ -1,7 +1,9 @@
 ion-content {
   --padding-top: env(safe-area-inset-top) !important;
-  --background: var(--ion-color-theme-primary)
-    url("../../assets/img/bg/landing-page.png") no-repeat center center / cover;
+  // --background: var(--ion-color-theme-primary)
+  //   url("../../assets/img/bg/landing-page.png") no-repeat center center / cover;
+  --background: #281d66;
+
   color: var(--entry-font-color);
   ion-grid {
     height: 100%;

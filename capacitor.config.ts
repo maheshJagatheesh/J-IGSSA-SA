@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.association.gsv',
-  appName: 'Association_GSV',
+  appId: 'com.gojaro.igssasa',
+  appName: 'IGSSA South Australia',
   webDir: 'www',
   bundledWebRuntime: false,
   plugins: {

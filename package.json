@@ -1,5 +1,5 @@
 {
-  "name": "Association_ACC_MELB",
+  "name": "IGSSA South Australia",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -105,5 +105,5 @@
     "ts-node": "~8.3.0",
     "typescript": "~4.4.4"
   },
-  "description": "An Ionic project"
+  "description": "The Independent Girls Schools Sport Association (IGSSA) is a sports organisation of 10 independent schools in South Australia."
 }
